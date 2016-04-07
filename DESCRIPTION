@@ -1,0 +1,15 @@
+Package: statsr
+Type: Package
+Title: Companion package for the Coursera Statistics with R specialization
+Version: 0.1-1
+Date: 2016-04-07
+Authors@R: c(person("Colin", "Rundel", role=c("aut"), email="rundel@gmail.com"),
+             person("Mine", "Cetinkaya-Rundel", role=c("aut","cre"), email="mine@stat.duke.edu"),
+             person("Merlise", "Clyde", role=c("aut"), email="clyde@stat.duke.edu"),
+             person("David", "Banks", role=c("aut"), email="banks@stat.duke.edu"))
+Maintainer: Mine Cetinkaya-Rundel <mine@stat.duke.edu>
+Description: More details about what the package does. See <http://http://
+    cran.r-project.org/doc/manuals/r-release/R-exts.html#The-DESCRIPTION-file> for
+    details on how to write this part.
+License: MIT
+RoxygenNote: 5.0.1

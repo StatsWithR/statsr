@@ -1,2 +1,2 @@
 # statsr
-Companion package for the Coursera Statistics with R specialization
+Companion package for the Coursera *Statistics with R* specialization

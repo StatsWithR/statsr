@@ -68,7 +68,7 @@ li li{
 }
 
 li li:before{
-    content: counter(subitem, upper-alpha) ' ';
+    content: counter(subitem, upper-alpha) '. ';
     counter-increment: subitem;
     /* Position and style the number */
     position:absolute;

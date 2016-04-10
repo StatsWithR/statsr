@@ -56,10 +56,27 @@ ol > li:before {
 
 li ol,
 li ul {margin-top:6px;}
-ol ol li:last-child {margin-bottom:0;}
 
-.choices ul li{
-    list-style-type:upper-alpha;
+ol ol{
+    counter-reset: subitem;
+}
+
+li li:before{
+    content: counter(subitem, upper-alpha) ' ';
+    counter-increment: subitem;
+    top:-2px;
+    left:-2em;
+    width:7em;
+    /* Some space between the number and the content in browsers that support
+       generated content but not positioning it (Camino 2 is one example) */
+    margin-right:8px;
+    padding:4px;
+    border-top:0px solid #317EAC;
+    color:#fff;
+    background:#317EAC;
+    font-weight:bold;
+    font-family:"Helvetica Neue", Arial, sans-serif;
+    text-align:center;
 }
 
 div#instructions { 

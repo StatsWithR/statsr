@@ -72,12 +72,12 @@ li li:before{
     counter-increment: subitem;
     /* Position and style the number */
     position:absolute;
-    top:0px;
-    left:0em;
+    top:-2px;
+    left:-2em;
     -moz-box-sizing:border-box;
     -webkit-box-sizing:border-box;
     box-sizing:border-box;
-    width:7em;
+    width:3em;
     /* Some space between the number and the content in browsers that support
        generated content but not positioning it (Camino 2 is one example) */
     margin-right:8px;

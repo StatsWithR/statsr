@@ -63,7 +63,7 @@ ol ol{
 
 li li{
     border-top:0px solid #317EAC;
-    background:rgba(49, 126, 172, 0.1);
+    background:rgba(49, 126, 172, 0);
 }
 
 li li:before{

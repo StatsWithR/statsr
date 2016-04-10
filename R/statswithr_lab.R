@@ -4,5 +4,7 @@ statswithr_lab <- function() {
   css <- system.file("lab.css", package = "statsr")
 
   # call the base html_document function
-  rmarkdown::html_document(css = css)
+  rmarkdown::html_document(css = css, 
+                           highlight = pygments,
+                           theme = cerulean)
 }

@@ -8,8 +8,6 @@ Authors@R: c(person("Colin", "Rundel", role=c("aut"), email="rundel@gmail.com"),
              person("Merlise", "Clyde", role=c("aut"), email="clyde@stat.duke.edu"),
              person("David", "Banks", role=c("aut"), email="banks@stat.duke.edu"))
 Maintainer: Mine Cetinkaya-Rundel <mine@stat.duke.edu>
-Description: More details about what the package does. See <http://http://
-    cran.r-project.org/doc/manuals/r-release/R-exts.html#The-DESCRIPTION-file> for
-    details on how to write this part.
+Description: See https://github.com/StatsWithR/statsr for more information.
 License: MIT
 RoxygenNote: 5.0.1

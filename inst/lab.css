@@ -1,0 +1,98 @@
+body {
+    counter-reset: li; /* initialize counter named li */
+}
+
+h1 {
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight:bold;
+}
+
+h2 {
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight:bold;
+    margin-top: 24px;
+}
+
+hr {
+    border: 1px solid #357FAA;
+}
+
+ol {
+    margin-left:0; /* Remove the default left margin */
+    padding-left:0; /* Remove the default left padding */
+}
+
+ol > li {
+    position:relative; /* Create a positioning context */
+    margin:0 0 10px 2em; /* Give each list item a left margin to make room for the numbers */
+    padding:10px 80px; /* Add some spacing around the content */
+    list-style:none; /* Disable the normal item numbering */
+    border-top:2px solid #317EAC;
+    background:rgba(49, 126, 172, 0.1);
+}
+
+ol > li:before {
+    content:"Question " counter(li); /* Use the counter as content */
+    counter-increment:li; /* Increment the counter by 1 */
+    /* Position and style the number */
+    position:absolute;
+    top:-2px;
+    left:-2em;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+    width:7em;
+    /* Some space between the number and the content in browsers that support
+       generated content but not positioning it (Camino 2 is one example) */
+    margin-right:8px;
+    padding:4px;
+    border-top:2px solid #317EAC;
+    color:#fff;
+    background:#317EAC;
+    font-weight:bold;
+    font-family:"Helvetica Neue", Arial, sans-serif;
+    text-align:center;
+}
+
+li ol,
+li ul {margin-top:6px;}
+ol ol li:last-child {margin-bottom:0;}
+
+.oyo ul li{
+    list-style-type:decimal;
+}
+
+div#instructions { 
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: rgba(0, 102, 102, 0.8);
+    border:1px solid rgba(0, 102, 102, 0.2);
+    padding: 10px 10px;
+    background: rgba(204, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+div#license { 
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: rgba(76, 114, 29, 0.8);
+    border:1px solid rgba(76, 114, 29, 0.2);
+    padding: 10px 10px;
+    background: rgba(76, 114, 29, 0.1);
+    border-radius: 5px;
+}
+
+div#boxedtext {
+    background-color: rgba(86, 155, 189, 0.2);
+    padding: 20px;
+    margin-bottom: 20px;
+    font-size: 10pt;
+}
+
+div#exercise {
+    position:relative; /* Create a positioning context */
+    margin:0 0 10px 0em; /* Give each list item a left margin to make room for the numbers */
+    padding:10px 30px; /* Add some spacing around the content */
+    border-top:2px solid #35CD4B;
+    background:rgba(49, 199, 58, 0.1);
+}

@@ -58,8 +58,8 @@ li ol,
 li ul {margin-top:6px;}
 ol ol li:last-child {margin-bottom:0;}
 
-.oyo ul li{
-    list-style-type:decimal;
+.choices ul li{
+    list-style-type:upper-alpha;
 }
 
 div#instructions { 

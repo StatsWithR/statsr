@@ -74,17 +74,17 @@ li li:before{
     position:absolute;
     top:-2px;
     left:-2em;
-    -moz-box-sizing:border-box;
-    -webkit-box-sizing:border-box;
-    box-sizing:border-box;
+    /*-moz-box-sizing:border-box;*/
+    /*-webkit-box-sizing:border-box;*/
+    box-sizing:content-box;
     width:1em;
     /* Some space between the number and the content in browsers that support
        generated content but not positioning it (Camino 2 is one example) */
     margin-right:4px;
     padding:2px;
-    border-top:0px solid #317EAC;
+    border-top: initial; /*0px solid #317EAC;*/
     color:#fff;
-    background:#317EAC;
+    background:transparent;
     font-weight:bold;
     font-family:"Helvetica Neue", Arial, sans-serif;
     text-align:center;

@@ -6,5 +6,7 @@ statswithr_lab <- function() {
   # call the base html_document function
   rmarkdown::html_document(css = css, 
                            highlight = "pygments",
-                           theme = "cerulean")
+                           theme = "cerulean",
+                           fig_width = 7,
+                           fig_height = 4)
 }

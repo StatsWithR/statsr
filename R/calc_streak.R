@@ -24,19 +24,3 @@ calc_streak = function(x)
     
     return(data.frame(length = streak))
 }
-
-#' FIXME - Kobe Bryant's shots made
-#'
-#' Blah blah blah
-#'
-#' @format A data frame with 133 rows and 6 variables:
-#' \describe{
-#'   \item{vs}{}
-#'   \item{game}{}
-#'   \item{quarter}{}
-#'   \item{time}{}
-#'   \item{description}{}
-#'   \item{shot}{}
-#' }
-#' @source \url{}
-"kobe_basket"

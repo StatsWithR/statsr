@@ -9,5 +9,6 @@ Authors@R: c(person("Colin", "Rundel", role=c("aut"), email="rundel@gmail.com"),
              person("David", "Banks", role=c("aut"), email="banks@stat.duke.edu"))
 Maintainer: Mine Cetinkaya-Rundel <mine@stat.duke.edu>
 Description: See https://github.com/StatsWithR/statsr for more information.
+LazyData: true
 License: MIT
 RoxygenNote: 5.0.1

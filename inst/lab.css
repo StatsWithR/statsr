@@ -1,3 +1,7 @@
+.fax-slot-machine:before {
+    content: "\1f3b0"
+}
+
 body {
     counter-reset: li; /* initialize counter named li */
 }

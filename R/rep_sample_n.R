@@ -9,10 +9,10 @@
 
 rep_sample_n <- function(tbl, size, replace = FALSE, reps = 1)
 {
-  n <- nrow(tbl)
-  i <- replicate(reps, sample.int(n, size, replace = replace), simplify = FALSE) %>% unlist()
-  
-  rep_tbl <- cbind(replicate = rep(1:reps,rep(size,reps)), tbl[i,])
-  
-  group_by(rep_tbl, replicate)
+  n <- nrow(tbl)
+  i <- replicate(reps, sample.int(n, size, replace = replace), simplify = FALSE) %>% unlist()
+
+  rep_tbl <- cbind(replicate = rep(1:reps,rep(size,reps)), tbl[i,])
+
+  group_by(rep_tbl, replicate)
 }

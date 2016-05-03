@@ -10,5 +10,7 @@ Authors@R: c(person("Colin", "Rundel", role=c("aut"), email="rundel@gmail.com"),
 Maintainer: Mine Cetinkaya-Rundel <mine@stat.duke.edu>
 Description: See https://github.com/StatsWithR/statsr for more information.
 LazyData: true
-License: MIT
+License: MIT + file LICENSE
 RoxygenNote: 5.0.1
+Depends: R (>= 3.2.0)
+Imports: dplyr, rmarkdown

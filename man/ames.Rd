@@ -83,7 +83,7 @@
   \item{Pool.QC}{Pool quality.}
   \item{Fence}{Fence quality.}
   \item{Misc.Feature}{Miscellaneous feature not covered in other categories.}
-  \item{Misc.Val}{$Value of miscellaneous feature.}
+  \item{Misc.Val}{Dollar value of miscellaneous feature.}
   \item{Mo.Sold}{Month Sold (MM).}
   \item{Yr.Sold}{Year Sold (YYYY).}
   \item{Sale.Type}{Type of sale.}
@@ -97,7 +97,7 @@ an end of semester regression project." Journal of Statistics Education 19.3 (20
 ames
 }
 \description{
-Data set contains information from the Ames Assessor’s Office used in computing 
+Data set contains information from the Ames Assessor's Office used in computing 
 assessed values for individual residential properties sold in Ames, IA from 2006 
 to 2010. See http://www.amstat.org/publications/jse/v19n3/decock/datadocumentation.txt 
 for detailed variable descriptions.

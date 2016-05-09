@@ -28,6 +28,3 @@ Maintainer: Your Name <your@email.com>
 \seealso{
   Optional links to other man pages
 }
-\examples{
-
-}

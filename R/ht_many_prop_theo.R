@@ -39,24 +39,24 @@ ht_many_prop_theo <- function(y, x, x_name, y_name,
   n_fill_values <- length(levels(y))
   fill_values <- colorRampPalette(c("#1FBEC3", "#C7EEF0"))( n_fill_values )
 
-  eda_plot <- ggplot(data = d_eda, aes(x = x, fill = y), environment = environment()) +
-    geom_bar(position = "fill") +
-    scale_fill_manual(values = fill_values) +
-    xlab(x_name) +
-    ylab("") +
-    ggtitle("Sample Distribution") +
-    guides(fill = guide_legend(title = y_name))
+  eda_plot <- ggplot2::ggplot(data = d_eda, ggplot2::aes(x = x, fill = y), environment = environment()) +
+    ggplot2::geom_bar(position = "fill") +
+    ggplot2::scale_fill_manual(values = fill_values) +
+    ggplot2::xlab(x_name) +
+    ggplot2::ylab("") +
+    ggplot2::ggtitle("Sample Distribution") +
+    ggplot2::guides(fill = ggplot2::guide_legend(title = y_name))
   
   # inf_plot
   x_max <- max(qchisq(0.99, df = deg_fr), stat*1.1)
-  inf_plot <- ggplot(data.frame(x = c(0, x_max)), aes(x)) +
-    stat_function(fun = dchisq, args = list(df = deg_fr), color = "#999999") +
-    annotate("rect", xmin = stat, xmax = stat+Inf, ymin = 0, ymax = Inf, 
+  inf_plot <- ggplot2::ggplot(data.frame(x = c(0, x_max)), ggplot2::aes(x)) +
+    ggplot2::stat_function(fun = dchisq, args = list(df = deg_fr), color = "#999999") +
+    ggplot2::annotate("rect", xmin = stat, xmax = stat+Inf, ymin = 0, ymax = Inf, 
              alpha = 0.3, fill = "#FABAB8") +
-    ggtitle(paste0("Chi-sq Distribution\n(df = ", deg_fr, ")")) +
-    xlab("") +
-    ylab("") +
-    geom_vline(xintercept = stat, color = "#F57670", lwd = 1.5)
+    ggplot2::ggtitle(paste0("Chi-sq Distribution\n(df = ", deg_fr, ")")) +
+    ggplot2::xlab("") +
+    ggplot2::ylab("") +
+    ggplot2::geom_vline(xintercept = stat, color = "#F57670", lwd = 1.5)
   
   # print plots
   if(show_eda_plot & !show_inf_plot){ 
@@ -66,7 +66,7 @@ ht_many_prop_theo <- function(y, x, x_name, y_name,
     print(inf_plot)
   }
   if(show_eda_plot & show_inf_plot){
-    grid.arrange(eda_plot, inf_plot, ncol = 2)
+    gridExtra::grid.arrange(eda_plot, inf_plot, ncol = 2)
   }
 
   # return

@@ -74,23 +74,23 @@ ht_single_prop_sim <- function(y, success, null, alternative,
   # eda_plot
   d_eda <- data.frame(y = y)
 
-  eda_plot <- ggplot(data = d_eda, aes(x = y), environment = environment()) +
-    geom_bar(fill = "#8FDEE1") +
-    xlab(y_name) +
-    ylab("") +
-    ggtitle("Sample Distribution")
+  eda_plot <- ggplot2::ggplot(data = d_eda, ggplot2::aes(x = y), environment = environment()) +
+    ggplot2::geom_bar(fill = "#8FDEE1") +
+    ggplot2::xlab(y_name) +
+    ggplot2::ylab("") +
+    ggplot2::ggtitle("Sample Distribution")
 
   # inf_plot
   d_inf <- data.frame(sim_dist = sim_dist)
   
-  inf_plot <- ggplot(data = d_inf, aes(x = sim_dist), environment = environment()) +
-    geom_histogram(fill = "#CCCCCC", binwidth = diff(range(sim_dist)) / 20) +
-    annotate("rect", xmin = x_min, xmax = x_max, ymin = 0, ymax = Inf, 
+  inf_plot <- ggplot2::ggplot(data = d_inf, ggplot2::aes(x = sim_dist), environment = environment()) +
+    ggplot2::geom_histogram(fill = "#CCCCCC", binwidth = diff(range(sim_dist)) / 20) +
+    ggplot2::annotate("rect", xmin = x_min, xmax = x_max, ymin = 0, ymax = Inf, 
              alpha = 0.3, fill = "#FABAB8") +
-    xlab("simulated proportions") +
-    ylab("") +
-    ggtitle("Null Distribution") +
-    geom_vline(xintercept = p_hat, color = "#F57670", lwd = 1.5)
+    ggplot2::xlab("simulated proportions") +
+    ggplot2::ylab("") +
+    ggplot2::ggtitle("Null Distribution") +
+    ggplot2::geom_vline(xintercept = p_hat, color = "#F57670", lwd = 1.5)
   
   # print plots
   if(show_eda_plot & !show_inf_plot){ 
@@ -100,7 +100,7 @@ ht_single_prop_sim <- function(y, success, null, alternative,
     print(inf_plot)
   }
   if(show_eda_plot & show_inf_plot){
-    grid.arrange(eda_plot, inf_plot, ncol = 2)
+    gridExtra::grid.arrange(eda_plot, inf_plot, ncol = 2)
   }
   
   # return

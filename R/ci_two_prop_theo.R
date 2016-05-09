@@ -61,13 +61,13 @@ ci_two_prop_theo <- function(y, x, success, conf_level,
       fill_values = c("#8FDEE1", "#1FBEC3") 
       }
   
-  eda_plot <- ggplot(data = d_eda, aes(x = x, fill = y), environment = environment()) +
-    geom_bar(position = "fill") +
-    scale_fill_manual(values = fill_values) +
-    xlab(x_name) +
-    ylab("") +
-    ggtitle("Sample Distribution") +
-    guides(fill = guide_legend(title = y_name))
+  eda_plot <- ggplot2::ggplot(data = d_eda, ggplot2::aes(x = x, fill = y), environment = environment()) +
+    ggplot2::geom_bar(position = "fill") +
+    ggplot2::scale_fill_manual(values = fill_values) +
+    ggplot2::xlab(x_name) +
+    ggplot2::ylab("") +
+    ggplot2::ggtitle("Sample Distribution") +
+    ggplot2::guides(fill = ggplot2::guide_legend(title = y_name))
   
   # print plots
   if(show_eda_plot){ print(eda_plot) }

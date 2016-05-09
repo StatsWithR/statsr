@@ -102,25 +102,25 @@ ht_two_mean_sim <- function(y, x, null, alternative, nsim, seed,
   d_eda <- data.frame(y = y, x = x)
   d_means <- data.frame(y_bars = as.numeric(y_bars), x = levels(x))
   
-  eda_plot <- ggplot(data = d_eda, aes(x = y), environment = environment()) +
-    geom_histogram(fill = "#8FDEE1", binwidth = diff(range(y)) / 20) +
-    xlab(y_name) +
-    ylab(x_name) +
-    ggtitle("Sample Distribution") +
-    geom_vline(data = d_means, aes(xintercept = y_bars), col = "#1FBEC3", lwd = 1.5) +
-    facet_grid(x ~ .) 
+  eda_plot <- ggplot2::ggplot(data = d_eda, ggplot2::aes(x = y), environment = environment()) +
+    ggplot2::geom_histogram(fill = "#8FDEE1", binwidth = diff(range(y)) / 20) +
+    ggplot2::xlab(y_name) +
+    ggplot2::ylab(x_name) +
+    ggplot2::ggtitle("Sample Distribution") +
+    ggplot2::geom_vline(data = d_means, ggplot2::aes(xintercept = y_bars), col = "#1FBEC3", lwd = 1.5) +
+    ggplot2::facet_grid(x ~ .) 
 
   # inf_plot
   d_inf <- data.frame(sim_dist = sim_dist)
   
-  inf_plot <- ggplot(data = d_inf, aes(x = sim_dist), environment = environment()) +
-    geom_histogram(fill = "#CCCCCC", binwidth = diff(range(sim_dist)) / 20) +
-    annotate("rect", xmin = x_min, xmax = x_max, ymin = 0, ymax = Inf, 
+  inf_plot <- ggplot2::ggplot(data = d_inf, ggplot2::aes(x = sim_dist), environment = environment()) +
+    ggplot2::geom_histogram(fill = "#CCCCCC", binwidth = diff(range(sim_dist)) / 20) +
+    ggplot2::annotate("rect", xmin = x_min, xmax = x_max, ymin = 0, ymax = Inf, 
              alpha = 0.3, fill = "#FABAB8") +
-    xlab("simulated difference in means") +
-    ylab("") +
-    ggtitle("Null Distribution") +
-    geom_vline(xintercept = y_bar_diff, color = "#F57670", lwd = 1.5)
+    ggplot2::xlab("simulated difference in means") +
+    ggplot2::ylab("") +
+    ggplot2::ggtitle("Null Distribution") +
+    ggplot2::geom_vline(xintercept = y_bar_diff, color = "#F57670", lwd = 1.5)
   
   # print plots
   if(show_eda_plot & !show_inf_plot){ 
@@ -130,7 +130,7 @@ ht_two_mean_sim <- function(y, x, null, alternative, nsim, seed,
     print(inf_plot)
   }
   if(show_eda_plot & show_inf_plot){
-    grid.arrange(eda_plot, inf_plot, ncol = 2)
+    gridExtra::grid.arrange(eda_plot, inf_plot, ncol = 2)
   }
   
   # return

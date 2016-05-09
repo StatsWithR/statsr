@@ -46,15 +46,15 @@ inference(y, x = NULL, data, type = c("ci", "ht"), statistic = c("mean",
 
 \item{verbose}{whether output should be verbose or not, default is TRUE}
 
+\item{show_var_types}{print variable types, set to verbose by default}
+
+\item{show_summ_stats}{print summary stats, set to verbose by default}
+
 \item{show_eda_plot}{print EDA plot, set to verbose by default}
 
 \item{show_inf_plot}{print inference plot, set to verbose by default}
 
 \item{show_res}{print results, set to verbose by default}
-
-\item{show_var_type}{print variable types, set to verbose by default}
-
-\item{show_sum_stats}{print summary stats, set to verbose by default}
 }
 \value{
 Results of inference task performed

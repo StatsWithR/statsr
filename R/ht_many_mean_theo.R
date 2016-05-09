@@ -76,7 +76,7 @@ ht_many_mean_theo <- function(y, x, null, alternative, sig_level,
       cat("\nPairwise tests - ")
       pairwise <- pairwise.t.test(y, x, p.adjust.method = "none", pool.sd = TRUE)
       cat(paste0(pairwise$method, ":\n"))
-      print(tidy(pairwise), digits = 4)
+      print(broom::tidy(pairwise), digits = 4)
     }
   }
   
@@ -84,24 +84,24 @@ ht_many_mean_theo <- function(y, x, null, alternative, sig_level,
   d_eda <- data.frame(y = y, x = x)
   d_means <- data.frame(y_bars = as.numeric(y_bars), x = levels(x))
   
-  eda_plot <- ggplot(data = d_eda, aes(x = y), environment = environment()) +
-    geom_histogram(fill = "#8FDEE1", binwidth = diff(range(y)) / 20) +
-    xlab(y_name) +
-    ylab(x_name) +
-    ggtitle("Sample Distribution") +
-    geom_vline(data = d_means, aes(xintercept = y_bars), col = "#1FBEC3", lwd = 1.5) +
-    facet_grid(x ~ .)
+  eda_plot <- ggplot2::ggplot(data = d_eda, ggplot2::aes(x = y), environment = environment()) +
+    ggplot2::geom_histogram(fill = "#8FDEE1", binwidth = diff(range(y)) / 20) +
+    ggplot2::xlab(y_name) +
+    ggplot2::ylab(x_name) +
+    ggplot2::ggtitle("Sample Distribution") +
+    ggplot2::geom_vline(data = d_means, ggplot2::aes(xintercept = y_bars), col = "#1FBEC3", lwd = 1.5) +
+    ggplot2::facet_grid(x ~ .)
   
   # inf_plot
   x_max <- max(qf(0.99, df1 = deg_frs[1], df2 = deg_frs[2]), stat*1.1)
-  inf_plot <- ggplot(data.frame(x = c(0, x_max)), aes(x)) +
-    stat_function(fun = df, args = list(df1 = deg_frs[1], df2 = deg_frs[2]), color = "#999999") +
-    annotate("rect", xmin = stat, xmax = stat+Inf, ymin = 0, ymax = Inf, 
+  inf_plot <- ggplot2::ggplot(data.frame(x = c(0, x_max)), ggplot2::aes(x)) +
+    ggplot2::stat_function(fun = df, args = list(df1 = deg_frs[1], df2 = deg_frs[2]), color = "#999999") +
+    ggplot2::annotate("rect", xmin = stat, xmax = stat+Inf, ymin = 0, ymax = Inf, 
              alpha = 0.3, fill = "#FABAB8") +
-    ggtitle(paste0("F Distribution\n(df_G = ", deg_frs[1], ", df_E = ", deg_frs[2], ")")) +
-    xlab("") +
-    ylab("") +
-    geom_vline(xintercept = stat, color = "#F57670", lwd = 1.5)
+    ggplot2::ggtitle(paste0("F Distribution\n(df_G = ", deg_frs[1], ", df_E = ", deg_frs[2], ")")) +
+    ggplot2::xlab("") +
+    ggplot2::ylab("") +
+    ggplot2::geom_vline(xintercept = stat, color = "#F57670", lwd = 1.5)
   
   # print plots
   if(show_eda_plot & !show_inf_plot){ 
@@ -111,7 +111,7 @@ ht_many_mean_theo <- function(y, x, null, alternative, sig_level,
     print(inf_plot)
   }
   if(show_eda_plot & show_inf_plot){
-    grid.arrange(eda_plot, inf_plot, ncol = 2)
+    gridExtra::grid.arrange(eda_plot, inf_plot, ncol = 2)
   }
   
   # return

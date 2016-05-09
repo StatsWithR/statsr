@@ -63,13 +63,13 @@ ci_two_mean_theo <- function(y, x, conf_level, y_name, x_name,
   d_eda <- data.frame(y = y, x = x)
   d_means <- data.frame(y_bars = as.numeric(y_bars), x = levels(x))
   
-  eda_plot <- ggplot(data = d_eda, aes(x = y), environment = environment()) +
-    geom_histogram(fill = "#8FDEE1", binwidth = diff(range(y)) / 20) +
-    xlab(y_name) +
-    ylab(x_name) +
-    ggtitle("Sample Distribution") +
-    geom_vline(data = d_means, aes(xintercept = y_bars), col = "#1FBEC3", lwd = 1.5) +
-    facet_grid(x ~ .)
+  eda_plot <- ggplot2::ggplot(data = d_eda, ggplot2::aes(x = y), environment = environment()) +
+    ggplot2::geom_histogram(fill = "#8FDEE1", binwidth = diff(range(y)) / 20) +
+    ggplot2::xlab(y_name) +
+    ggplot2::ylab(x_name) +
+    ggplot2::ggtitle("Sample Distribution") +
+    ggplot2::geom_vline(data = d_means, ggplot2::aes(xintercept = y_bars), col = "#1FBEC3", lwd = 1.5) +
+    ggplot2::facet_grid(x ~ .)
     
   
   # print plots

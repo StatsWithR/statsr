@@ -92,22 +92,22 @@ ci_two_median_sim <- function(y, x, conf_level, y_name, x_name,
   # eda_plot
   d_eda <- data.frame(y = y, x = x)
 
-  eda_plot <- ggplot(data = d_eda, aes(x = x, y = y), environment = environment()) +
-    geom_boxplot(color = "#1FBEC3", fill = "#8FDEE1", outlier.colour = "#1FBEC3") +
-    xlab(x_name) +
-    ylab(y_name) +
-    ggtitle("Sample Distribution")
+  eda_plot <- ggplot2::ggplot(data = d_eda, ggplot2::aes(x = x, y = y), environment = environment()) +
+    ggplot2::geom_boxplot(color = "#1FBEC3", fill = "#8FDEE1", outlier.colour = "#1FBEC3") +
+    ggplot2::xlab(x_name) +
+    ggplot2::ylab(y_name) +
+    ggplot2::ggtitle("Sample Distribution")
 
   # inf_plot
   d_inf <- data.frame(sim_dist = sim_dist)
-  inf_plot <- ggplot(data = d_inf, aes(x = sim_dist), environment = environment()) +
-    geom_histogram(fill = "#CCCCCC", binwidth = diff(range(sim_dist)) / 20) +
-    annotate("rect", xmin = ci[1], xmax = ci[2], ymin = 0, ymax = Inf, 
+  inf_plot <- ggplot2::ggplot(data = d_inf, ggplot2::aes(x = sim_dist), environment = environment()) +
+    ggplot2::geom_histogram(fill = "#CCCCCC", binwidth = diff(range(sim_dist)) / 20) +
+    ggplot2::annotate("rect", xmin = ci[1], xmax = ci[2], ymin = 0, ymax = Inf, 
              alpha = 0.3, fill = "#FABAB8") +
-    xlab("bootstrap differences in medians") +
-    ylab("") +
-    ggtitle("Bootstrap Distribution") +
-    geom_vline(xintercept = ci, color = "#F57670", lwd = 1.5)
+    ggplot2::xlab("bootstrap differences in medians") +
+    ggplot2::ylab("") +
+    ggplot2::ggtitle("Bootstrap Distribution") +
+    ggplot2::geom_vline(xintercept = ci, color = "#F57670", lwd = 1.5)
   
   # print plots
   if(show_eda_plot & !show_inf_plot){ 
@@ -117,7 +117,7 @@ ci_two_median_sim <- function(y, x, conf_level, y_name, x_name,
     print(inf_plot)
   }
   if(show_eda_plot & show_inf_plot){
-    grid.arrange(eda_plot, inf_plot, ncol = 2)
+    gridExtra::grid.arrange(eda_plot, inf_plot, ncol = 2)
   }
   
   # return

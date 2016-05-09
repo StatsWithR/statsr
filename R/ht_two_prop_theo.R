@@ -96,23 +96,23 @@ ht_two_prop_theo <- function(y, x, success, null, alternative,
       fill_values = c("#8FDEE1", "#1FBEC3") 
       }
   
-  eda_plot <- ggplot(data = d_eda, aes(x = x, fill = y), environment = environment()) +
-    geom_bar(position = "fill") +
-    scale_fill_manual(values = fill_values) +
-    xlab(x_name) +
-    ylab("") +
-    ggtitle("Sample Distribution") +
-    guides(fill = guide_legend(title = y_name))
+  eda_plot <- ggplot2::ggplot(data = d_eda, ggplot2::aes(x = x, fill = y), environment = environment()) +
+    ggplot2::geom_bar(position = "fill") +
+    ggplot2::scale_fill_manual(values = fill_values) +
+    ggplot2::xlab(x_name) +
+    ggplot2::ylab("") +
+    ggplot2::ggtitle("Sample Distribution") +
+    ggplot2::guides(fill = ggplot2::guide_legend(title = y_name))
   
   # inf_plot
-  inf_plot <- ggplot(data.frame(x = c(null - 4*se, null + 4*se)), aes(x)) + 
-    stat_function(fun = dnorm, args = list(mean = null, sd = se), color = "#999999") +
-    annotate("rect", xmin = x_min, xmax = x_max, ymin = 0, ymax = Inf, 
+  inf_plot <- ggplot2::ggplot(data.frame(x = c(null - 4*se, null + 4*se)), ggplot2::aes(x)) + 
+    ggplot2::stat_function(fun = dnorm, args = list(mean = null, sd = se), color = "#999999") +
+    ggplot2::annotate("rect", xmin = x_min, xmax = x_max, ymin = 0, ymax = Inf, 
              alpha = 0.3, fill = "#FABAB8") +
-    ggtitle("Null Distribution") +
-    xlab("") +
-    ylab("") +
-    geom_vline(xintercept = p_hat_diff, color = "#F57670", lwd = 1.5)
+    ggplot2::ggtitle("Null Distribution") +
+    ggplot2::xlab("") +
+    ggplot2::ylab("") +
+    ggplot2::geom_vline(xintercept = p_hat_diff, color = "#F57670", lwd = 1.5)
   
   # print plots
   if(show_eda_plot & !show_inf_plot){ 
@@ -122,7 +122,7 @@ ht_two_prop_theo <- function(y, x, success, null, alternative,
     print(inf_plot)
   }
   if(show_eda_plot & show_inf_plot){
-    grid.arrange(eda_plot, inf_plot, ncol = 2)
+    gridExtra::grid.arrange(eda_plot, inf_plot, ncol = 2)
   }
   
   # return

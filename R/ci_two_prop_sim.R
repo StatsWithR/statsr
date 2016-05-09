@@ -96,24 +96,24 @@ ci_two_prop_sim <- function(y, x, success, conf_level,
     fill_values = c("#8FDEE1", "#1FBEC3") 
   }
   
-  eda_plot <- ggplot(data = d_eda, aes(x = x, fill = y), environment = environment()) +
-    geom_bar() +
-    scale_fill_manual(values = fill_values) +
-    xlab(x_name) +
-    ylab("") +
-    ggtitle("Sample Distribution") +
-    guides(fill = guide_legend(title = y_name))
+  eda_plot <- ggplot2::ggplot(data = d_eda, ggplot2::aes(x = x, fill = y), environment = environment()) +
+    ggplot2::geom_bar() +
+    ggplot2::scale_fill_manual(values = fill_values) +
+    ggplot2::xlab(x_name) +
+    ggplot2::ylab("") +
+    ggplot2::ggtitle("Sample Distribution") +
+    ggplot2::guides(fill = ggplot2::guide_legend(title = y_name))
   
   # inf_plot
   d_inf <- data.frame(sim_dist = sim_dist)
-  inf_plot <- ggplot(data = d_inf, aes(x = sim_dist), environment = environment()) +
-    geom_histogram(fill = "#CCCCCC", binwidth = diff(range(sim_dist)) / 20) +
-    annotate("rect", xmin = ci[1], xmax = ci[2], ymin = 0, ymax = Inf, 
+  inf_plot <- ggplot2::ggplot(data = d_inf, ggplot2::aes(x = sim_dist), environment = environment()) +
+    ggplot2::geom_histogram(fill = "#CCCCCC", binwidth = diff(range(sim_dist)) / 20) +
+    ggplot2::annotate("rect", xmin = ci[1], xmax = ci[2], ymin = 0, ymax = Inf, 
              alpha = 0.3, fill = "#FABAB8") +
-    xlab("bootstrap differences in proportions") +
-    ylab("") +
-    ggtitle("Bootstrap Distribution") +
-    geom_vline(xintercept = ci, color = "#F57670", lwd = 1.5)
+    ggplot2::xlab("bootstrap differences in proportions") +
+    ggplot2::ylab("") +
+    ggplot2::ggtitle("Bootstrap Distribution") +
+    ggplot2::geom_vline(xintercept = ci, color = "#F57670", lwd = 1.5)
   
   # print plots
   if(show_eda_plot & !show_inf_plot){ 
@@ -123,7 +123,7 @@ ci_two_prop_sim <- function(y, x, success, conf_level,
     print(inf_plot)
   }
   if(show_eda_plot & show_inf_plot){
-    grid.arrange(eda_plot, inf_plot, ncol = 2)
+    gridExtra::grid.arrange(eda_plot, inf_plot, ncol = 2)
   }
   
   # return

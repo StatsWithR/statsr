@@ -15,8 +15,8 @@
 #' @param nsim number of simulations
 #' @param seed seed to be set, default is NULL
 #' @param verbose whether output should be verbose or not, default is TRUE
-#' @param show_var_type print variable types, set to verbose by default
-#' @param show_sum_stats print summary stats, set to verbose by default
+#' @param show_var_types print variable types, set to verbose by default
+#' @param show_summ_stats print summary stats, set to verbose by default
 #' @param show_eda_plot print EDA plot, set to verbose by default
 #' @param show_inf_plot print inference plot, set to verbose by default
 #' @param show_res print results, set to verbose by default
@@ -46,10 +46,10 @@ inference <- function(y, x = NULL, data,
                "Please install these packages before running the inference function."), call. = FALSE)
   }
 
-  # load packages if needed
-  suppressMessages(library(ggplot2, quietly = TRUE))
-  suppressMessages(library(gridExtra, quietly = TRUE))
-  suppressMessages(library(broom, quietly = TRUE))
+#  # load packages if needed
+#  suppressMessages(library(ggplot2, quietly = TRUE))
+#  suppressMessages(library(gridExtra, quietly = TRUE))
+#   suppressMessages(library(broom, quietly = TRUE))
 
   # save axis labels for use later
   y_name <- paste(substitute(y))
@@ -285,7 +285,7 @@ inference <- function(y, x = NULL, data,
       # one mean
       if(statistic == "mean"){
         if(method == "theoretical"){
-          res <- ci_one_mean_theo(y = y, conf_level = conf_level, y_name = y_name,
+          res <- ci_single_mean_theo(y = y, conf_level = conf_level, y_name = y_name,
                                      show_var_types = show_var_types,
                                      show_summ_stats = show_summ_stats,
                                      show_eda_plot = show_eda_plot,
@@ -294,7 +294,7 @@ inference <- function(y, x = NULL, data,
           return(invisible(list(df = res$df, SE = res$SE, ME = res$ME, CI = res$CI)))
         }
         if(method == "simulation"){
-          res <- ci_one_mean_sim(y = y, conf_level = conf_level, y_name = y_name,
+          res <- ci_single_mean_sim(y = y, conf_level = conf_level, y_name = y_name,
                                     boot_method = boot_method, nsim = nsim, seed = seed,
                                     show_var_types = show_var_types,
                                     show_summ_stats = show_summ_stats,
@@ -315,7 +315,7 @@ inference <- function(y, x = NULL, data,
           stop("Use simulation methods for inference for the median", call. = FALSE)
         }
         if(method == "simulation"){
-          res <- ci_one_median_sim(y = y, conf_level = conf_level, y_name = y_name,
+          res <- ci_single_median_sim(y = y, conf_level = conf_level, y_name = y_name,
                                       boot_method = boot_method, nsim = nsim, seed = seed,
                                       show_var_types = show_var_types,
                                       show_summ_stats = show_summ_stats,
@@ -333,7 +333,7 @@ inference <- function(y, x = NULL, data,
       # one proportion
       if(statistic == "proportion"){
         if(method == "theoretical"){
-          res <- ci_one_prop_theo(y = y, success = success,
+          res <- ci_single_prop_theo(y = y, success = success,
                                      conf_level = conf_level, y_name = y_name,
                                      show_var_types = show_var_types,
                                      show_summ_stats = show_summ_stats,
@@ -344,7 +344,7 @@ inference <- function(y, x = NULL, data,
 
         }
         if(method == "simulation"){
-          res <- ci_one_prop_sim(y = y, success = success,
+          res <- ci_single_prop_sim(y = y, success = success,
                                     conf_level = conf_level, y_name = y_name,
                                     boot_method = boot_method, nsim = nsim, seed = seed,
                                     show_var_types = show_var_types,
@@ -481,7 +481,7 @@ inference <- function(y, x = NULL, data,
       # one mean
       if(statistic == "mean"){
         if(method == "theoretical"){
-          res <- ht_one_mean_theo(y = y, null = null, alternative = alternative,
+          res <- ht_single_mean_theo(y = y, null = null, alternative = alternative,
                                      y_name = y_name,
                                      show_var_types = show_var_types,
                                      show_summ_stats = show_summ_stats,
@@ -491,7 +491,7 @@ inference <- function(y, x = NULL, data,
           return(invisible(list(SE = res$SE, t = res$t, df = res$df, p_value = res$p_value)))
         }
         if(method == "simulation"){
-          res <- ht_one_mean_sim(y = y, null = null, alternative = alternative,
+          res <- ht_single_mean_sim(y = y, null = null, alternative = alternative,
                                     y_name = y_name,
                                     nsim = nsim, seed = seed,
                                     show_var_types = show_var_types,
@@ -509,7 +509,7 @@ inference <- function(y, x = NULL, data,
           stop("Use simulation methods for inference for the median", call. = FALSE)
         }
         if(method == "simulation"){
-          res <- ht_one_median_sim(y = y, null = null, alternative = alternative,
+          res <- ht_single_median_sim(y = y, null = null, alternative = alternative,
                                       y_name = y_name,
                                       nsim = nsim, seed = seed,
                                       show_var_types = show_var_types,
@@ -524,7 +524,7 @@ inference <- function(y, x = NULL, data,
       # one proportion
       if(statistic == "proportion"){
         if(method == "theoretical"){
-          res <- ht_one_prop_theo(y = y, success = success, null = null,
+          res <- ht_single_prop_theo(y = y, success = success, null = null,
                                      alternative = alternative,
                                      y_name = y_name,
                                      show_var_types = show_var_types,
@@ -535,7 +535,7 @@ inference <- function(y, x = NULL, data,
           return(invisible(list(SE = res$SE, z = res$z, p_value = res$p_value)))
         }
         if(method == "simulation"){
-          res <- ht_one_prop_sim(y = y, success = success, null = null,
+          res <- ht_single_prop_sim(y = y, success = success, null = null,
                                     alternative = alternative,
                                     y_name = y_name,
                                     nsim = nsim, seed = seed,

@@ -70,22 +70,23 @@ ht_single_mean_theo <- function(y, null, alternative, y_name,
   # eda_plot
   d_eda <- data.frame(y = y)
   
-  eda_plot <- ggplot(data = d_eda, aes(x = y), environment = environment()) +
-    geom_histogram(fill = "#8FDEE1", binwidth = diff(range(y)) / 20) +
-    xlab(y_name) +
-    ylab("") +
-    ggtitle("Sample Distribution") +
-    geom_vline(xintercept = y_bar, col = "#1FBEC3", lwd = 1.5)
+  eda_plot <- ggplot2::ggplot(data = d_eda, ggplot2::aes(x = y), environment = environment()) +
+    ggplot2::geom_histogram(fill = "#8FDEE1", binwidth = diff(range(y)) / 20) +
+    ggplot2::xlab(y_name) +
+    ggplot2::ylab("") +
+    ggplot2::ggtitle("Sample Distribution") +
+    ggplot2::geom_vline(xintercept = y_bar, col = "#1FBEC3", lwd = 1.5)
   
   # inf_plot ### TO DO: remove y axis ticks
-  inf_plot <- ggplot(data.frame(x = c(null - 4*se, null + 4*se)), aes(x)) + 
-    stat_function(fun = dnorm, args = list(mean = null, sd = se), color = "#999999") +
-    annotate("rect", xmin = x_min, xmax = x_max, ymin = 0, ymax = Inf, 
+  d_for_plot <- data.frame(x_for_plot = c(null - 4*se, null + 4*se))
+  inf_plot <- ggplot2::ggplot(d_for_plot, ggplot2::aes(x = x_for_plot)) + 
+    ggplot2::stat_function(fun = dnorm, args = list(mean = null, sd = se), color = "#999999") +
+    ggplot2::annotate("rect", xmin = x_min, xmax = x_max, ymin = 0, ymax = Inf, 
              alpha = 0.3, fill = "#FABAB8") +
-    ggtitle("Null Distribution") +
-    xlab("") +
-    ylab("") +
-    geom_vline(xintercept = y_bar, color = "#F57670", lwd = 1.5)
+    ggplot2::ggtitle("Null Distribution") +
+    ggplot2::xlab("") +
+    ggplot2::ylab("") +
+    ggplot2::geom_vline(xintercept = y_bar, color = "#F57670", lwd = 1.5)
   
   # print plots
   if(show_eda_plot & !show_inf_plot){ 
@@ -95,7 +96,7 @@ ht_single_mean_theo <- function(y, null, alternative, y_name,
     print(inf_plot)
   }
   if(show_eda_plot & show_inf_plot){
-    grid.arrange(eda_plot, inf_plot, ncol = 2)
+    gridExtra::grid.arrange(eda_plot, inf_plot, ncol = 2)
   }
 
   # return

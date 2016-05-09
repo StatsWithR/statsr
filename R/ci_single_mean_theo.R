@@ -47,12 +47,12 @@ ci_single_mean_theo <- function(y, conf_level, y_name,
 
   # eda_plot
   d_eda <- data.frame(y = y)
-  eda_plot <- ggplot(data = d_eda, aes(x = y), environment = environment()) +
-    geom_histogram(fill = "#8FDEE1", binwidth = diff(range(y)) / 20) +
-    xlab(y_name) +
-    ylab("") +
-    ggtitle("Sample Distribution") +
-    geom_vline(xintercept = y_bar, col = "#1FBEC3", lwd = 1.5)
+  eda_plot <- ggplot2::ggplot(data = d_eda, ggplot2::aes(x = y), environment = environment()) +
+    ggplot2::geom_histogram(fill = "#8FDEE1", binwidth = diff(range(y)) / 20) +
+    ggplot2::xlab(y_name) +
+    ggplot2::ylab("") +
+    ggplot2::ggtitle("Sample Distribution") +
+    ggplot2::geom_vline(xintercept = y_bar, col = "#1FBEC3", lwd = 1.5)
   
   # print plots
   if(show_eda_plot){ print(eda_plot) }

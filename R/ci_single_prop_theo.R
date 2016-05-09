@@ -41,11 +41,11 @@ ci_single_prop_theo <- function(y, success, conf_level, y_name,
 
   # eda_plot
   d_eda <- data.frame(y = y)
-  eda_plot <- ggplot(data = d_eda, aes(x = y), environment = environment()) +
-    geom_bar(fill = "#8FDEE1") +
-    xlab(y_name) +
-    ylab("") +
-    ggtitle("Sample Distribution")
+  eda_plot <- ggplot2::ggplot(data = d_eda, ggplot2::aes(x = y), environment = environment()) +
+    ggplot2::geom_bar(fill = "#8FDEE1") +
+    ggplot2::xlab(y_name) +
+    ggplot2::ylab("") +
+    ggplot2::ggtitle("Sample Distribution")
   
   # print plots
   if(show_eda_plot){ print(eda_plot) }

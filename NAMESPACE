@@ -2,4 +2,5 @@
 
 export(calc_streak)
 export(inference)
+export(plot_ss)
 export(rep_sample_n)

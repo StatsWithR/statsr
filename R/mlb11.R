@@ -14,12 +14,12 @@
 #'   \item{stolen_bases}{Number of stolen bases.}
 #'   \item{wins}{Number of wins.}
 #'   \item{new_onbase}{Newer variable: on-base percentage, a measure of
-#'   how often a batter reaches base for any reason other than a fielding error,
-#'   fielder's choice, dropped/uncaught third strike, fielder's obstruction, or
-#'   catcher's interference.}
+#'       how often a batter reaches base for any reason other than a fielding error,
+#'       fielder's choice, dropped/uncaught third strike, fielder's obstruction, or
+#'       catcher's interference.}
 #'   \item{new_slug}{Newer variable: slugging percentage, popular measure of the
-#'   power of a hitter calculated as the total bases divided by at bats.}
-#'   \item{new_ops}{Newer variable: on-base plus slugging, calculated as the sum of the on-base and slugging percentages.}
+#'       power of a hitter calculated as the total bases divided by at bats.}
+#'   \item{new_obs}{Newer variable: on-base plus slugging, calculated as the sum of the on-base and slugging percentages.}
 #' }
 #' @source \href{http://www.mlb.com/}{mlb.com}
 "mlb11"

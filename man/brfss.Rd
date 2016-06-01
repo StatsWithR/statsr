@@ -14,7 +14,9 @@
   \item{vege_per_day}{Number of servings of dark green vegetables consumed per day.}
 }}
 \source{
-Centers for Disease Control and Prevention - http://www.cdc.gov/brfss/annual_data/annual_2013.html.
+Centers for Disease Control and Prevention (CDC). Behavioral Risk Factor Surveillance System
+Survey Data. Atlanta, Georgia: U.S. Department of Health and Human Services, Centers for
+Disease Control and Prevention, 2013.
 }
 \usage{
 brfss

@@ -37,7 +37,7 @@ ht_many_prop_theo <- function(y, x, x_name, y_name,
   d_eda <- data.frame(y = y, x = x)
   
   n_fill_values <- length(levels(y))
-  fill_values <- colorRampPalette(c("#1FBEC3", "#C7EEF0"))( n_fill_values )
+  fill_values <- grDevices::colorRampPalette(c("#1FBEC3", "#C7EEF0"))( n_fill_values )
 
   eda_plot <- ggplot2::ggplot(data = d_eda, ggplot2::aes(x = x, fill = y), environment = environment()) +
     ggplot2::geom_bar(position = "fill") +

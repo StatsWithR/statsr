@@ -38,7 +38,7 @@ inference <- function(y, x = NULL, data,
                       show_eda_plot = verbose, show_inf_plot = verbose, show_res = verbose){
 
   # if required packages are not installed, stop
-  installed_packages <- names(installed.packages()[,"Package"])
+  installed_packages <- names(utils::installed.packages()[,"Package"])
   required_packages <- c("ggplot2", "gridExtra", "broom")
   if(!all(required_packages %in% installed_packages)){
     missing_packages <- required_packages[which(!(required_packages %in% installed_packages))]

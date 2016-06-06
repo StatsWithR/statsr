@@ -6,4 +6,5 @@
 #' @name statsr
 #' @import stats
 #' @import graphics
+#' @import shiny
 NULL

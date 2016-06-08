@@ -6,5 +6,6 @@
 #' @name statsr
 #' @import stats
 #' @import graphics
+#' @import ggplot2
 #' @import shiny
 NULL

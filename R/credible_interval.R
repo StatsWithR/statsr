@@ -117,6 +117,7 @@ credible_interval_app = function()
                     geom_point(data = ci_interval(), size=2) +
                     ggtitle(paste0("Posterior Distribution of ",param," with ",input$ci*100,"% Credible Interval"))
             })
-        }
+        },
+        options = list(height = 600)
     )
 }

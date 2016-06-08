@@ -71,8 +71,8 @@ ht_single_prop_theo <- function(y, success, null, alternative, y_name,
     ggplot2::ggtitle("Sample Distribution")
 
   # inf_plot
-  d_for_plot <- data.frame(x_for_plot = c(null - 4*se, null + 4*se))
-  inf_plot <- ggplot2::ggplot(d_for_plot, ggplot2::aes(x = x_for_plot)) + 
+  d_for_plot <- data.frame(x = c(null - 4*se, null + 4*se))
+  inf_plot <- ggplot2::ggplot(d_for_plot, ggplot2::aes_string(x = 'x')) + 
     ggplot2::stat_function(fun = dnorm, args = list(mean = null, sd = se), color = "#999999") +
     ggplot2::annotate("rect", xmin = x_min, xmax = x_max, ymin = 0, ymax = Inf, 
              alpha = 0.3, fill = "#FABAB8") +

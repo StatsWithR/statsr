@@ -59,12 +59,12 @@ credible_interval_app = function()
                 cmd = paste0("c(",paste0(round(rev(ci_percent()),4),collapse=", "),")")
                 cmd = paste0("q",input$dist,"(",cmd,",",
                           switch(input$dist,
-                                 norm = paste0(" mean=",round(input$mu,3),",",
-                                               " sd=",round(sqrt(input$sigma2),3),")"),
-                                 beta = paste0(" shape1=",round(input$alpha,3),",",
-                                               " shape2=",round(input$beta,3),")"),
-                                 gamma = paste0(" shape=",round(input$alpha,3),",",
-                                                " rate=",round(input$beta,3),")")
+                                 norm = paste0(" mean = ",round(input$mu,3),",",
+                                               " sd = ",round(sqrt(input$sigma2),3),")"),
+                                 beta = paste0(" shape1 = ",round(input$alpha,3),",",
+                                               " shape2 = ",round(input$beta,3),")"),
+                                 gamma = paste0(" shape = ",round(input$alpha,3),",",
+                                                " rate = ",round(input$beta,3),")")
                           )
                       )
                 val = eval(parse(text=cmd))

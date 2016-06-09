@@ -16,10 +16,10 @@ credible_interval_app = function()
 
                     selectInput(inputId = "dist",
                                 label = "Distribution Family:",
-                                choices = c("Normal" = "norm",
-                                            "Beta"   = "beta",
-                                            "Gamma"  = "gamma"),
-                                selected = "norm"),
+                                choices = c("Beta"   = "beta",
+                                            "Gamma"  = "gamma",
+                                            "Normal" = "norm"),
+                                selected = "beta"),
                     br(),
                     
                     conditionalPanel(

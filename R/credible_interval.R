@@ -8,8 +8,14 @@ credible_interval_app = function()
         ui = pageWithSidebar(
                 headerPanel(""),
                 sidebarPanel(
+                    selectInput(inputId = "type",
+                                label = "Distribution Type:",
+                                choices = c("Prior" = "prior",
+                                            "Posterior" = "posterior"),
+                                selected = "posterior"),
+
                     selectInput(inputId = "dist",
-                                label = "Posterior Distribution:",
+                                label = "Distribution Family:",
                                 choices = c("Normal" = "norm",
                                             "Beta"   = "beta",
                                             "Gamma"  = "gamma"),
@@ -17,26 +23,50 @@ credible_interval_app = function()
                     br(),
                     
                     conditionalPanel(
-                        "input.dist == 'norm'",
-                        numericInput("mu",     HTML("&mu;"), value=0.0),
-                        numericInput("sigma2", HTML("&sigma;&sup2;"), value=1.0, min=0)
+                        "input.type == 'posterior'",
+                        conditionalPanel(
+                            "input.dist == 'norm'",
+                            numericInput("mu",     HTML("&mu;"), value=0.0),
+                            numericInput("sigma2", HTML("&sigma;&sup2;"), value=1.0, min=0)
+                        ),
+                        conditionalPanel(
+                            "input.dist == 'beta' || input.dist == 'gamma'",
+                            numericInput("alpha", HTML("&alpha;"), value=1, min=0),
+                            numericInput("beta",  HTML("&beta;"),  value=1, min=0)
+                        ),
+                        br(),
+
+                        sliderInput("ci", "Credible Interval", min=0, max=1, step=0.01, value=0.95)
                     ),
+                    
                     conditionalPanel(
-                        "input.dist == 'beta' || input.dist == 'gamma'",
-                        numericInput("alpha", HTML("&alpha;"), value=1, min=0),
-                        numericInput("beta",  HTML("&beta;"),  value=1, min=0)
-                    ),
-                    br(),
-                    
-                    sliderInput("ci", "Credible Interval", min=0, max=1, step=0.01, value=0.95)
-                    
+                        "input.type == 'prior'",
+                        conditionalPanel(
+                            "input.dist == 'norm'",
+                            numericInput("m",     "m", value=0.0),
+                            numericInput("s2", HTML("s&sup2;"), value=1.0, min=0)
+                        ),
+                        conditionalPanel(
+                            "input.dist == 'beta' || input.dist == 'gamma'",
+                            numericInput("a", "a", value=1, min=0),
+                            numericInput("b",  "b", value=1, min=0)
+                        ),
+                        br()
+                    )
                 ),
                 mainPanel(
-                    plotOutput("plot"),
-                    htmlOutput("calc")
+                    conditionalPanel(
+                        "input.type == 'posterior'",
+                        plotOutput("post_plot"),
+                        htmlOutput("post_calc")
+                    ),
+                    conditionalPanel(
+                        "input.type == 'prior'",
+                        plotOutput("prior_plot")
+                    )
                 )
             ),
-        server = function(input, output) 
+        server = function(input, output, session) 
         {
             ci_percent  = reactive(
             {
@@ -54,7 +84,7 @@ credible_interval_app = function()
                 )
             })
             
-            output$calc = renderUI(
+            output$post_calc = renderUI(
             {
                 cmd = paste0("c(",paste0(round(rev(ci_percent()),4),collapse=", "),")")
                 cmd = paste0("q",input$dist,"(",cmd,",",
@@ -78,7 +108,7 @@ credible_interval_app = function()
                 HTML(paste(code(cmd),output(val),sep="\n"))
             })
             
-            output$plot = renderPlot(
+            output$post_plot = renderPlot(
             {
                 validate(
                     need(is.numeric(input$mu), "Distribution parameters must be numeric."),
@@ -111,11 +141,46 @@ credible_interval_app = function()
 
                 ggplot(d, aes_string(x='x', y='y')) + 
                     ylab("Density") +
-                    geom_line() + 
+                    geom_line() +
                     geom_polygon(data = ci_region, aes_string(x='x',y='y'),alpha=0.5) +
                     geom_line(data = ci_interval(), size=1.5) +
                     geom_point(data = ci_interval(), size=2) +
                     ggtitle(paste0("Posterior Distribution of ",param," with ",input$ci*100,"% Credible Interval"))
+            })
+
+            output$prior_plot = renderPlot(
+            {
+                validate(
+                    need(is.numeric(input$m), "Distribution parameters must be numeric."),
+                    need(is.numeric(input$s2), "Distribution parameters must be numeric."),
+                    need(is.numeric(input$a), "Distribution parameters must be numeric."),
+                    need(is.numeric(input$b), "Distribution parameters must be numeric."),
+                    need(input$s2 > 0, "s2 must be > 0."),
+                    need(input$a > 0, "a must be > 0."),
+                    need(input$b > 0, "b must be > 0.")
+                )
+
+                d = data.frame(
+                    x = switch(input$dist,
+                               norm  = seq(input$m-3*input$s2, input$m+3*input$s2, length.out = 1000),
+                               beta  = seq(0, 1, length.out=1000),
+                               gamma = seq(0, qgamma(0.995,input$a,input$b), length.out=1000))
+                )
+                
+                d$y = switch(input$dist,
+                           norm  = dnorm(d$x, input$m, sqrt(input$s2)),
+                           beta  = dbeta(d$x, input$a, input$b),
+                           gamma = dgamma(d$x, input$a, input$b))
+                
+                param = switch(input$dist,
+                               norm = "\u03BC",
+                               beta = "p",
+                               gamma = "\u03BB")
+
+                ggplot(d, aes_string(x='x', y='y')) + 
+                    ylab("Density") +
+                    geom_line() +
+                    ggtitle(paste0("Prior Distribution of ",param))
             })
         },
         options = list(height = 600)

@@ -121,6 +121,13 @@ div#boxedtext {
     font-size: 10pt;
 }
 
+div#answer {
+    background-color: rgba(155, 86, 189, 0.2);
+    padding: 20px;
+    margin-bottom: 20px;
+    font-size: 10pt;
+}
+
 div#exercise {
     position:relative; /* Create a positioning context */
     margin:0 0 10px 0em; /* Give each list item a left margin to make room for the numbers */

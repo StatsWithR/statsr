@@ -18,6 +18,16 @@ Calculate hit streaks.
 \examples{
 data(kobe_basket)
 calc_streak(kobe_basket$shot)
+barplot(table(calc_streak(kobe_basket$shot)), col = "blue", 
+        xlab = "Streak length", ylab = "Frequency")
+test1 <- c("H","M","M","H","H","M","M","M","H","M")
+test2 <- c("H","M","M","H","H","M","M","M","H","H")
+test3 <- c("M","M","M","H","H","M","M","M","H","H")
+calc_streak(test1)
+barplot(table(calc_streak(test1)), col = "green",
+        xlab = "Streak length", ylab = "Frequency")
+calc_streak(test2)
+calc_streak(test3)
 
 }
 

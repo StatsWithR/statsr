@@ -5,6 +5,10 @@
 #' @examples
 #' data(kobe_basket)
 #' calc_streak(kobe_basket$shot)
+#' test1 <- c("H","M","M","H","H","M","M","M","H","M")
+#' test2 <- c("H","M","M","H","H","M","M","M","H","H")
+#' calc_streak(test1)
+#' calc_streak(test2)
 #' 
 #' @export
 
@@ -18,6 +22,13 @@ calc_streak = function(x)
     
     y = rep(0,length(x))
     y[x == "H"] = 1
+    # Need to account for case when last shot is a miss
+    y <- if(y[length(y)]==0){
+        y[-length(y)]
+    }else{
+        y
+    }
+    #
     y = c(0, y, 0)
     wz = which(y == 0)
     streak = diff(wz) - 1

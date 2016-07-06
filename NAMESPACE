@@ -2,6 +2,7 @@
 
 export(bandit_posterior)
 export(bandit_sim)
+export(bayes_inference)
 export(calc_streak)
 export(credible_interval_app)
 export(inference)

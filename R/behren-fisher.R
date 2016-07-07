@@ -19,9 +19,13 @@ logmarglike_H0 = function(ybar, s2, n, low_mu=NULL, up_mu=NULL, m=4)
   ss = s2*(n-1) 
   integrand = function(mu, ybar, ss, n) 
   {
-    exp(-0.5*(n[1]*log(0.5*(n[1]*((ybar[1] - mu)^2) + ss[1])) + 
-              n[2]*log(0.5*(n[2]*((ybar[2] - mu)^2) + ss[2]))) +
-         0.5*(log(n[1]) + log(n[2])) + lgamma(n[1]/2) + lgamma(n[2]/2))
+      marg_log_like_H1 = -0.5*(n[1]*log(0.5*(n[1]*((ybar[1] - mu_hat)^2) + ss[1])) + 
+                               n[2]*log(0.5*(n[2]*((ybar[2] - mu_hat)^2) + ss[2]))) +
+                          0.5*(log(n[1]) + log(n[2])) + lgamma(n[1]/2) + lgamma(n[2]/2)
+      exp(-0.5*(n[1]*log(0.5*(n[1]*((ybar[1] - mu)^2) + ss[1])) + 
+                n[2]*log(0.5*(n[2]*((ybar[2] - mu)^2) + ss[2]))) +
+               0.5*(log(n[1]) + log(n[2])) + lgamma(n[1]/2) + lgamma(n[2]/2) -
+           marg_log_like_H1)
   } 
   
   marg_like = integrate(integrand, low_mu, up_mu, ybar, ss, n)
@@ -58,6 +62,9 @@ logmarglike_H1 = function(ybar, s2, n, max_eval=10^6, low_v=.01, up_v=100, m=4)
     v1=x[2]
     v2=x[3]
     
+    s2 = ss/(n - 1)
+    mu_hat =(ybar[1]/s2[1] + ybar[2]/s2[2]) / (1/s2[1] + 1/s2[2])
+    
     prec1 = 2*n[1]/(n[1] + 2 + n[1]*v1)
     prec2 = 2*n[2]/(n[2] + 2 + n[2]*v2)
     
@@ -67,10 +74,15 @@ logmarglike_H1 = function(ybar, s2, n, max_eval=10^6, low_v=.01, up_v=100, m=4)
     alpha1 = n[1] 
     alpha2 = n[2] 
 
-    loglike = exp(0.5*(log(prec1) + log(prec2) -alpha1*log(beta1) -alpha2*log(beta2)) +
+    marg_log_like_H1 = -0.5*(n[1]*log(0.5*(n[1]*((ybar[1] - mu_hat)^2) + ss[1])) + 
+                             n[2]*log(0.5*(n[2]*((ybar[2] - mu_hat)^2) + ss[2]))) +
+                        0.5*(log(n[1]) + log(n[2])) + lgamma(n[1]/2) + lgamma(n[2]/2)
+    
+    like = exp(0.5*(log(prec1) + log(prec2) -alpha1*log(beta1) -alpha2*log(beta2)) +
               lgamma(alpha1/2) + lgamma(alpha2/2) +
-              -0.5*(log(v1) + log(v2)) - log(1 + v1) - log(1 + v2) - 2*log(pi))
-    return(loglike)
+              -0.5*(log(v1) + log(v2)) - log(1 + v1) - log(1 + v2) - 2*log(pi) -
+              marg_log_like_H1)
+    return(like)
   }
 
   marg_like = cubature::adaptIntegrate(integrand, 

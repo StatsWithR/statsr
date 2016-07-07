@@ -174,8 +174,8 @@ behren_fisher_intrinsic_BF_post_gibbs = function (ybar, s2, n,
   #post_H1 = post_odds/(1 + post_odds)
   
   # initialize
-  theta_post = matrix(NA, nrow=nsim, ncol=7)
-  colnames(theta_post) = c("mu1", "mu2", "phi1", "phi2", "mu", "v1", "v2")
+  theta_post = as.data.frame(matrix(NA, nrow=nsim, ncol=7))
+  names(theta_post) = c("mu1", "mu2", "phi1", "phi2", "mu", "v1", "v2")
   
   theta=NULL
   theta$mu1 = ybar[1]

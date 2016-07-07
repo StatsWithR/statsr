@@ -116,6 +116,13 @@ bayes_ht_two_mean = function(y, x, null = 0,
                              show_res  = verbose,
                              show_plot = verbose)
 {
+  if (alternative != "twosided")
+    stop("One sided hypothesis tests are not currently supported.", call.=FALSE)
+
+  if (null != 0)
+    stop(paste0("Currently only H1: mu_", gr1, " - mu_", gr2, " = 0  (null) supported."), call.=FALSE)
+
+
   hypothesis_prior = check_hypothesis_prior(hypothesis_prior)
   
   prior_H1 = hypothesis_prior[1]
@@ -135,13 +142,6 @@ bayes_ht_two_mean = function(y, x, null = 0,
 
   s1 = sd(y1)
   s2 = sd(y2)
-
-  if (alternative != "twosided")
-    stop("One sided hypothesis tests are not currently supported.")
-
-  if (null != 0)
-    stop(paste0("Currently only H1: mu_", gr1, " - mu_", gr2, " = 0  (null) supported."))
-
 
   if (show_summ)
   {

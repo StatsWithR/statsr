@@ -150,6 +150,13 @@ bayes_ht_two_prop = function(y, x, success, null = 0,
                              show_res  = verbose,
                              show_plot = verbose)
 {
+  if (alternative != "twosided")
+    stop("One sided hypothesis tests are not currently supported.", call.=FALSE)
+
+  if (null != 0)
+    stop(paste0("Currently only H1: p_", gr1, " - p_", gr2, " = 0  (null) supported."), call.=FALSE)
+
+
   beta_prior1 = check_beta_prior(beta_prior1)
   beta_prior2 = check_beta_prior(beta_prior2)
   hypothesis_prior = check_hypothesis_prior(hypothesis_prior)
@@ -186,14 +193,6 @@ bayes_ht_two_prop = function(y, x, success, null = 0,
               -lbeta(prior_a1, prior_b1)
               +lbeta(k2+prior_a2, n2-k2+prior_b2)
               -lbeta(prior_a2, prior_b2))
-  
-  if (alternative != "twosided")
-    stop("One sided hypothesis tests are not currently supported.", call.=FALSE)
-
-  if (null != 0)
-    stop(paste0("Currently only H1: p_", gr1, " - p_", gr2, " = 0  (null) supported."), call.=FALSE)
-
-
 
   if (show_summ)
   {

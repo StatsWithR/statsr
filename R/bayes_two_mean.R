@@ -161,10 +161,6 @@ bayes_ht_two_mean = function(y, x, null = 0,
                                   n = c(n1, n2),
                                   max_eval=10^6, low_v=0.001, up_v=100, m=4)
 
-  
-  print(BF)
-  print(str(BF))
-
   res = list(hypothesis_prior = hypothesis_prior)
   
   if (BF < 1)

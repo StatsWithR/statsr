@@ -39,9 +39,10 @@ check_hypothesis_prior = function(prior)
         prior = c(H1=0.5,H2=0.5)
     }
 
-    if (length(prior) == 1 & names(prior) %in% c("H1","H2"))
-    {
-        prior[ setdiff(c("H1","H2"), names(prior)) ] = 1 - prior
+    if (length(prior) == 1)
+    {   
+        if (names(prior) %in% c("H1","H2"))
+            prior[ setdiff(c("H1","H2"), names(prior)) ] = 1 - prior
     }
 
     stopifnot(length(prior) == 2)

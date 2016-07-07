@@ -154,8 +154,6 @@ bayes_ht_two_mean = function(y, x, null = 0,
     cat("(Assuming intrinsic prior on parameters)\n")
   }
 
-  cat(y_bar1,y_bar2,s1,s2,n1,n2,"\n")
-
   BF = behren_fisher_intrinsic_BF(ybar = c(y_bar1, y_bar2), 
                                   s2 = c(s1, s2)^2, 
                                   n = c(n1, n2),

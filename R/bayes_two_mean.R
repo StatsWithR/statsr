@@ -154,12 +154,17 @@ bayes_ht_two_mean = function(y, x, null = 0,
     cat("(Assuming intrinsic prior on parameters)\n")
   }
 
+  cat(y_bar1,y_bar2,s1,s2,n1,n2,"\n")
+
   BF = behren_fisher_intrinsic_BF(ybar = c(y_bar1, y_bar2), 
                                   s2 = c(s1, s2)^2, 
                                   n = c(n1, n2),
                                   max_eval=10^6, low_v=0.001, up_v=100, m=4)
 
   
+  print(BF)
+  print(str(BF))
+
   res = list(hypothesis_prior = hypothesis_prior)
   
   if (BF < 1)
@@ -189,7 +194,7 @@ bayes_ht_two_mean = function(y, x, null = 0,
                         twosided = "!=")
       cat("Hypotheses:\n")
       cat("H1: mu_", gr1, "  = mu_", gr2, "\n", sep="")
-      cat("H2: mu_", gr2, " ", alt_sign, " mu_", gr2, "\n", sep="")
+      cat("H2: mu_", gr1, " ", alt_sign, " mu_", gr2, "\n", sep="")
       cat("\n")
 
       cat("Priors:\n")

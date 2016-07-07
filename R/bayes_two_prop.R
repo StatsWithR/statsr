@@ -240,7 +240,7 @@ bayes_ht_two_prop = function(y, x, success, null = 0,
                         twosided = "!=")
       cat("Hypotheses:\n")
       cat("H1: p_", gr1, " =  p_", gr2, "\n",sep="")
-      cat("H2: p_", gr2, " ", alt_sign, " p_", gr2, "\n",sep="")
+      cat("H2: p_", gr1, " ", alt_sign, " p_", gr2, "\n",sep="")
       cat("\n")
 
       cat("Priors:\n")

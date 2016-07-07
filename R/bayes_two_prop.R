@@ -176,25 +176,22 @@ bayes_ht_two_prop = function(y, x, success, null = 0,
 
   # \binom{n1+n2,k1+k2} B(k1+k2+a1+a2, n1+n2-k1-k2+b1+b2) / B(a1+a2,b1+b2)
 
-  mlik1 = exp( lchoose(n1+n2, k1+k2)
-              +lbeta(k1+k2+prior_a1+prior_a2, n1+n2-k1-k2+prior_b1+prior_b2)
-              -lbeta(prior_a1+prior_a2, prior_b1+prior_b2) )
+  mloglik1 = ( lbeta(k1+k2+prior_a1+prior_a2, n1+n2-k1-k2+prior_b1+prior_b2)
+              -lbeta(prior_a1+prior_a2, prior_b1+prior_b2))
 
 
   # \binom{n1,k1} B(k1+a1, n1-k1+b1) / B(a1,b1) \times \binom{n2,k2} B(k2+a2, n2-k2+b2) / B(a2,b2)
 
-  mlik2 = exp( lchoose(n1, k1)
-              +lbeta(k1+prior_a1, n1-k1+prior_b1)
+  mloglik2 = ( lbeta(k1+prior_a1, n1-k1+prior_b1)
               -lbeta(prior_a1, prior_b1)
-              +lchoose(n2, k2)
               +lbeta(k2+prior_a2, n2-k2+prior_b2)
-              -lbeta(prior_a2, prior_b2) )
+              -lbeta(prior_a2, prior_b2))
   
   if (alternative != "twosided")
-    stop("One sided hypothesis tests are not currently supported.")
+    stop("One sided hypothesis tests are not currently supported.", call.=FALSE)
 
   if (null != 0)
-    stop(paste0("Currently only H1: p_", gr1, " - p_", gr2, " = 0  (null) supported."))
+    stop(paste0("Currently only H1: p_", gr1, " - p_", gr2, " = 0  (null) supported."), call.=FALSE)
 
 
 
@@ -213,11 +210,11 @@ bayes_ht_two_prop = function(y, x, success, null = 0,
              beta_prior2 = beta_prior2,
              hypothesis_prior = hypothesis_prior)
   
-  if (mlik1 >= mlik2)
+  if (mloglik1 >= mloglik2)
   {
       res$order = "H1:H2"
       res$O  = prior_H1 / prior_H2
-      res$BF = mlik1 / mlik2
+      res$BF = exp(mloglik1 - mloglik2)
       res$PO = res$BF * res$O
       res$post_H1 = res$PO / (res$PO+1)
       res$post_H2 = 1 - res$PO / (res$PO+1) 
@@ -225,7 +222,7 @@ bayes_ht_two_prop = function(y, x, success, null = 0,
   } else {
       res$order = "H2:H1"
       res$O  = prior_H2 / prior_H1
-      res$BF = mlik2 / mlik1
+      res$BF = exp(mloglik2 - mloglik1)
       res$PO = res$BF * res$O
       res$post_H2 = res$PO / (res$PO+1)
       res$post_H1 = 1 - res$PO / (res$PO+1) 

@@ -12,7 +12,7 @@ rep_sample_n <- function(tbl, size, replace = FALSE, reps = 1)
     n <- nrow(tbl)
     i <- unlist(replicate(reps, sample.int(n, size, replace = replace), simplify = FALSE))
 
-    rep_tbl <- cbind(replicate = rep(1:reps,rep(size,reps)), tbl[i,])
+    rep_tbl <- cbind(replicate = rep(1:reps,rep(size,reps)), tbl[i, , drop=FALSE])
 
     dplyr::group_by(rep_tbl, replicate)
 }

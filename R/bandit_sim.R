@@ -153,10 +153,10 @@ bandit_sim = function()
                                "machine = c(",m,"), ",
                                "outcome = c(",o,"))")
                       })
-        output$tab = renderTable(values$tab, align="lccc")
+        output$tab = renderTable(values$tab, align="ccc")
         output$res = renderTable(values$res,
                                  include.rownames=FALSE,
-                                 align="cccc")
+                                 align="ccc")
     }
   )
 }

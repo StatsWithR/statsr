@@ -10,7 +10,7 @@ bandit_posterior(data, prior = c(m1_good = 0.5, m2_good = 0.5),
 \arguments{
 \item{data}{data frame containing win loss data}
 
-\item{prior}{prior vector containing the probabilites of Machine 1 and Machine 2 being good, defaults to 50-50.}
+\item{prior}{prior vector containing the probabilites of Machine 1 and Machine 2 being good, defaults to 0.5 and 0.5 respectively.}
 
 \item{win_probs}{vector containing the probabilities of winning on the good and bad machine respectively.}
 }
@@ -18,10 +18,9 @@ bandit_posterior(data, prior = c(m1_good = 0.5, m2_good = 0.5),
 A vector containing the posterior probability of Machine 1 and Machine 2 being the good machine.
 }
 \description{
-An interactive function that will generate a scatterplot of two variables, then
-allow the user to click the plot in two locations to draw a best fit line.
-Residuals are drawn by default; boxes representing the squared residuals are
-optional.
+Utility function for calculating the posterior probability of each machine being "good" in 
+two armed bandit problem. Calculated result is based on observed win loss data, prior belief about 
+which machine is good and the probability of the good and bad machine paying out.
 }
 \examples{
 data = data.frame(machine = c(1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 2L), 

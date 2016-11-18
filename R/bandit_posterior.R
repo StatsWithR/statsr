@@ -1,12 +1,11 @@
 #' plot_ss
 #'
-#' An interactive function that will generate a scatterplot of two variables, then
-#' allow the user to click the plot in two locations to draw a best fit line.
-#' Residuals are drawn by default; boxes representing the squared residuals are
-#' optional.
+#' Utility function for calculating the posterior probability of each machine being "good" in 
+#' two armed bandit problem. Calculated result is based on observed win loss data, prior belief about 
+#' which machine is good and the probability of the good and bad machine paying out.
 #'
 #' @param data data frame containing win loss data
-#' @param prior prior vector containing the probabilites of Machine 1 and Machine 2 being good, defaults to 50-50.
+#' @param prior prior vector containing the probabilites of Machine 1 and Machine 2 being good, defaults to 0.5 and 0.5 respectively.
 #' @param win_probs vector containing the probabilities of winning on the good and bad machine respectively.
 #' @return A vector containing the posterior probability of Machine 1 and Machine 2 being the good machine.
 #'

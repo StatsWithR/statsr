@@ -1,5 +1,7 @@
 language: r
 cache: packages
+r_check_args: '--as-cran'
 r:
   - oldrel
   - release
+  - devel

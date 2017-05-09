@@ -25,4 +25,3 @@ brfss
 This data set is a small subset of BRFSS results from the 2013 survey, each row represents an individual respondent.
 }
 \keyword{datasets}
-

@@ -18,3 +18,10 @@ knitr::opts_chunk$set(
 
 Companion package for the Coursera *Statistics with R* specialization
 
+To install the latest version from github, verify that there is passing badge above on the README page.  In `R` enter
+
+```{r github, echo=TRUE,eval=FALSE}
+library(devtools)
+devtools::install_github("statswithr/statsr")
+```
+

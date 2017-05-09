@@ -28,4 +28,3 @@ data = data.frame(machine = c(1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 2L),
 bandit_posterior(data)
 
 }
-

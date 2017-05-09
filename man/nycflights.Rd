@@ -33,4 +33,3 @@ On-time data for a random sample of flights that departed NYC (i.e. JFK, LGA or 
 in 2013.
 }
 \keyword{datasets}
-

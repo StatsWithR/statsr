@@ -21,4 +21,3 @@ Survey results on atheism across several countries and years. Each row
 represents a single respondent.
 }
 \keyword{datasets}
-

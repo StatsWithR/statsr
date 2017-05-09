@@ -62,4 +62,3 @@ Results of inference task performed
 \description{
 Hypothesis tests and confidence intervals
 }
-

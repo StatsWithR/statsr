@@ -24,4 +24,3 @@ data = data.frame(machine = c(1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 2L),
 plot_bandit_posterior(data)
 
 }
-

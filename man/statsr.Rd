@@ -8,4 +8,3 @@
 \description{
 See https://github.com/StatsWithR/statsr for more information.
 }
-

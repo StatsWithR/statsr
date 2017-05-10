@@ -1,8 +1,8 @@
 Package: statsr
 Type: Package
 Title: Companion package for the Coursera Statistics with R specialization
-Version: 1.0.0
-Date: 2017-05-10
+Version: 0.0.1
+Date: 2017-05-11
 Authors@R: c(person("Colin", "Rundel", role=c("aut"), email="rundel@gmail.com"),
              person("Mine", "Cetinkaya-Rundel", role=c("aut","cre"), email="mine@stat.duke.edu"),
              person("Merlise", "Clyde", role=c("aut"), email="clyde@stat.duke.edu"),

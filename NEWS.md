@@ -1,5 +1,5 @@
 # News for statsr
 
-# statsr 1.0.0
+# statsr 0.0.1
 
 * First release of package on CRAN

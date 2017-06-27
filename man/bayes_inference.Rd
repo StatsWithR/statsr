@@ -5,11 +5,13 @@
 \title{Bayesian hypothesis tests and credible intervals}
 \usage{
 bayes_inference(y, x = NULL, data, type = c("ci", "ht"),
-  statistic = c("mean", "proportion"), success = NULL, null = NULL,
-  cred_level = 0.95, alternative = c("twosided", "less", "greater"),
-  hypothesis_prior = c(H1 = 0.5, H2 = 0.5), n_0 = 1, beta_prior = NULL,
-  beta_prior1 = NULL, beta_prior2 = NULL, verbose = TRUE,
-  show_summ = verbose, show_res = verbose, show_plot = verbose)
+  statistic = c("mean", "proportion"), method = c("theoretical",
+  "simulation"), success = NULL, null = NULL, cred_level = 0.95,
+  alternative = c("twosided", "less", "greater"), hypothesis_prior = c(H1 =
+  0.5, H2 = 0.5), n_0 = 1, mu_0 = 0, s_0 = 0, v_0 = -1,
+  beta_prior = NULL, beta_prior1 = NULL, beta_prior2 = NULL,
+  verbose = TRUE, show_summ = verbose, show_res = verbose,
+  show_plot = verbose)
 }
 \arguments{
 \item{y}{Response variable, can be numerical or categorical}
@@ -22,6 +24,8 @@ bayes_inference(y, x = NULL, data, type = c("ci", "ht"),
 
 \item{statistic}{population parameter to estimate: mean or proportion}
 
+\item{method}{of inference; "theoretical" (quantile based) or "simulation"}
+
 \item{success}{which level of the categorical variable to call "success", i.e. do inference on}
 
 \item{null}{null value for the hypothesis test}
@@ -32,7 +36,12 @@ bayes_inference(y, x = NULL, data, type = c("ci", "ht"),
 
 \item{hypothesis_prior}{discrete prior for H1 and H2, default is the uniform prior: c(H1=0.5,H2=0.5)}
 
-\item{n_0}{Prior sample size for calculating the Bayes factor of the twosided test of one mean}
+\item{n_0, mu_0, s_0, v_0}{Prior parameters for the conjugate Normal-Gamma prior: mu_0 is the prior mean (0.0 by default);
+n_0 is the prior sample size;  s_0  standard deviation; 
+v_0 is the prior degrees of freedom associated with the prior standard deviation, s_0. 
+The default values correspond to the independent Jeffreys prior for
+the variance sigma^2  (s_0 = 0, v_0 = -1),  and the unit information prior 
+mu given sigma^2  (mu_0 = 0, n_0=1).}
 
 \item{beta_prior, beta_prior1, beta_prior2}{beta priors for p (or p_1 and p_2) for one or two proportion inference}
 
@@ -45,8 +54,35 @@ bayes_inference(y, x = NULL, data, type = c("ci", "ht"),
 \item{show_plot}{print inference plot, set to verbose by default}
 }
 \value{
-Results of inference task performed
+Results of inference task performed.
 }
 \description{
 Bayesian hypothesis tests and credible intervals
+}
+\examples{
+
+# inference for the mean from a single normal population
+# Jeffreys Reference prior, p(mu, sigma^2) = 1/sigma^2
+
+
+data(tapwater)
+
+# Calculate 95\% CI using quantiles from Student t
+bayes_inference(tthm, data=tapwater,
+                statistic="mean",
+                type="ci", n_0=0,
+
+# Calculate 95\% CI using simulation from Student t
+bayes_inference(tthm, data=tapwater,
+                statistic="mean",
+                type="ci", n_0=0,
+
+# Calculate 95\% CI using simulation from Student t with the 
+#  unit information prior on mu and reference prior on sigma^2
+
+bayes_inference(tthm, data=tapwater,
+                statistic="mean",
+                type="ci", n_0=1,
+
+
 }

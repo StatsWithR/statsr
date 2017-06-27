@@ -4,6 +4,7 @@
 #' @param data Name of data frame that y and x are in
 #' @param type of inference; "ci" (credible interval) or "ht" (hypothesis test)
 #' @param statistic population parameter to estimate: mean or proportion
+#' @param method  of inference; "theoretical" (quantile based) or "simulation"
 #' @param success which level of the categorical variable to call "success", i.e. do inference on
 #' @param null null value for the hypothesis test
 #' @param cred_level confidence level, value between 0 and 1
@@ -13,21 +14,57 @@
 #' @param show_res print results, set to verbose by default
 #' @param show_plot print inference plot, set to verbose by default
 #' @param hypothesis_prior discrete prior for H1 and H2, default is the uniform prior: c(H1=0.5,H2=0.5)
-#' @param n_0 Prior sample size for calculating the Bayes factor of the twosided test of one mean
+#' @param n_0,mu_0,s_0,v_0 Prior parameters for the conjugate Normal-Gamma prior: mu_0 is the prior mean (0.0 by default);
+#' n_0 is the prior sample size;  s_0  standard deviation; 
+#' v_0 is the prior degrees of freedom associated with the prior standard deviation, s_0. 
+#' The default values correspond to the independent Jeffreys prior for
+#' the variance sigma^2  (s_0 = 0, v_0 = -1),  and the unit information prior 
+#' mu given sigma^2  (mu_0 = 0, n_0=1).
 #' @param beta_prior,beta_prior1,beta_prior2 beta priors for p (or p_1 and p_2) for one or two proportion inference
-#' @return Results of inference task performed
+#' @return Results of inference task performed.
+#' 
+#' @examples 
+#' 
+#' # inference for the mean from a single normal population
+#' # Jeffreys Reference prior, p(mu, sigma^2) = 1/sigma^2
+#' 
+#' 
+#' data(tapwater)
+#' 
+#' # Calculate 95% CI using quantiles from Student t
+#' bayes_inference(tthm, data=tapwater,
+#'                 statistic="mean",
+#'                 type="ci", n_0=0,
+#                  method="theoretical")
+#' 
+#' # Calculate 95% CI using simulation from Student t
+#' bayes_inference(tthm, data=tapwater,
+#'                 statistic="mean",
+#'                 type="ci", n_0=0,
+#                  method="simulation")
+#' 
+#'# Calculate 95% CI using simulation from Student t with the 
+#'#  unit information prior on mu and reference prior on sigma^2
+#'
+#' bayes_inference(tthm, data=tapwater,
+#'                 statistic="mean",
+#'                 type="ci", n_0=1,
+#                  method="simulation")
+#' 
+#' 
 #' @export
 
 
 bayes_inference = function(y, x = NULL, data,
                            type = c("ci", "ht"),
                            statistic = c("mean", "proportion"),
+                           method =  c("theoretical", "simulation"),
                            success = NULL, 
                            null = NULL, 
                            cred_level = 0.95,
                            alternative = c("twosided","less","greater"),
                            hypothesis_prior = c(H1=0.5,H2=0.5),
-                           n_0 = 1,
+                           n_0 = 1, mu_0 = 0, s_0 = 0, v_0 = -1,
                            beta_prior  = NULL,
                            beta_prior1 = NULL,
                            beta_prior2 = NULL,
@@ -99,6 +136,15 @@ bayes_inference = function(y, x = NULL, data,
     stop("Missing statistic: mean or proportion", call. = FALSE)
   }
 
+  # error: method isn't theoretical or simulation
+  method_list = c("theoretical", "simulation")
+  method = tolower(gsub("\\s","", method))
+  which_method = pmatch(method, method_list)
+  if(is.na(which_method)){
+      stop("Method should be theoretical or simulation", call. = FALSE)
+  }
+  method = method_list[which_method]
+  
   # Check type
   stopifnot(length(type) == 1 & is.character(type))
   if(!type %in% c("ci", "ht"))
@@ -158,12 +204,26 @@ bayes_inference = function(y, x = NULL, data,
     y = y[!is.na(y)]
 
     if(statistic == "mean" & y_type == "numerical")
-    {
-      if(type == "ci")
-        return(invisible(
-          bayes_ci_single_mean(y, cred_level, 
-                               verbose, show_summ, show_res, show_plot)
-        ))
+    { 
+    # make sure improper prior is set correctly    
+      if (n_0 == 0)  mu_0 = 0 
+      if (v_0 == -1) s_0 = 0
+    # add more checks?
+      if(type == "ci")  {
+        if (method=="theoretical")   {
+          return(invisible(
+             bayes_ci_single_mean_theo(y, cred_level,
+                                       n_0, mu_0, s_0, v_0, 
+                                       verbose, show_summ,
+                                       show_res, show_plot)
+            )) }            
+        if (method=="simulation")   {
+              return(invisible(
+                  bayes_ci_single_mean_sim(y, cred_level,
+                                            n_0, mu_0, s_0, v_0, 
+                                            verbose, show_summ, show_res, show_plot)
+              )) }  
+      }
       if(type == "ht")
         return(invisible( 
           bayes_ht_single_mean(y, null, alternative, cred_level, n_0, hypothesis_prior, 

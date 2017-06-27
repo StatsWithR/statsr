@@ -1,4 +1,5 @@
-bayes_ci_single_mean = function(y, cred_level = 0.95,
+bayes_ci_single_mean_sim = function(y, cred_level = 0.95,
+                                n_0, mu_0, s_0, v_0,
                                 verbose    = TRUE,
                                 show_summ  = verbose, 
                                 show_res   = verbose,
@@ -8,23 +9,35 @@ bayes_ci_single_mean = function(y, cred_level = 0.95,
 
   n = length(y) 
   y_bar = mean(y)
-  s = sd(y)
-
-  post = rt(nsim, df=n-1) * s / sqrt(n) + y_bar  
+  
+  # update hyperparameters
+  n_n = n_0 + n
+  post_mean = (n*y_bar + n_0*mu_0)/n_n
+  ss = var(y)*(n-1) + s_0^2*v_0 + (n*n_0/n_n)*(y_bar - mu_0)^2
+  v_n = v_0 + n
+  s = sqrt(ss/v_n)
+  post_sd = s/sqrt(n_n)
+  
+  post = rt(nsim, df=v_n) * s / sqrt(n_n) + post_mean  
   
   ci = quantile(post, probs = c((1-cred_level)/2,1-(1-cred_level)/2))
   
   den = coda_density(post)
   
-  post_mean   = mean(post)
+ 
   post_median = median(post)
   post_mode   = den$x[which.max(den$y)]
 
   if (show_summ)
   {
     cat("Single numerical variable\n")
-    cat("n = ", n, ", y-bar = ", round(y_bar, 4), ", s = ", round(s, 4), "\n",sep="")
-    cat("(Assuming improper prior: P(mu, sigma^2) = 1/sigma^2)\n")
+    cat("n = ", n, ", y-bar = ", round(y_bar, 4), ", s = ", round(sd(y), 4), "\n",sep="")
+    if (n_0 == 0 )  cat("(Assuming improper prior: P(mu) = 1)\n")
+    else  cat("(Assuming proper prior:  mu | sigma^2 ~ N(m_0, n_0 sigma^2)\n")
+    if (v_0 == -1)  cat("(Assuming improper prior: P(sigma^2) = 1/sigma^2)\n")
+    else   cat("(Assuming proper prior: 1/sigma^2 ~ G(v_0/2, s_0*v_0/2)\n")
+    
+    cat("posterior mean = ", round(post_mean, 4), ", posterior sd = ", round(post_sd, 4), "\n",sep="")
     cat("\n")
   }
 
@@ -75,6 +88,8 @@ bayes_ci_single_mean = function(y, cred_level = 0.95,
       post_mean   = post_mean,
       post_median = post_median,
       post_mode   = post_mode,
+      post_sd     = s,
+      post_df     = v_n,
       ci          = ci
     )
   ))

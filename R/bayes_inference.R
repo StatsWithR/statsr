@@ -207,7 +207,7 @@ bayes_inference = function(y, x = NULL, data,
     { 
     # make sure improper prior is set correctly    
       if (n_0 == 0)  mu_0 = 0 
-      if (v_0 == -1) s_0 = 0
+      if (v_0 <= 0) s_0 = 0
     # add more checks?
       if(type == "ci")  {
         if (method=="theoretical")   {
@@ -225,8 +225,9 @@ bayes_inference = function(y, x = NULL, data,
               )) }  
       }
       if(type == "ht")
+          if (n_0 == 0) error("improper priors cannot be used as a prior on mu for hypothesis testing")
         return(invisible( 
-          bayes_ht_single_mean(y, null, alternative, cred_level, n_0, hypothesis_prior, 
+          bayes_ht_single_mean(y, mu_0, alternative, cred_level, n_0, hypothesis_prior, 
                                verbose, show_summ, show_res, show_plot)
           ))
     }

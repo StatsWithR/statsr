@@ -41,11 +41,19 @@ bayes_ci_single_mean_theo = function(y, cred_level = 0.95,
    cat("Single numerical variable\n")
    cat("n = ", n, ", y-bar = ", round(y_bar, 4), ", s = ", round(sd(y), 4), "\n",sep="")
    if (n_0 == 0 )  cat("(Assuming improper prior: P(mu) = 1)\n")
-   else  cat("(Assuming proper prior:  mu | sigma^2 ~ N(m_0, n_0 sigma^2)\n")
-   if (v_0 == -1)  cat("(Assuming improper prior: P(sigma^2) = 1/sigma^2)\n")
-   else   cat("(Assuming proper prior: 1/sigma^2 ~ G(v_0/2, s_0*v_0/2)\n")
-   
-   cat("posterior mean = ", round(post_mean, 4), ", posterior sd = ", round(s, 4), "\n",sep="")
+   else  cat("(Assuming proper prior:  mu | sigma^2 ~ N(",
+              round(mu_0,4),", ", n_0, "*sigma^2)\n", sep="")
+   if (v_0 <= 0)  cat("(Assuming improper prior: P(1/sigma^2) = (sigma^2)^",v_0,"\n",sep="")
+   else   cat("(Assuming proper prior: 1/sigma^2 ~ G(",
+              v_0,"/2,", round(s_0^2,4),"*",v_0,"/2)\n", sep="")
+   cat("\n")
+   cat("Joint Posterior Distribution for mu and 1/sigma^2:\n",
+       " N(", round(post_mean, 4), ", sigma^2/", n_n,")",
+       " G(", v_n, "/2, ", round(s^2*v_n,4), "/2)\n\n", sep="")
+   cat("Marginal Posterior for mu:\n", 
+       "Student t with posterior mean = ", 
+       round(post_mean, 4), ", posterior scale = ", round(s, 4), 
+       " on ", v_n, " df\n",sep="")
    
     cat("\n")
   }
@@ -55,10 +63,6 @@ bayes_ci_single_mean_theo = function(y, cred_level = 0.95,
   {
     cat(paste0(cred_level*100, "% CI: (", round(ci[1], 4), " , ", round(ci[2], 4), ")\n"))
     
-    cat("\n")
-    cat("Post. mean   =", round(post_mean,4),   "\n")
-    cat("Post. median =", round(post_median,4), "\n")
-    cat("Post. mode   =", round(post_mode,4),   "\n")
   }
 
 

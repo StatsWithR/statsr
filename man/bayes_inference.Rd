@@ -9,7 +9,7 @@ bayes_inference(y, x = NULL, data, type = c("ci", "ht"),
   "simulation"), success = NULL, null = NULL, cred_level = 0.95,
   alternative = c("twosided", "less", "greater"), hypothesis_prior = c(H1 =
   0.5, H2 = 0.5), prior_family = "JZS", n_0 = 1, mu_0 = null, s_0 = 0,
-  v_0 = -1, alpha_0 = 0, rscale = 2/sqrt(2), beta_prior = NULL,
+  v_0 = -1, alpha_0 = 0, rscale = sqrt(2)/2, beta_prior = NULL,
   beta_prior1 = NULL, beta_prior2 = NULL, verbose = TRUE,
   show_summ = verbose, show_res = verbose, show_plot = verbose)
 }
@@ -39,18 +39,19 @@ bayes_inference(y, x = NULL, data, type = c("ci", "ht"),
 \item{prior_family}{character string representing default priors for inference or testing ("JSZ", "JUI","ref"). 
 See notes for details.}
 
-\item{n_0, mu_0, s_0, v_0, alpha_0, rscale}{Prior parameters for the conjugate Normal-Gamma prior
+\item{n_0, mu_0, s_0, v_0, alpha_0}{Prior parameters for the conjugate Normal-Gamma prior
 or mixtures of NG:
-  mu_0 is the prior mean (0.0 by default);
-  n_0 is the prior sample size or squared scaling parameter for the ZS Cauchy prior; 
+  mu_0 is the prior mean (0.0 by default) for one-sample problems;
+  n_0 is the prior sample size; 
   s_0 is the prior standard deviation of the data;
-  v_0 is the prior degrees of freedom associated with the prior standard deviation, 
-  s_0.
-  alpha_0 is the prior effect size for comparing two normal means (default is 0). 
-
+  v_0 is the prior degrees of freedom associated with the prior standard deviation, s_0;
+  alpha_0 is the prior effect size for comparing two normal means (default is 0).
 The default values correspond to the independent Jeffreys prior for
 the variance sigma^2  (s_0 = 0, v_0 = -1),  and the unit information prior 
 mu given sigma^2  (mu_0 = 0, n_0=1).}
+
+\item{rscale}{is the scaling parameter in the Cauchy prior:  1/n_0 ~ Gamma(1/2, rscale^2/2)
+leads to mu_0 or alpha_0 having a Cauchy(0, rscale*sigma) prior distribution.}
 
 \item{beta_prior, beta_prior1, beta_prior2}{beta priors for p (or p_1 and p_2) for one or two proportion inference}
 
@@ -93,18 +94,20 @@ bayes_inference(tthm, data=tapwater,
                 type="ci", prior_family="ref",
                 method="theoretical")
 
-# Calculate 95\% CI using simulation from Student t
+# Calculate 95\% CI using simulation from Student t using an informative mean and ref
+# prior for sigma^2
+
 bayes_inference(tthm, data=tapwater,
-                statistic="mean",
-                type="ci",  prior_family="ref",
+                statistic="mean", mu_0=9.8,
+                type="ci",  prior_family="JUI",
                 method="theo")
 
 # Calculate 95\% CI using simulation from Student t with the 
-#  unit information prior on mu and reference prior on sigma^2
+# Cauchy prior on mu and reference prior on sigma^2
 
 bayes_inference(tthm, data=tapwater,
-                statistic="mean", mu_0 = 0,
-                type="ci", prior_family="JUI",
+                statistic="mean", mu_0 = 9.8,
+                type="ci", prior_family="JZS",
                 method="simulation")
 
 
@@ -113,7 +116,15 @@ bayes_inference(tthm, data=tapwater,
                 statistic="mean",
                 type="ht", alternative="twosided", null=80,
                 prior_family="NG", n_0=1, mu_0=80, s_0=0, v_0=-1, 
-                method="theo")
+                method="sim")
+                
+                
+# Bayesian t-test mu = 0 with ZJS prior  (using BayesFactor package)
+bayes_inference(tthm, data=tapwater,
+                statistic="mean",
+                type="ht", alternative="twosided", null=80,
+                prior_family="JZS", rscale=1,
+                method="sim")
                 
                 
 

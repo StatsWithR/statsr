@@ -148,9 +148,9 @@ bayes_ht_single_mean_sim = function(y, null,
   {
     cat("Single numerical variable\n")
     cat("n = ", n, ", y-bar = ", round(y_bar, 4), ", s = ", round(s, 4), "\n",sep="")
-    cat("(Assuming proper prior: mu | sigma^2 ~ N(", round(mu_0, 4),
+    cat("(Using proper prior: mu | sigma^2 ~ N(", round(mu_0, 4),
         ", ", n_0, "*sigma^2)\n", sep="")
-    cat("(Assuming improper prior: P(sigma^2) = 1/sigma^2)\n")
+    cat("(Using improper prior: P(sigma^2) = 1/sigma^2)\n")
     cat("\n")
   }
   

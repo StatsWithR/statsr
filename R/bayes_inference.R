@@ -16,18 +16,18 @@
 #' @param hypothesis_prior discrete prior for H1 and H2, default is the uniform prior: c(H1=0.5,H2=0.5)
 #' @param prior_family character string representing default priors for inference or testing ("JSZ", "JUI","ref"). 
 #'        See notes for details.
-#' @param n_0,mu_0,s_0,v_0,alpha_0,rscale Prior parameters for the conjugate Normal-Gamma prior
+#' @param n_0,mu_0,s_0,v_0,alpha_0 Prior parameters for the conjugate Normal-Gamma prior
 #' or mixtures of NG:
-#'   mu_0 is the prior mean (0.0 by default);
-#'   n_0 is the prior sample size or squared scaling parameter for the ZS Cauchy prior; 
+#'   mu_0 is the prior mean (0.0 by default) for one-sample problems;
+#'   n_0 is the prior sample size; 
 #'   s_0 is the prior standard deviation of the data;
-#'   v_0 is the prior degrees of freedom associated with the prior standard deviation, 
-#'   s_0.
-#'   alpha_0 is the prior effect size for comparing two normal means (default is 0). 
-#'
+#'   v_0 is the prior degrees of freedom associated with the prior standard deviation, s_0;
+#'   alpha_0 is the prior effect size for comparing two normal means (default is 0).
 #' The default values correspond to the independent Jeffreys prior for
 #' the variance sigma^2  (s_0 = 0, v_0 = -1),  and the unit information prior 
 #' mu given sigma^2  (mu_0 = 0, n_0=1).
+#' @param  rscale is the scaling parameter in the Cauchy prior:  1/n_0 ~ Gamma(1/2, rscale^2/2)
+#'   leads to mu_0 or alpha_0 having a Cauchy(0, rscale*sigma) prior distribution.         
 #' @param beta_prior,beta_prior1,beta_prior2 beta priors for p (or p_1 and p_2) for one or two proportion inference
 #' @return Results of inference task performed.
 #' 
@@ -57,18 +57,20 @@
 #'                 type="ci", prior_family="ref",
 #'                 method="theoretical")
 #' 
-#' # Calculate 95% CI using simulation from Student t
+#' # Calculate 95% CI using simulation from Student t using an informative mean and ref
+#' # prior for sigma^2
+#' 
 #' bayes_inference(tthm, data=tapwater,
-#'                 statistic="mean",
-#'                 type="ci",  prior_family="ref",
+#'                 statistic="mean", mu_0=9.8,
+#'                 type="ci",  prior_family="JUI",
 #'                 method="theo")
 #' 
 #'# Calculate 95% CI using simulation from Student t with the 
-#'#  unit information prior on mu and reference prior on sigma^2
+#'# Cauchy prior on mu and reference prior on sigma^2
 #'
 #' bayes_inference(tthm, data=tapwater,
-#'                 statistic="mean", mu_0 = 0,
-#'                 type="ci", prior_family="JUI",
+#'                 statistic="mean", mu_0 = 9.8,
+#'                 type="ci", prior_family="JZS",
 #'                 method="simulation")
 #' 
 #' 
@@ -77,7 +79,15 @@
 #'                 statistic="mean",
 #'                 type="ht", alternative="twosided", null=80,
 #'                 prior_family="NG", n_0=1, mu_0=80, s_0=0, v_0=-1, 
-#'                 method="theo")
+#'                 method="sim")
+#'                 
+#'                 
+#' # Bayesian t-test mu = 0 with ZJS prior  (using BayesFactor package)
+#' bayes_inference(tthm, data=tapwater,
+#'                 statistic="mean",
+#'                 type="ht", alternative="twosided", null=80,
+#'                 prior_family="JZS", rscale=1,
+#'                 method="sim")
 #'                 
 #'                 
 
@@ -95,7 +105,8 @@ bayes_inference = function(y, x = NULL, data,
                            alternative = c("twosided","less","greater"),
                            hypothesis_prior = c(H1=0.5,H2=0.5),
                            prior_family="JZS",
-                           n_0 = 1, mu_0 = null, s_0 = 0, v_0 = -1, alpha_0=0, rscale=2/sqrt(2),
+                           n_0 = 1, mu_0 = null, s_0 = 0, v_0 = -1,
+                           alpha_0=0, rscale=sqrt(2)/2,
                            beta_prior  = NULL,
                            beta_prior1 = NULL,
                            beta_prior2 = NULL,
@@ -254,8 +265,8 @@ bayes_inference = function(y, x = NULL, data,
           n_0 = 1
           s_0 = 0
           v_0 = -1}
-      if (prior_family == "ZSC") {
-           method="sim"
+      if (prior_family == "JZS") {
+           method="simulation"
       }
             
     # make sure improper prior is set correctly 
@@ -288,31 +299,59 @@ bayes_inference = function(y, x = NULL, data,
               ))  }
             else {
               return(invisible(
-                  bayes_ci_single_mean_JZS(y, cred_level,
-                                           rscale, mu_0, 
-                                           verbose, show_summ, show_res, show_plot)
+                  bayes_ci_single_mean_JZS(y=y, cred_level=cred_level,
+                                           rscale=rscale, mu_0=mu_0, 
+                                           verbose=verbose, 
+                                           show_summ=show_summ,
+                                           show_res=show_res, 
+                                           show_plot=show_plot)
               )) }
           }
      }
      if(type == "ht") {
         if (n_0 == 0) stop("\nImproper priors cannot be used as a prior on mu for hypothesis testing\nPlease use n_0 > 0 or use a different default prior_family, such as JZS.")
         if (s_0 != 0 & v_0 != -1) warning("\nInformative priors on sigma^2 are not available, switching to Jeffreys reference prior for sigma^2")
-         
-          if (method=="theoretical") {
+
+        if (method=="theoretical") {
            return(invisible( 
-            bayes_ht_single_mean_theo(y, null, alternative, cred_level,
-                                      n_0, mu_0,
-                                      hypothesis_prior, 
-                                      verbose, show_summ, show_res, show_plot)
+            bayes_ht_single_mean_theo(y, null=null,
+                                      alternative=alternative,
+                                      cred_level=cred_level,
+                                      mu_0=mu_0, n_0=n_0,
+                                      hypothesis_prior=hypothesis_prior,
+                                      verbose=verbose,
+                                      show_summ=show_summ, 
+                                      show_res=show_res, 
+                                      show_plot=show_plot)
            ))}
-         if (method=="simulation") {
+        if (method=="simulation") {
+          if (prior_family != "JZS") {
+                 return(invisible(
+                     bayes_ht_single_mean_sim(y=y, null=null,
+                                              hypothesis_prior=hypothesis_prior,
+                                              alternative=alternative,
+                                              cred_level=cred_level,
+                                              mu_0=mu_0,n_0=n_0,
+                                              verbose=verbose,
+                                              show_summ=show_summ, 
+                                              show_res=show_res, 
+                                              show_plot=show_plot)
+                 ))  }
+          else {
+             
              return(invisible( 
-                 bayes_ht_single_mean_sim(y, null, alternative, cred_level,
-                                           n_0, mu_0,
-                                           hypothesis_prior, 
-                                           verbose, show_summ, show_res, show_plot)
+                 bayes_ht_single_mean_JZS(y=y, null=null,
+                                          hypothesis_prior=hypothesis_prior,
+                                          alternative=alternative,
+                                          cred_level=cred_level,
+                                          mu_0=mu_0, rscale=rscale,
+                                          verbose=verbose,
+                                          show_summ=show_summ, 
+                                          show_res=show_res, 
+                                          show_plot=show_plot)
              ))}
-      }
+         }
+     }
     }
     
     if(statistic == "proportion" & y_type == "categorical" & y_levels == 2) {

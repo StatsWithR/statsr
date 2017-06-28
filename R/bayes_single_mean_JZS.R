@@ -33,9 +33,9 @@ bayes_ci_single_mean_JZS = function(y, cred_level = 0.95,
       cat("Single numerical variable\n")
       cat("n = ", n, ", y-bar = ", round(y_bar, 4), ", s = ", round(sd(y), 4), "\n",sep="")
 
-      cat("(Assuming Zellner-Siow Cauchy prior:  mu ~ N(",
+      cat("(Assuming Zellner-Siow Cauchy prior:  mu ~ C(",
                 round(mu_0,4),", ", round(rscale,4), "*sigma)\n", sep="")
-      cat("(Assuming improper Jeffreys prior: p(1/sigma^2) = (sigma^2)^",v_0,"\n",sep="")
+      cat("(Assuming improper Jeffreys prior: p(sigma^2) = 1/sigma^2\n")
 
       cat("\nPosterior Summaries\n")
      
@@ -93,11 +93,10 @@ bayes_ci_single_mean_JZS = function(y, cred_level = 0.95,
 
 
 
-bayes_ht_single_JZS = function(y, mu_0=0, 
+bayes_ht_single_mean_JZS = function(y, null,  hypothesis_prior,
                                 alternative = "twosided",
-                                cred_level = 0.95,
-                                n_0 = 1,
-                                hypothesis_prior = NULL,
+                                cred_level = 0.95, 
+                                mu_0 = null, rscale=sqrt(2)/2,
                                 verbose    = TRUE,
                                 show_summ  = verbose, 
                                 show_res   = verbose,
@@ -110,19 +109,17 @@ bayes_ht_single_JZS = function(y, mu_0=0,
 
   if (is.null(null)) {
     null = mu_0
-}
+  }
+
   hypothesis_prior = check_hypothesis_prior(hypothesis_prior)
   
   n = length(y) 
   y_bar = mean(y)
   s = sd(y)
 
-  t = (y_bar - null)/ (s/sqrt(n))
-
-  #BF12 = sqrt((n+n_0)/n_0) * pow( (t^2 * (n_0 / (n+n_0)) + nu) / (t^2+nu), (nu+1)/2 ) 
-
-  BF12 = exp(0.5*(log(n + n_0) - log(n_0) + (n-1)*(log(t^2*n_0/(n + n_0) + (n - 1)) - log(t^2 + n - 1))))
-
+ 
+  BFout = BayesFactor::ttestBF(x=y, mu=mu_0, rscale=rscale,
+                               posterior=FALSE)
 
   prior_H1 = hypothesis_prior[1]
   prior_H2 = hypothesis_prior[2]
@@ -134,12 +131,19 @@ bayes_ht_single_JZS = function(y, mu_0=0,
   {
     cat("Single numerical variable\n")
     cat("n = ", n, ", y-bar = ", round(y_bar, 4), ", s = ", round(s, 4), "\n",sep="")
-    cat("(Assuming improper prior: P(mu, sigma^2) = 1/sigma^2)\n")
+    cat("(Using Zellner-Siow Cauchy prior:  mu ~ C(",
+        round(mu_0,4),", ", round(rscale,4), "*sigma)\n", sep="")
+    cat("(Using improper Jeffreys prior: p(sigma^2) = 1/sigma^2\n")
+    
     cat("\n")
   }
   
-  res = list(hypothesis_prior = hypothesis_prior)
+ 
+ 
   
+  res= list(hypothesis_prior = hypothesis_prior)
+  BF12 = exp(BFout@bayesFactor$bf)
+
   if (BF12 >= 1)
   {
       res$order = "H1:H2"
@@ -188,37 +192,14 @@ bayes_ht_single_JZS = function(y, mu_0=0,
   
   if (show_plot)
   { 
-    post_mean  = (y_bar*n + n_0*null)/(n + n_0)
-    post_scale = sqrt((s^2*(n-1)  + y_bar^2*n*n_0/(n + n_0))/((n-1)*n))
-
-    post_H2 = rt(nsim, df=n-1)*post_scale + post_mean
-
-
-    ci = quantile(post_H2, probs = c((1-cred_level)/2,1-(1-cred_level)/2))
-    den = coda_density(post_H2)
-
-    d_H2 = data.frame(mu = den$x, dens = den$y * res$post_H2 / max(den$y)) 
-
-    li = min(which(d_H2$mu >= ci[1]))  
-    ui = max(which(d_H2$mu <  ci[2]))
-
-    ci_poly = data.frame(mu = c(d_H2$mu[c(li,li:ui,ui)]), 
-                         dens = c(0, d_H2$dens[li:ui], 0))
-
-    ci_interval = data.frame(mu = ci, dens = c(0,0))
-
-    H1_line = data.frame(mu=c(null,null), dens=c(0,res$post_H1))
-
-    pos_plot = ggplot(d_H2, aes_string(x="mu", y="dens")) + 
-               geom_line() +
-               ylab("Density") +  
-               xlab("mu") +
-               #geom_line(data  = ci_interval, size=1.5) +
-               geom_line(data  = H1_line, size=1.5, col="blue", alpha=0.5) +
-               #geom_point(data = ci_interval, size=2) +
-               geom_polygon(data = ci_poly, alpha=0.5)
-
-    print(pos_plot)
+      if (show_res | show_summ) cat("\nPosterior summaries for mu under H2:\n")
+      bayes_ci_single_mean_JZS(y, cred_level=cred_level,
+                                rscale=rscale, mu_0=mu_0,
+                                verbose    = FALSE,
+                                show_summ  = show_summ, 
+                                show_res   = show_res,
+                                show_plot  = show_plot)
+      
   }
 
   return(invisible(res)) 

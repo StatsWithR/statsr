@@ -35,7 +35,7 @@
 #' @note For inference and testing for normal means several default options are avialable.
 #'  "JZS"  corresponds to using the Jeffreys reference prior on sigma^2, p(sigma^2) = 1/sigma^2, 
 #'  and the Zellner-Siow Cauchy prior on the standardized effect size mu/sigma or ( mu_1 - mu_2)/sigma
-#'   with a location of mu_0 and scale  sqrt(n_0).  The "ZUI" option also uses the
+#'   with a location of mu_0 and scale  sqrt(n_0).  The "JUI" option also uses the
 #'   Jeffreys reference prior on sigma^2, but the Unit Information prior on the
 #'  standardized effect, N(mu_0, 1).  The option "ref" uses the improper unifrom prior  on 
 #'  the standardized effect and the Jeffereys reference prior on  sigma^2.  The latter 
@@ -53,24 +53,34 @@
 #' 
 #' # Calculate 95% CI using quantiles from Student t derived from NG prior
 #' bayes_inference(tthm, data=tapwater,
-#'                 statistic="mean",
+#'                 statistic="mean", 
 #'                 type="ci", prior_family="ref",
 #'                 method="theoretical")
 #' 
 #' # Calculate 95% CI using simulation from Student t
 #' bayes_inference(tthm, data=tapwater,
 #'                 statistic="mean",
-#'                 type="ci", n_0=0, prior_family="NG",
+#'                 type="ci",  prior_family="ref",
 #'                 method="theo")
 #' 
 #'# Calculate 95% CI using simulation from Student t with the 
 #'#  unit information prior on mu and reference prior on sigma^2
 #'
 #' bayes_inference(tthm, data=tapwater,
-#'                 statistic="mean",
-#'                 type="ci", prior_family="ZUI",
+#'                 statistic="mean", mu_0 = 0,
+#'                 type="ci", prior_family="JUI",
 #'                 method="simulation")
 #' 
+#' 
+#' # Bayesian t-test mu = 0 with JUI prior
+#' bayes_inference(tthm, data=tapwater,
+#'                 statistic="mean",
+#'                 type="ht", alternative="twosided", null=80,
+#'                 prior_family="NG", n_0=1, mu_0=80, s_0=0, v_0=-1, 
+#'                 method="theo")
+#'                 
+#'                 
+
 #' 
 #' @export
 
@@ -85,7 +95,7 @@ bayes_inference = function(y, x = NULL, data,
                            alternative = c("twosided","less","greater"),
                            hypothesis_prior = c(H1=0.5,H2=0.5),
                            prior_family="JZS",
-                           n_0 = 1, mu_0 = 0, s_0 = 0, v_0 = -1, alpha_0=0, rscale=2/sqrt(2),
+                           n_0 = 1, mu_0 = null, s_0 = 0, v_0 = -1, alpha_0=0, rscale=2/sqrt(2),
                            beta_prior  = NULL,
                            beta_prior1 = NULL,
                            beta_prior2 = NULL,
@@ -222,11 +232,11 @@ bayes_inference = function(y, x = NULL, data,
   # check prior family
   if (y_type == "numerical") {
   # error: method isn't theoretical or simulation
-  family_list = c("JZS","ZUI", "ref", "NG")
+  family_list = c("JZS","JUI", "ref", "NG")
  # prior_family = tolower(gsub("\\s","", prior_family))
   which_prior = pmatch(prior_family, family_list)
   if(is.na(which_prior)){
-      stop("Method should be one of JZS, NG, ZUI, or ref", call. = FALSE)
+      stop("Method should be one of JZS, NG, JUI, or ref", call. = FALSE)
   }
   prior_family = family_list[which_prior]
   }
@@ -236,13 +246,11 @@ bayes_inference = function(y, x = NULL, data,
   {
     y = y[!is.na(y)]
 
-    if(statistic == "mean" & y_type == "numerical")
-    { 
-   
+    if(statistic == "mean" & y_type == "numerical") { 
       if (prior_family == "ref") {
           n_0 = mu_0 = s_0  =0.0
           v_0 = -1}
-      if (prior_family == "ZUI") {
+      if (prior_family == "JUI") {
           n_0 = 1
           s_0 = 0
           v_0 = -1}
@@ -254,10 +262,17 @@ bayes_inference = function(y, x = NULL, data,
      if (prior_family == "NG") {
       if (n_0 == 0)  mu_0 = 0 
       if (v_0 <= 0) s_0 = 0 }
-        
+    
+     if(is.null(null)) {
+        if (is.null(mu_0)) stop("Error: must specify prior mean mu_0\n")
+        null = mu_0
+        }
+     if(is.null(mu_0)) mu_0 = null    
+     if(mu_0 != null) stop("Error: null must be the same as mu_0\n")
+
     # add more checks?
-      if(type == "ci")  {
-        if (method=="theoretical")   {
+     if(type == "ci")  {
+       if (method=="theoretical")   {
           return(invisible(
              bayes_ci_single_mean_theo(y, cred_level,
                                        n_0, mu_0, s_0, v_0, 
@@ -278,18 +293,29 @@ bayes_inference = function(y, x = NULL, data,
                                            verbose, show_summ, show_res, show_plot)
               )) }
           }
+     }
+     if(type == "ht") {
+        if (n_0 == 0) stop("\nImproper priors cannot be used as a prior on mu for hypothesis testing\nPlease use n_0 > 0 or use a different default prior_family, such as JZS.")
+        if (s_0 != 0 & v_0 != -1) warning("\nInformative priors on sigma^2 are not available, switching to Jeffreys reference prior for sigma^2")
+         
+          if (method=="theoretical") {
+           return(invisible( 
+            bayes_ht_single_mean_theo(y, null, alternative, cred_level,
+                                      n_0, mu_0,
+                                      hypothesis_prior, 
+                                      verbose, show_summ, show_res, show_plot)
+           ))}
+         if (method=="simulation") {
+             return(invisible( 
+                 bayes_ht_single_mean_sim(y, null, alternative, cred_level,
+                                           n_0, mu_0,
+                                           hypothesis_prior, 
+                                           verbose, show_summ, show_res, show_plot)
+             ))}
       }
-      if(type == "ht")
-          if (n_0 == 0) stop("improper priors cannot be used as a prior on mu for hypothesis testing\n")
-        return(invisible( 
-          bayes_ht_single_mean(y, mu_0, alternative, cred_level, n_0, hypothesis_prior, 
-                               verbose, show_summ, show_res, show_plot)
-          ))
     }
-
-    if(statistic == "proportion" & y_type == "categorical" & y_levels == 2)
-    {
-
+    
+    if(statistic == "proportion" & y_type == "categorical" & y_levels == 2) {
 
       if(type == "ci")
         return(invisible(

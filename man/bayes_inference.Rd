@@ -8,7 +8,7 @@ bayes_inference(y, x = NULL, data, type = c("ci", "ht"),
   statistic = c("mean", "proportion"), method = c("theoretical",
   "simulation"), success = NULL, null = NULL, cred_level = 0.95,
   alternative = c("twosided", "less", "greater"), hypothesis_prior = c(H1 =
-  0.5, H2 = 0.5), prior_family = "JZS", n_0 = 1, mu_0 = 0, s_0 = 0,
+  0.5, H2 = 0.5), prior_family = "JZS", n_0 = 1, mu_0 = null, s_0 = 0,
   v_0 = -1, alpha_0 = 0, rscale = 2/sqrt(2), beta_prior = NULL,
   beta_prior1 = NULL, beta_prior2 = NULL, verbose = TRUE,
   show_summ = verbose, show_res = verbose, show_plot = verbose)
@@ -72,7 +72,7 @@ Bayesian hypothesis tests and credible intervals
 For inference and testing for normal means several default options are avialable.
  "JZS"  corresponds to using the Jeffreys reference prior on sigma^2, p(sigma^2) = 1/sigma^2, 
  and the Zellner-Siow Cauchy prior on the standardized effect size mu/sigma or ( mu_1 - mu_2)/sigma
-  with a location of mu_0 and scale  sqrt(n_0).  The "ZUI" option also uses the
+  with a location of mu_0 and scale  sqrt(n_0).  The "JUI" option also uses the
   Jeffreys reference prior on sigma^2, but the Unit Information prior on the
  standardized effect, N(mu_0, 1).  The option "ref" uses the improper unifrom prior  on 
  the standardized effect and the Jeffereys reference prior on  sigma^2.  The latter 
@@ -89,23 +89,32 @@ data(tapwater)
 
 # Calculate 95\% CI using quantiles from Student t derived from NG prior
 bayes_inference(tthm, data=tapwater,
-                statistic="mean",
+                statistic="mean", 
                 type="ci", prior_family="ref",
                 method="theoretical")
 
 # Calculate 95\% CI using simulation from Student t
 bayes_inference(tthm, data=tapwater,
                 statistic="mean",
-                type="ci", n_0=0, prior_family="NG",
+                type="ci",  prior_family="ref",
                 method="theo")
 
 # Calculate 95\% CI using simulation from Student t with the 
 #  unit information prior on mu and reference prior on sigma^2
 
 bayes_inference(tthm, data=tapwater,
-                statistic="mean",
-                type="ci", prior_family="ZUI",
+                statistic="mean", mu_0 = 0,
+                type="ci", prior_family="JUI",
                 method="simulation")
 
+
+# Bayesian t-test mu = 0 with JUI prior
+bayes_inference(tthm, data=tapwater,
+                statistic="mean",
+                type="ht", alternative="twosided", null=80,
+                prior_family="NG", n_0=1, mu_0=80, s_0=0, v_0=-1, 
+                method="theo")
+                
+                
 
 }

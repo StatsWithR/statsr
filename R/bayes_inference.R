@@ -54,21 +54,21 @@
 #' # Calculate 95% CI using quantiles from Student t derived from NG prior
 #' bayes_inference(tthm, data=tapwater,
 #'                 statistic="mean",
-#'                 type="ci", n_0=0,
+#'                 type="ci", prior_family="ref",
 #'                 method="theoretical")
 #' 
 #' # Calculate 95% CI using simulation from Student t
 #' bayes_inference(tthm, data=tapwater,
 #'                 statistic="mean",
-#'                 type="ci", n_0=0,
-#'                 method="simulation")
+#'                 type="ci", n_0=0, prior_family="NG",
+#'                 method="theo")
 #' 
 #'# Calculate 95% CI using simulation from Student t with the 
 #'#  unit information prior on mu and reference prior on sigma^2
 #'
 #' bayes_inference(tthm, data=tapwater,
 #'                 statistic="mean",
-#'                 type="ci", n_0=1,
+#'                 type="ci", prior_family="ZUI",
 #'                 method="simulation")
 #' 
 #' 
@@ -84,8 +84,8 @@ bayes_inference = function(y, x = NULL, data,
                            cred_level = 0.95,
                            alternative = c("twosided","less","greater"),
                            hypothesis_prior = c(H1=0.5,H2=0.5),
-                           prior_family=c("JZS", "ZUI", "ref", "NG"),
-                           n_0 = 1, mu_0 = 0, s_0 = 0, v_0 = -1, alpha_0=0, rscale=1,
+                           prior_family="JZS",
+                           n_0 = 1, mu_0 = 0, s_0 = 0, v_0 = -1, alpha_0=0, rscale=2/sqrt(2),
                            beta_prior  = NULL,
                            beta_prior1 = NULL,
                            beta_prior2 = NULL,

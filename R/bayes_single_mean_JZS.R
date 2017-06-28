@@ -93,7 +93,7 @@ bayes_ci_single_mean_JZS = function(y, cred_level = 0.95,
 
 
 
-bayes_ht_single_JZS = function(y, null = NULL, 
+bayes_ht_single_JZS = function(y, mu_0=0, 
                                 alternative = "twosided",
                                 cred_level = 0.95,
                                 n_0 = 1,
@@ -108,9 +108,9 @@ bayes_ht_single_JZS = function(y, null = NULL,
   if (alternative != "twosided")
     stop("One sided hypothesis tests are not currently supported.")
 
-  if (is.null(null))
-    stop("Null value for mu in H1 must be specified.")
-
+  if (is.null(null)) {
+    null = mu_0
+}
   hypothesis_prior = check_hypothesis_prior(hypothesis_prior)
   
   n = length(y) 

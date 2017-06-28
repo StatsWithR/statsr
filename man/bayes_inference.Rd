@@ -8,10 +8,10 @@ bayes_inference(y, x = NULL, data, type = c("ci", "ht"),
   statistic = c("mean", "proportion"), method = c("theoretical",
   "simulation"), success = NULL, null = NULL, cred_level = 0.95,
   alternative = c("twosided", "less", "greater"), hypothesis_prior = c(H1 =
-  0.5, H2 = 0.5), n_0 = 1, mu_0 = 0, s_0 = 0, v_0 = -1,
-  beta_prior = NULL, beta_prior1 = NULL, beta_prior2 = NULL,
-  verbose = TRUE, show_summ = verbose, show_res = verbose,
-  show_plot = verbose)
+  0.5, H2 = 0.5), prior_family = "JZS", n_0 = 1, mu_0 = 0, s_0 = 0,
+  v_0 = -1, alpha_0 = 0, rscale = 2/sqrt(2), beta_prior = NULL,
+  beta_prior1 = NULL, beta_prior2 = NULL, verbose = TRUE,
+  show_summ = verbose, show_res = verbose, show_plot = verbose)
 }
 \arguments{
 \item{y}{Response variable, can be numerical or categorical}
@@ -36,9 +36,18 @@ bayes_inference(y, x = NULL, data, type = c("ci", "ht"),
 
 \item{hypothesis_prior}{discrete prior for H1 and H2, default is the uniform prior: c(H1=0.5,H2=0.5)}
 
-\item{n_0, mu_0, s_0, v_0}{Prior parameters for the conjugate Normal-Gamma prior: mu_0 is the prior mean (0.0 by default);
-n_0 is the prior sample size;  s_0  standard deviation; 
-v_0 is the prior degrees of freedom associated with the prior standard deviation, s_0. 
+\item{prior_family}{character string representing default priors for inference or testing ("JSZ", "JUI","ref"). 
+See notes for details.}
+
+\item{n_0, mu_0, s_0, v_0, alpha_0, rscale}{Prior parameters for the conjugate Normal-Gamma prior
+or mixtures of NG:
+  mu_0 is the prior mean (0.0 by default);
+  n_0 is the prior sample size or squared scaling parameter for the ZS Cauchy prior; 
+  s_0 is the prior standard deviation of the data;
+  v_0 is the prior degrees of freedom associated with the prior standard deviation, 
+  s_0.
+  alpha_0 is the prior effect size for comparing two normal means (default is 0). 
+
 The default values correspond to the independent Jeffreys prior for
 the variance sigma^2  (s_0 = 0, v_0 = -1),  and the unit information prior 
 mu given sigma^2  (mu_0 = 0, n_0=1).}
@@ -59,6 +68,17 @@ Results of inference task performed.
 \description{
 Bayesian hypothesis tests and credible intervals
 }
+\note{
+For inference and testing for normal means several default options are avialable.
+ "JZS"  corresponds to using the Jeffreys reference prior on sigma^2, p(sigma^2) = 1/sigma^2, 
+ and the Zellner-Siow Cauchy prior on the standardized effect size mu/sigma or ( mu_1 - mu_2)/sigma
+  with a location of mu_0 and scale  sqrt(n_0).  The "ZUI" option also uses the
+  Jeffreys reference prior on sigma^2, but the Unit Information prior on the
+ standardized effect, N(mu_0, 1).  The option "ref" uses the improper unifrom prior  on 
+ the standardized effect and the Jeffereys reference prior on  sigma^2.  The latter 
+ cannot be used for hypothesis testing due to the ill-determination of Bayes
+ factors.  Finally "NG" corresponds to the conjugate Normal-Gamma prior.
+}
 \examples{
 
 # inference for the mean from a single normal population
@@ -67,24 +87,24 @@ Bayesian hypothesis tests and credible intervals
 
 data(tapwater)
 
-# Calculate 95\% CI using quantiles from Student t
+# Calculate 95\% CI using quantiles from Student t derived from NG prior
 bayes_inference(tthm, data=tapwater,
                 statistic="mean",
-                type="ci", n_0=0,
+                type="ci", prior_family="ref",
                 method="theoretical")
 
 # Calculate 95\% CI using simulation from Student t
 bayes_inference(tthm, data=tapwater,
                 statistic="mean",
-                type="ci", n_0=0,
-                method="simulation")
+                type="ci", n_0=0, prior_family="NG",
+                method="theo")
 
 # Calculate 95\% CI using simulation from Student t with the 
 #  unit information prior on mu and reference prior on sigma^2
 
 bayes_inference(tthm, data=tapwater,
                 statistic="mean",
-                type="ci", n_0=1,
+                type="ci", prior_family="ZUI",
                 method="simulation")
 
 

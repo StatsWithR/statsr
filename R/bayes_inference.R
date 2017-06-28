@@ -35,13 +35,13 @@
 #' bayes_inference(tthm, data=tapwater,
 #'                 statistic="mean",
 #'                 type="ci", n_0=0,
-#                  method="theoretical")
+#'                 method="theoretical")
 #' 
 #' # Calculate 95% CI using simulation from Student t
 #' bayes_inference(tthm, data=tapwater,
 #'                 statistic="mean",
 #'                 type="ci", n_0=0,
-#                  method="simulation")
+#'                 method="simulation")
 #' 
 #'# Calculate 95% CI using simulation from Student t with the 
 #'#  unit information prior on mu and reference prior on sigma^2
@@ -49,7 +49,7 @@
 #' bayes_inference(tthm, data=tapwater,
 #'                 statistic="mean",
 #'                 type="ci", n_0=1,
-#                  method="simulation")
+#'                 method="simulation")
 #' 
 #' 
 #' @export
@@ -225,7 +225,7 @@ bayes_inference = function(y, x = NULL, data,
               )) }  
       }
       if(type == "ht")
-          if (n_0 == 0) error("improper priors cannot be used as a prior on mu for hypothesis testing")
+          if (n_0 == 0) stop("improper priors cannot be used as a prior on mu for hypothesis testing\n")
         return(invisible( 
           bayes_ht_single_mean(y, mu_0, alternative, cred_level, n_0, hypothesis_prior, 
                                verbose, show_summ, show_res, show_plot)

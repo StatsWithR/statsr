@@ -71,11 +71,13 @@ data(tapwater)
 bayes_inference(tthm, data=tapwater,
                 statistic="mean",
                 type="ci", n_0=0,
+                method="theoretical")
 
 # Calculate 95\% CI using simulation from Student t
 bayes_inference(tthm, data=tapwater,
                 statistic="mean",
                 type="ci", n_0=0,
+                method="simulation")
 
 # Calculate 95\% CI using simulation from Student t with the 
 #  unit information prior on mu and reference prior on sigma^2
@@ -83,6 +85,7 @@ bayes_inference(tthm, data=tapwater,
 bayes_inference(tthm, data=tapwater,
                 statistic="mean",
                 type="ci", n_0=1,
+                method="simulation")
 
 
 }

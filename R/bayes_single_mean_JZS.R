@@ -1,5 +1,5 @@
-bayes_ci_single_mean_sim = function(y, cred_level = 0.95,
-                                n_0, mu_0, s_0, v_0, 
+bayes_ci_single_mean_JZS = function(y, cred_level = 0.95,
+                                rscale, mu_0,
                                 verbose    = TRUE,
                                 show_summ  = verbose, 
                                 show_res   = verbose,
@@ -7,45 +7,39 @@ bayes_ci_single_mean_sim = function(y, cred_level = 0.95,
 {  
   nsim = 1e6
 
+  v_0 =-1
   n = length(y) 
   y_bar = mean(y)
-  
+  s = sd(y)
+
   # update hyperparameters
-  n_n = n_0 + n
-  post_mean = (n*y_bar + n_0*mu_0)/n_n
-  ss = var(y)*(n-1) + s_0^2*v_0 + (n*n_0/n_n)*(y_bar - mu_0)^2
-  v_n = v_0 + n
-  s = sqrt(ss/v_n)
-  post_sd = s/sqrt(n_n)
   
-  post = rt(nsim, df=v_n) * s / sqrt(n_n) + post_mean  
+  JZS.post = BayesFactor::ttestBF(x=y, mu=mu_0, rscale=rscale, posterior=TRUE, iterations=nsim)
   
+  post = JZS.post[,"mu"]
   ci = quantile(post, probs = c((1-cred_level)/2,1-(1-cred_level)/2))
   
   den = coda_density(post)
   
- 
+  post_mean = mean(post)
   post_median = median(post)
   post_mode   = den$x[which.max(den$y)]
 
   if (show_summ)
   {
+      stats = summary(JZS.post)$quantiles[-3,]
+      rownames(stats) = c("mu", "sigma^2", "n_0")
+      stats["n_0",] = stats["n_0",]/n
       cat("Single numerical variable\n")
       cat("n = ", n, ", y-bar = ", round(y_bar, 4), ", s = ", round(sd(y), 4), "\n",sep="")
-      if (n_0 == 0 )  cat("(Assuming improper prior: P(mu) = 1)\n")
-      else  cat("(Assuming proper prior:  mu | sigma^2 ~ N(",
-                round(mu_0,4),", ", n_0, "*sigma^2)\n", sep="")
-      if (v_0 <= 0)  cat("(Assuming improper prior: P(1/sigma^2) = (sigma^2)^",v_0,"\n",sep="")
-      else   cat("(Assuming proper prior: 1/sigma^2 ~ G(",
-                 v_0,"/2,", round(s_0^2,4),"*",v_0,"/2)\n", sep="")
-      cat("\n")
-      cat("Joint Posterior Distribution for mu and 1/sigma^2:\n",
-          " N(", round(post_mean, 4), ", sigma^2/", n_n,")",
-          " G(", v_n, "/2, ", round(s^2*v_n,4), "/2)\n\n", sep="")
-      cat("Marginal Posterior for mu:\n", 
-          "Student t with posterior mean = ", 
-          round(post_mean, 4), ", posterior scale = ", round(s, 4), 
-          " on ", v_n, " df\n",sep="")
+
+      cat("(Assuming Zellner-Siow Cauchy prior:  mu ~ N(",
+                round(mu_0,4),", ", round(rscale,4), "*sigma)\n", sep="")
+      cat("(Assuming improper Jeffreys prior: p(1/sigma^2) = (sigma^2)^",v_0,"\n",sep="")
+
+      cat("\nPosterior Summaries\n")
+     
+      print(stats)
      cat("\n")
       
   }
@@ -53,12 +47,8 @@ bayes_ci_single_mean_sim = function(y, cred_level = 0.95,
   # print results
   if (show_res)
   {
-    cat(paste0(cred_level*100, "% CI: (", round(ci[1], 4), " , ", round(ci[2], 4), ")\n"))
+    cat(paste0(cred_level*100, "% CI for mu: (", round(ci[1], 4), ", ", round(ci[2], 4), ")\n"))
     
-    cat("\n")
-    cat("Post. mean   =", round(post_mean,4),   "\n")
-    cat("Post. median =", round(post_median,4), "\n")
-    cat("Post. mode   =", round(post_mode,4),   "\n")
   }
 
 
@@ -91,14 +81,11 @@ bayes_ci_single_mean_sim = function(y, cred_level = 0.95,
   # return
   return( invisible(
     list(
-      post = post,
+      post = JZS.post,
       post_den = den,
       cred_level  = cred_level,
       post_mean   = post_mean,
-      post_median = post_median,
-      post_mode   = post_mode,
-      post_sd     = s,
-      post_df     = v_n,
+      post_sd     = summary(JZS.post)$statistics["mu", "SD"],
       ci          = ci
     )
   ))
@@ -106,7 +93,7 @@ bayes_ci_single_mean_sim = function(y, cred_level = 0.95,
 
 
 
-bayes_ht_single_mean = function(y, null = NULL, 
+bayes_ht_single_JZS = function(y, null = NULL, 
                                 alternative = "twosided",
                                 cred_level = 0.95,
                                 n_0 = 1,

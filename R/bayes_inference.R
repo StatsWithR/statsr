@@ -14,15 +14,35 @@
 #' @param show_res print results, set to verbose by default
 #' @param show_plot print inference plot, set to verbose by default
 #' @param hypothesis_prior discrete prior for H1 and H2, default is the uniform prior: c(H1=0.5,H2=0.5)
-#' @param n_0,mu_0,s_0,v_0 Prior parameters for the conjugate Normal-Gamma prior: mu_0 is the prior mean (0.0 by default);
-#' n_0 is the prior sample size;  s_0  standard deviation; 
-#' v_0 is the prior degrees of freedom associated with the prior standard deviation, s_0. 
+#' @param prior_family character string representing default priors for inference or testing ("JSZ", "JUI","ref"). 
+#'        See notes for details.
+#' @param n_0,mu_0,s_0,v_0,alpha_0,rscale Prior parameters for the conjugate Normal-Gamma prior
+#' or mixtures of NG:
+#'   mu_0 is the prior mean (0.0 by default);
+#'   n_0 is the prior sample size or squared scaling parameter for the ZS Cauchy prior; 
+#'   s_0 is the prior standard deviation of the data;
+#'   v_0 is the prior degrees of freedom associated with the prior standard deviation, 
+#'   s_0.
+#'   alpha_0 is the prior effect size for comparing two normal means (default is 0). 
+#'
 #' The default values correspond to the independent Jeffreys prior for
 #' the variance sigma^2  (s_0 = 0, v_0 = -1),  and the unit information prior 
 #' mu given sigma^2  (mu_0 = 0, n_0=1).
 #' @param beta_prior,beta_prior1,beta_prior2 beta priors for p (or p_1 and p_2) for one or two proportion inference
 #' @return Results of inference task performed.
 #' 
+#' 
+#' @note For inference and testing for normal means several default options are avialable.
+#'  "JZS"  corresponds to using the Jeffreys reference prior on sigma^2, p(sigma^2) = 1/sigma^2, 
+#'  and the Zellner-Siow Cauchy prior on the standardized effect size mu/sigma or ( mu_1 - mu_2)/sigma
+#'   with a location of mu_0 and scale  sqrt(n_0).  The "ZUI" option also uses the
+#'   Jeffreys reference prior on sigma^2, but the Unit Information prior on the
+#'  standardized effect, N(mu_0, 1).  The option "ref" uses the improper unifrom prior  on 
+#'  the standardized effect and the Jeffereys reference prior on  sigma^2.  The latter 
+#'  cannot be used for hypothesis testing due to the ill-determination of Bayes
+#'  factors.  Finally "NG" corresponds to the conjugate Normal-Gamma prior.
+#'  
+#'     
 #' @examples 
 #' 
 #' # inference for the mean from a single normal population
@@ -31,7 +51,7 @@
 #' 
 #' data(tapwater)
 #' 
-#' # Calculate 95% CI using quantiles from Student t
+#' # Calculate 95% CI using quantiles from Student t derived from NG prior
 #' bayes_inference(tthm, data=tapwater,
 #'                 statistic="mean",
 #'                 type="ci", n_0=0,
@@ -64,7 +84,8 @@ bayes_inference = function(y, x = NULL, data,
                            cred_level = 0.95,
                            alternative = c("twosided","less","greater"),
                            hypothesis_prior = c(H1=0.5,H2=0.5),
-                           n_0 = 1, mu_0 = 0, s_0 = 0, v_0 = -1,
+                           prior_family=c("JZS", "ZUI", "ref", "NG"),
+                           n_0 = 1, mu_0 = 0, s_0 = 0, v_0 = -1, alpha_0=0, rscale=1,
                            beta_prior  = NULL,
                            beta_prior1 = NULL,
                            beta_prior2 = NULL,
@@ -197,6 +218,18 @@ bayes_inference = function(y, x = NULL, data,
   if (cred_level > 1 | cred_level < 0) {
     stop("Credible level must be between 0 and 1.")
   }
+  
+  # check prior family
+  if (y_type == "numerical") {
+  # error: method isn't theoretical or simulation
+  family_list = c("JZS","ZUI", "ref", "NG")
+ # prior_family = tolower(gsub("\\s","", prior_family))
+  which_prior = pmatch(prior_family, family_list)
+  if(is.na(which_prior)){
+      stop("Method should be one of JZS, NG, ZUI, or ref", call. = FALSE)
+  }
+  prior_family = family_list[which_prior]
+  }
 
   # only one variable 
   if(is.null(x))
@@ -205,9 +238,23 @@ bayes_inference = function(y, x = NULL, data,
 
     if(statistic == "mean" & y_type == "numerical")
     { 
-    # make sure improper prior is set correctly    
+   
+      if (prior_family == "ref") {
+          n_0 = mu_0 = s_0  =0.0
+          v_0 = -1}
+      if (prior_family == "ZUI") {
+          n_0 = 1
+          s_0 = 0
+          v_0 = -1}
+      if (prior_family == "ZSC") {
+           method="sim"
+      }
+            
+    # make sure improper prior is set correctly 
+     if (prior_family == "NG") {
       if (n_0 == 0)  mu_0 = 0 
-      if (v_0 <= 0) s_0 = 0
+      if (v_0 <= 0) s_0 = 0 }
+        
     # add more checks?
       if(type == "ci")  {
         if (method=="theoretical")   {
@@ -218,11 +265,19 @@ bayes_inference = function(y, x = NULL, data,
                                        show_res, show_plot)
             )) }            
         if (method=="simulation")   {
+            if (prior_family != "JZS") {
               return(invisible(
                   bayes_ci_single_mean_sim(y, cred_level,
                                             n_0, mu_0, s_0, v_0, 
                                             verbose, show_summ, show_res, show_plot)
-              )) }  
+              ))  }
+            else {
+              return(invisible(
+                  bayes_ci_single_mean_JZS(y, cred_level,
+                                           rscale, mu_0, 
+                                           verbose, show_summ, show_res, show_plot)
+              )) }
+          }
       }
       if(type == "ht")
           if (n_0 == 0) stop("improper priors cannot be used as a prior on mu for hypothesis testing\n")

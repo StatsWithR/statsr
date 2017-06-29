@@ -1,6 +1,9 @@
 language: r
 cache: packages
 r_check_args: '--as-cran'
+
+warnings_are_errors: false
+
 r:
   - oldrel
   - release

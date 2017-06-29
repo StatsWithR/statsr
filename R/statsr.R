@@ -8,5 +8,5 @@
 #' @import graphics
 #' @import ggplot2
 #' @import shiny
-#' @import BayesFactor
+
 NULL

@@ -48,7 +48,7 @@
 #' # inference for the mean from a single normal population
 #' # Jeffreys Reference prior, p(mu, sigma^2) = 1/sigma^2
 #' 
-#' 
+#'
 #' data(tapwater)
 #' 
 #' # Calculate 95% CI using quantiles from Student t derived from NG prior
@@ -65,11 +65,15 @@
 #'                 type="ci",  prior_family="JUI",
 #'                 method="theo")
 #' 
-#'# Calculate 95% CI using simulation from Student t with the 
-#'# Cauchy prior on mu and reference prior on sigma^2
+#'# Calculate 95% CI using simulation  with the 
+#'# Cauchy prior on mu and reference prior on sigma^2 using BayesFactor package
 #'
+#'
+#' statsr:::bayes_ci_single_mean_JZS(tapwater$tthm)
+#' 
+#' 
 #' bayes_inference(tthm, data=tapwater,
-#'                 statistic="mean", mu_0 = 9.8,
+#'                 statistic="mean", mu_0 = 9.8, rscale=sqrt(2)/2,
 #'                 type="ci", prior_family="JZS",
 #'                 method="simulation")
 #' 
@@ -86,7 +90,7 @@
 #' bayes_inference(tthm, data=tapwater,
 #'                 statistic="mean",
 #'                 type="ht", alternative="twosided", null=80,
-#'                 prior_family="JZS", rscale=1,
+#'                 prior_family="JZS",
 #'                 method="sim")
 #'                 
 #'                 
@@ -115,6 +119,13 @@ bayes_inference = function(y, x = NULL, data,
                            show_res = verbose, 
                            show_plot = verbose)
 {
+    installed_packages <- names(utils::installed.packages()[,"Package"])
+    required_packages <- c("ggplot2", "gridExtra", "BayesFactor", "Matrix")
+    if(!all(required_packages %in% installed_packages)){
+        missing_packages <- required_packages[which(!(required_packages %in% installed_packages))]
+        stop(paste("The following required packages are not installed:", missing_packages,
+                   "Please install these packages before running the inference function."), call. = FALSE)
+    }    
   # save axis labels for use later
   y_name = paste(substitute(y))
   x_name = paste(substitute(x))
@@ -299,12 +310,13 @@ bayes_inference = function(y, x = NULL, data,
               ))  }
             else {
               return(invisible(
-                  bayes_ci_single_mean_JZS(y=y, cred_level=cred_level,
-                                           rscale=rscale, mu_0=mu_0, 
-                                           verbose=verbose, 
-                                           show_summ=show_summ,
-                                           show_res=show_res, 
-                                           show_plot=show_plot)
+                  bayes_ci_single_mean_JZS(y,
+                                           cred_level,
+                                           rscale, mu_0, 
+                                           verbose, 
+                                           show_summ,
+                                           show_res, 
+                                           show_plot)
               )) }
           }
      }

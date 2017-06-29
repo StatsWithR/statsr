@@ -1,5 +1,5 @@
 bayes_ci_single_mean_JZS = function(y, cred_level = 0.95,
-                                rscale, mu_0,
+                                rscale=sqrt(2)/2, mu_0=0,
                                 verbose    = TRUE,
                                 show_summ  = verbose, 
                                 show_res   = verbose,
@@ -12,9 +12,10 @@ bayes_ci_single_mean_JZS = function(y, cred_level = 0.95,
   y_bar = mean(y)
   s = sd(y)
 
-  # update hyperparameters
+  # update posterior
   
-  JZS.post = BayesFactor::ttestBF(x=y, mu=mu_0, rscale=rscale, posterior=TRUE, iterations=nsim)
+  JZS.post = BayesFactor::ttestBF(x=y,y=NULL, mu=mu_0, rscale=rscale,
+                                  posterior=TRUE, iterations=nsim)
   
   post = JZS.post[,"mu"]
   ci = quantile(post, probs = c((1-cred_level)/2,1-(1-cred_level)/2))
@@ -33,7 +34,7 @@ bayes_ci_single_mean_JZS = function(y, cred_level = 0.95,
       cat("Single numerical variable\n")
       cat("n = ", n, ", y-bar = ", round(y_bar, 4), ", s = ", round(sd(y), 4), "\n",sep="")
 
-      cat("(Assuming Zellner-Siow Cauchy prior:  mu ~ C(",
+      cat("(Assuming Zellner-Siow Cauchy prior:  mu | sigma^2 ~ C(",
                 round(mu_0,4),", ", round(rscale,4), "*sigma)\n", sep="")
       cat("(Assuming improper Jeffreys prior: p(sigma^2) = 1/sigma^2\n")
 

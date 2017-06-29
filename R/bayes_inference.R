@@ -47,7 +47,7 @@
 #'
 #' data(tapwater)
 #' 
-#' # Calculate 95% CI using quantiles from Student t derived from NG prior
+#' # Calculate 95% CI using quantiles from Student t derived from ref prior
 #' bayes_inference(tthm, data=tapwater,
 #'                 statistic="mean", 
 #'                 type="ci", prior_family="ref",
@@ -62,25 +62,16 @@
 #'                 method="theo")
 #' 
 #'# Calculate 95% CI using simulation  with the 
-#'# Cauchy prior on mu and reference prior on sigma^2 using BayesFactor package
+#'# Cauchy prior on mu and reference prior on sigma^2
 #' 
 #' 
-#' library(BayesFactor)
 #' bayes_inference(tthm, data=tapwater,
 #'                 statistic="mean", mu_0 = 9.8, rscale=sqrt(2)/2,
 #'                 type="ci", prior_family="JZS",
 #'                 method="simulation")
 #' 
-#' 
-#' # Bayesian t-test mu = 0 with JUI prior
-#' bayes_inference(tthm, data=tapwater,
-#'                 statistic="mean",
-#'                 type="ht", alternative="twosided", null=80,
-#'                 prior_family="NG", n_0=1, mu_0=80, s_0=0, v_0=-1, 
-#'                 method="sim")
 #'                 
-#'                 
-#' # Bayesian t-test mu = 0 with ZJS prior  (using BayesFactor package)
+#' # Bayesian t-test mu = 0 with ZJS prior  
 #' bayes_inference(tthm, data=tapwater,
 #'                 statistic="mean",
 #'                 type="ht", alternative="twosided", null=80,
@@ -88,7 +79,16 @@
 #'                 method="sim")
 #'                 
 #'                 
-
+#' # Bayesian t-test for two means 
+#' 
+#' data(chickwts)
+#' chickwts = chickwts[chickwts$feed %in% c("horsebean","linseed"),]
+#' # Drop unused factor levels
+#' chickwts$feed = factor(chickwts$feed)                
+#' bayes_inference(y=weight, x=feed, data=chickwts,
+#'                 statistic="mean", mu_0 = 0, alt="twosided",
+#'                 type="ht", prior_family="JZS",
+#'                 method="simulation")               
 #' 
 #' @export
 

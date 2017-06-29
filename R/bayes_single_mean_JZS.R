@@ -82,12 +82,13 @@ bayes_ci_single_mean_JZS = function(y, cred_level = 0.95,
   # return
   return( invisible(
     list(
-      post = JZS.post,
+      mu = post,
       post_den = den,
       cred_level  = cred_level,
       post_mean   = post_mean,
       post_sd     = summary(JZS.post)$statistics["mu", "SD"],
-      ci          = ci
+      ci          = ci,
+      samples = JZS.post
     )
   ))
 }
@@ -194,13 +195,13 @@ bayes_ht_single_mean_JZS = function(y, null,  hypothesis_prior,
   if (show_plot)
   { 
       if (show_res | show_summ) cat("\nPosterior summaries for mu under H2:\n")
-      bayes_ci_single_mean_JZS(y, cred_level=cred_level,
-                                rscale=rscale, mu_0=mu_0,
-                                verbose    = FALSE,
-                                show_summ  = show_summ, 
-                                show_res   = show_res,
-                                show_plot  = show_plot)
-      
+      samples = bayes_ci_single_mean_JZS(y, cred_level=cred_level,
+                                  rscale=rscale, mu_0=mu_0,
+                                  verbose    = FALSE,
+                                  show_summ  = show_summ, 
+                                  show_res   = show_res,
+                                  show_plot  = show_plot)
+      res = append(res,  samples) 
   }
 
   return(invisible(res)) 

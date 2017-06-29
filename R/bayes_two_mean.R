@@ -15,6 +15,7 @@ bayes_ci_two_mean = function(y, x, mu_0=0, rscale=sqrt(2)/2,
   
   n1 = length(y1)
   n2 = length(y2)
+  n = n1 + n2
   
   y_bar1 = mean(y1)
   y_bar2 = mean(y2)
@@ -24,9 +25,9 @@ bayes_ci_two_mean = function(y, x, mu_0=0, rscale=sqrt(2)/2,
   
   ci_percentiles = c( (1-cred_level)/2,1-(1-cred_level)/2)
   
-  sim = BayesFactor::ttestBF(x=y1, y=y2, mu=mu_0, rscale=rscale,
-                             posterior=TRUE, iterations=nsim)
-  diff_post = sim[, 2] 
+  JZS.post = BayesFactor::ttestBF(x=y1, y=y2, mu=mu_0, rscale=rscale,
+                             posterior=TRUE, iterations=nsim, progress=FALSE)
+  diff_post = JZS.post[, 2] 
   ci = quantile(diff_post, probs = ci_percentiles)
   
   den = coda_density(diff_post)
@@ -36,6 +37,10 @@ bayes_ci_two_mean = function(y, x, mu_0=0, rscale=sqrt(2)/2,
   post_mode   = den$x[which.max(den$y)]
 
 
+  stats = summary(JZS.post)$quantiles
+  rownames(stats) = c("overall mean", paste0("mu_",gr1," - mu_",gr2), "sigma^2", "effect size", "n_0")
+  stats["n_0",] = stats["n_0",]/n
+  
   # print variable types
   if (show_summ)
   {
@@ -45,20 +50,22 @@ bayes_ci_two_mean = function(y, x, mu_0=0, rscale=sqrt(2)/2,
   
     cat(paste0("n_", gr1, " = ", n1, ", y_bar_", gr1, " = ", round(y_bar1, 4), ", s_", gr1, " = ", round(s1, 4), "\n"))
     cat(paste0("n_", gr2, " = ", n2, ", y_bar_", gr2, " = ", round(y_bar2, 4), ", s_", gr2, " = ", round(s2, 4), "\n"))
-    cat("(Assuming independent Jeffrey's priors for mu and sigma^2)\n")
+    cat("(Assuming Zellner-Siow Cauchy prior for difference in means)\n")
+    cat("(Assuming independent Jeffrey's priors for overall mean and variance)\n")
     cat("\n")
+    cat("\nPosterior Summaries\n")
+    print(stats)  
   }
 
 
 
   if(show_res)
   {
+   
     cat(paste0(cred_level*100, "% Cred. Int.: (", round(ci[1], 4), " , ", round(ci[2], 4), ")\n"))
 
     cat("\n")
-    cat("Post. mean   =", round(post_mean,4),   "\n")
-    cat("Post. median =", round(post_median,4), "\n")
-    cat("Post. mode   =", round(post_mode,4),   "\n")    
+      
   }
 
   
@@ -91,13 +98,14 @@ bayes_ci_two_mean = function(y, x, mu_0=0, rscale=sqrt(2)/2,
   # return
   return( invisible(
     list(
-      post        = diff_post,
+      mu_diff = diff_post,
       post_den    = den,
       post_mean   = post_mean,
       post_median = post_median,
       post_mode   = post_mode,
-      cred_level = cred_level,
-      ci = ci
+      cred_level  = cred_level,
+      ci          = ci,
+      samples     = JZS.post
     )
   ))
 }
@@ -150,12 +158,14 @@ bayes_ht_two_mean = function(y, x, null = 0, rscale=sqrt(2)/2,
   
     cat(paste0("n_", gr1, " = ", n1, ", y_bar_", gr1, " = ", round(y_bar1, 4), ", s_", gr1, " = ", round(s1, 4), "\n"))
     cat(paste0("n_", gr2, " = ", n2, ", y_bar_", gr2, " = ", round(y_bar2, 4), ", s_", gr2, " = ", round(s2, 4), "\n"))
-    cat("(Assuming intrinsic prior on parameters)\n")
+    cat("(Assuming Zellner-Siow Cauchy prior on the difference of means. )\n")
+    cat("(Assuming independent Jeffreys prior on the overall mean and variance. )\n")
   }
 
   BFout = BayesFactor::ttestBF(x=y1, y=y2, mu=null, rscale=rscale) 
   BF = exp(BFout@bayesFactor$bf)
   res = list(hypothesis_prior = hypothesis_prior)
+  res$BayesFactor = BFout
   
   if (BF < 1)
   {
@@ -207,10 +217,13 @@ bayes_ht_two_mean = function(y, x, null = 0, rscale=sqrt(2)/2,
 
   if (show_plot)
   {
+    if (show_res | show_summ) cat("\nPosterior summaries for  under H2:\n")
+      
     samples = bayes_ci_two_mean(y, x, null, rscale=rscale,
                                 cred_level,verbose=F,show_summ, show_res,show_plot)
+    res = append(res, samples)
   }
-  
+    
   # return
   return(invisible(res)) 
 }

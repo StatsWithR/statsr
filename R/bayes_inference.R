@@ -16,18 +16,14 @@
 #' @param hypothesis_prior discrete prior for H1 and H2, default is the uniform prior: c(H1=0.5,H2=0.5)
 #' @param prior_family character string representing default priors for inference or testing ("JSZ", "JUI","ref"). 
 #'        See notes for details.
-#' @param n_0,mu_0,s_0,v_0,alpha_0 Prior parameters for the conjugate Normal-Gamma prior
-#' or mixtures of NG:
-#'   mu_0 is the prior mean (0.0 by default) for one-sample problems;
-#'   n_0 is the prior sample size; 
-#'   s_0 is the prior standard deviation of the data;
-#'   v_0 is the prior degrees of freedom associated with the prior standard deviation, s_0;
-#'   alpha_0 is the prior effect size for comparing two normal means (default is 0).
-#' The default values correspond to the independent Jeffreys prior for
-#' the variance sigma^2  (s_0 = 0, v_0 = -1),  and the unit information prior 
-#' mu given sigma^2  (mu_0 = 0, n_0=1).
-#' @param  rscale is the scaling parameter in the Cauchy prior:  1/n_0 ~ Gamma(1/2, rscale^2/2)
-#'   leads to mu_0 or alpha_0 having a Cauchy(0, rscale*sigma) prior distribution.         
+#' @param n_0  n_0 is the prior sample size in the Normal prior for the mean
+#' @param mu_0 the prior mean in one sample mean problems or the prior difference 
+#' in two sample problems.  For hypothesis testing, this is all the null value
+#' if null is not supplied.
+#' @param s_0 the prior standard deviation of the data for the conjugate Gamma prior on 1/sigma^2
+#' @param v_0 prior degrees of freedom for conjugate Gamma prior on 1/sigma^2
+#' @param rscale is the scaling parameter in the Cauchy prior:  1/n_0 ~ Gamma(1/2, rscale^2/2)
+#'   leads to mu_0  having a Cauchy(0, rscale*sigma) prior distribution for prior_family="JZS".         
 #' @param beta_prior,beta_prior1,beta_prior2 beta priors for p (or p_1 and p_2) for one or two proportion inference
 #' @return Results of inference task performed.
 #' 
@@ -108,7 +104,7 @@ bayes_inference = function(y, x = NULL, data,
                            hypothesis_prior = c(H1=0.5,H2=0.5),
                            prior_family="JZS",
                            n_0 = 1, mu_0 = null, s_0 = 0, v_0 = -1,
-                           alpha_0=0, rscale=sqrt(2)/2,
+                           rscale=sqrt(2)/2,
                            beta_prior  = NULL,
                            beta_prior1 = NULL,
                            beta_prior2 = NULL,
@@ -390,15 +386,23 @@ bayes_inference = function(y, x = NULL, data,
     {
       if(type == "ci")
         return(invisible(
-          bayes_ci_two_mean(y, x, cred_level,
+          bayes_ci_two_mean(y, x, mu_0, rscale, cred_level,
                             verbose, show_summ, show_res, show_plot)
         ))
-      if(type == "ht")
+      if(type == "ht") {
+         if(is.null(null)) {
+              if (is.null(mu_0)) stop("Error: must specify prior mean mu_0\n")
+              null = mu_0
+          }
+          if(is.null(mu_0)) mu_0 = null    
+          if(mu_0 != null) stop("Error: null must be the same as mu_0\n")
+          
         return(invisible(
-          bayes_ht_two_mean(y, x, null, alternative, cred_level, 
+          bayes_ht_two_mean(y, x, null, rscale, alternative, cred_level, 
                             hypothesis_prior, 
                             verbose, show_summ, show_res, show_plot)
         ))
+        }
     }
 
     if(statistic == "proportion" & y_type == "categorical" & y_levels == 2)

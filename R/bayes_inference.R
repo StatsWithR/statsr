@@ -67,10 +67,6 @@
 #' 
 #'# Calculate 95% CI using simulation  with the 
 #'# Cauchy prior on mu and reference prior on sigma^2 using BayesFactor package
-#'
-#'
-#' statsr:::bayes_ci_single_mean_JZS(tapwater$tthm)
-#' 
 #' 
 #' bayes_inference(tthm, data=tapwater,
 #'                 statistic="mean", mu_0 = 9.8, rscale=sqrt(2)/2,
@@ -253,7 +249,7 @@ bayes_inference = function(y, x = NULL, data,
   
   # check prior family
   if (y_type == "numerical") {
-  # error: method isn't theoretical or simulation
+  # error: wrong prior_family
   family_list = c("JZS","JUI", "ref", "NG")
  # prior_family = tolower(gsub("\\s","", prior_family))
   which_prior = pmatch(prior_family, family_list)

@@ -105,10 +105,6 @@ bayes_inference(tthm, data=tapwater,
 # Calculate 95\% CI using simulation  with the 
 # Cauchy prior on mu and reference prior on sigma^2 using BayesFactor package
 
-
-statsr:::bayes_ci_single_mean_JZS(tapwater$tthm)
-
-
 bayes_inference(tthm, data=tapwater,
                 statistic="mean", mu_0 = 9.8, rscale=sqrt(2)/2,
                 type="ci", prior_family="JZS",

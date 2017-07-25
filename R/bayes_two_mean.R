@@ -1,12 +1,11 @@
 bayes_ci_two_mean = function(y, x, mu_0=0, rscale=sqrt(2)/2,
                              cred_level = 0.95,
+                             nsim = 10000,
                              verbose   = TRUE,
                              show_summ = verbose, 
                              show_res  = verbose,
                              show_plot = verbose)
 {
-  nsim = 1e6
-  
   gr1 = levels(x)[1]
   gr2 = levels(x)[2]
 
@@ -118,6 +117,7 @@ bayes_ht_two_mean = function(y, x, null = 0, rscale=sqrt(2)/2,
                              alternative = "twosided", 
                              cred_level = 0.95,
                              hypothesis_prior = NULL,
+                             nsim = 10000,
                              verbose   = TRUE,
                              show_summ = verbose, 
                              show_res  = verbose,
@@ -217,10 +217,11 @@ bayes_ht_two_mean = function(y, x, null = 0, rscale=sqrt(2)/2,
 
   if (show_plot)
   {
-    if (show_res | show_summ) cat("\nPosterior summaries for  under H2:\n")
+    if (show_res | show_summ) cat("\nPosterior summaries for under H2:\n")
       
-    samples = bayes_ci_two_mean(y, x, null, rscale=rscale,
-                                cred_level,verbose=F,show_summ, show_res,show_plot)
+    samples = bayes_ci_two_mean(y, x, null, rscale=rscale, 
+                                cred_level, nsim,
+                                verbose=F,show_summ, show_res,show_plot)
     res = append(res, samples)
   }
     

@@ -1,11 +1,11 @@
 bayes_ci_single_mean_JZS = function(y, cred_level = 0.95,
-                                rscale=sqrt(2)/2, mu_0=0,
+                                mu_0=0, rscale=sqrt(2)/2,
+                                nsim = 10000,
                                 verbose    = TRUE,
                                 show_summ  = verbose, 
                                 show_res   = verbose,
                                 show_plot  = verbose)
 {  
-  nsim = 1e6
 
   v_0 =-1
   n = length(y) 
@@ -29,8 +29,9 @@ bayes_ci_single_mean_JZS = function(y, cred_level = 0.95,
   if (show_summ)
   {
       stats = summary(JZS.post)$quantiles[-3,]
-      rownames(stats) = c("mu", "sigma^2", "n_0")
-      stats["n_0",] = stats["n_0",]/n
+      rownames(stats) = c("mu", "sigma", "n_0")
+      stats["sigma",] = sqrt(stats["sigma",])
+      stats["n_0",] = n/stats["n_0",ncol(stats):1]
       cat("Single numerical variable\n")
       cat("n = ", n, ", y-bar = ", round(y_bar, 4), ", s = ", round(sd(y), 4), "\n",sep="")
 
@@ -99,6 +100,7 @@ bayes_ht_single_mean_JZS = function(y, null,  hypothesis_prior,
                                 alternative = "twosided",
                                 cred_level = 0.95, 
                                 mu_0 = null, rscale=sqrt(2)/2,
+                                nsim = 10000,
                                 verbose    = TRUE,
                                 show_summ  = verbose, 
                                 show_res   = verbose,
@@ -144,7 +146,7 @@ bayes_ht_single_mean_JZS = function(y, null,  hypothesis_prior,
  
   
   res= list(hypothesis_prior = hypothesis_prior)
-  BF12 = exp(BFout@bayesFactor$bf)
+  BF12 = exp(-BFout@bayesFactor$bf)
 
   if (BF12 >= 1)
   {
@@ -196,7 +198,8 @@ bayes_ht_single_mean_JZS = function(y, null,  hypothesis_prior,
   { 
       if (show_res | show_summ) cat("\nPosterior summaries for mu under H2:\n")
       samples = bayes_ci_single_mean_JZS(y, cred_level=cred_level,
-                                  rscale=rscale, mu_0=mu_0,
+                                  rscale=rscale, mu_0=mu_0, 
+                                  nsim,
                                   verbose    = FALSE,
                                   show_summ  = show_summ, 
                                   show_res   = show_res,

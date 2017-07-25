@@ -1,11 +1,11 @@
 bayes_ci_single_mean_sim = function(y, cred_level = 0.95,
                                 n_0, mu_0, s_0, v_0, 
+                                nsim = 1000,
                                 verbose    = TRUE,
                                 show_summ  = verbose, 
                                 show_res   = verbose,
                                 show_plot  = verbose)
 {  
-  nsim = 1e6
 
   n = length(y) 
   y_bar = mean(y)
@@ -111,12 +111,12 @@ bayes_ht_single_mean_sim = function(y, null,
                                 cred_level = 0.95,
                                 n_0, mu_0=null,
                                 hypothesis_prior = NULL,
+                                nsim = 10000,
                                 verbose    = TRUE,
                                 show_summ  = verbose, 
                                 show_res   = verbose,
                                 show_plot  = verbose)
 {
-  nsim = 1e6
   s_0=0; v_0 = -1
   
   if (alternative != "twosided")

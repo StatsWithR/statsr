@@ -9,6 +9,7 @@
 #' @param null null value for the hypothesis test
 #' @param cred_level confidence level, value between 0 and 1
 #' @param alternative direction of the alternative hypothesis; "less","greater", or "twosided"
+#' @param nsim number of Monte Carlo draws; default is 10,000
 #' @param verbose whether output should be verbose or not, default is TRUE
 #' @param show_summ print summary stats, set to verbose by default
 #' @param show_res print results, set to verbose by default
@@ -23,7 +24,7 @@
 #' @param s_0 the prior standard deviation of the data for the conjugate Gamma prior on 1/sigma^2
 #' @param v_0 prior degrees of freedom for conjugate Gamma prior on 1/sigma^2
 #' @param rscale is the scaling parameter in the Cauchy prior:  1/n_0 ~ Gamma(1/2, rscale^2/2)
-#'   leads to mu_0  having a Cauchy(0, rscale*sigma) prior distribution for prior_family="JZS".         
+#'   leads to mu_0  having a Cauchy(0, rscale^2*sigma^2) prior distribution for prior_family="JZS".         
 #' @param beta_prior,beta_prior1,beta_prior2 beta priors for p (or p_1 and p_2) for one or two proportion inference
 #' @return Results of inference task performed.
 #' 
@@ -31,7 +32,7 @@
 #' @note For inference and testing for normal means several default options are avialable.
 #'  "JZS"  corresponds to using the Jeffreys reference prior on sigma^2, p(sigma^2) = 1/sigma^2, 
 #'  and the Zellner-Siow Cauchy prior on the standardized effect size mu/sigma or ( mu_1 - mu_2)/sigma
-#'   with a location of mu_0 and scale  sqrt(n_0).  The "JUI" option also uses the
+#'   with a location of mu_0 and scale  rscale.  The "JUI" option also uses the
 #'   Jeffreys reference prior on sigma^2, but the Unit Information prior on the
 #'  standardized effect, N(mu_0, 1).  The option "ref" uses the improper unifrom prior  on 
 #'  the standardized effect and the Jeffereys reference prior on  sigma^2.  The latter 
@@ -44,7 +45,7 @@
 #' # inference for the mean from a single normal population
 #' # Jeffreys Reference prior, p(mu, sigma^2) = 1/sigma^2
 #' 
-#'
+#' library(BayesFactor)
 #' data(tapwater)
 #' 
 #' # Calculate 95% CI using quantiles from Student t derived from ref prior
@@ -108,6 +109,7 @@ bayes_inference = function(y, x = NULL, data,
                            beta_prior  = NULL,
                            beta_prior1 = NULL,
                            beta_prior2 = NULL,
+                           nsim = 10000,
                            verbose = TRUE,
                            show_summ = verbose,
                            show_res = verbose, 
@@ -299,14 +301,15 @@ bayes_inference = function(y, x = NULL, data,
             if (prior_family != "JZS") {
               return(invisible(
                   bayes_ci_single_mean_sim(y, cred_level,
-                                            n_0, mu_0, s_0, v_0, 
+                                            n_0, mu_0, s_0, v_0, nsim,
                                             verbose, show_summ, show_res, show_plot)
               ))  }
             else {
               return(invisible(
                   bayes_ci_single_mean_JZS(y,
                                            cred_level,
-                                           rscale, mu_0, 
+                                           mu_0,  rscale, 
+                                           nsim,
                                            verbose, 
                                            show_summ,
                                            show_res, 
@@ -338,6 +341,7 @@ bayes_inference = function(y, x = NULL, data,
                                               alternative=alternative,
                                               cred_level=cred_level,
                                               mu_0=mu_0,n_0=n_0,
+                                              nsim,
                                               verbose=verbose,
                                               show_summ=show_summ, 
                                               show_res=show_res, 
@@ -351,6 +355,7 @@ bayes_inference = function(y, x = NULL, data,
                                           alternative=alternative,
                                           cred_level=cred_level,
                                           mu_0=mu_0, rscale=rscale,
+                                          nsim,
                                           verbose=verbose,
                                           show_summ=show_summ, 
                                           show_res=show_res, 
@@ -399,7 +404,7 @@ bayes_inference = function(y, x = NULL, data,
           
         return(invisible(
           bayes_ht_two_mean(y, x, null, rscale, alternative, cred_level, 
-                            hypothesis_prior, 
+                            hypothesis_prior, nsim,
                             verbose, show_summ, show_res, show_plot)
         ))
         }

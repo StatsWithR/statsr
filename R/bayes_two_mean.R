@@ -38,7 +38,8 @@ bayes_ci_two_mean = function(y, x, mu_0=0, rscale=sqrt(2)/2,
 
   stats = summary(JZS.post)$quantiles
   rownames(stats) = c("overall mean", paste0("mu_",gr1," - mu_",gr2), "sigma^2", "effect size", "n_0")
-  stats["n_0",] = stats["n_0",]/n
+  stats["n_0",] = n/stats["n_0",ncol(stats):1]
+  
   
   # print variable types
   if (show_summ)
@@ -95,8 +96,7 @@ bayes_ci_two_mean = function(y, x, mu_0=0, rscale=sqrt(2)/2,
   }
 
   # return
-  return( invisible(
-    list(
+  res = list(
       mu_diff = diff_post,
       post_den    = den,
       post_mean   = post_mean,
@@ -104,9 +104,12 @@ bayes_ci_two_mean = function(y, x, mu_0=0, rscale=sqrt(2)/2,
       post_mode   = post_mode,
       cred_level  = cred_level,
       ci          = ci,
-      samples     = JZS.post
-    )
-  ))
+      samples     = JZS.post,
+      summary     = stats
+  )
+  
+  if (show_plot) res$plot = pos_plot
+  return( invisible(res))
 }
 
 
@@ -197,10 +200,8 @@ bayes_ht_two_mean = function(y, x, null = 0, rscale=sqrt(2)/2,
       cat("H2: mu_", gr1, " ", alt_sign, " mu_", gr2, "\n", sep="")
       cat("\n")
 
-      cat("Priors:\n")
-      #cat("P(p_",gr1,") ~ Beta(a=",prior_a1,",b=",prior_b1,")\n",sep="")
-      #cat("P(p_",gr2,") ~ Beta(a=",prior_a2,",b=",prior_b2,")\n",sep="")
-      cat("P(H1) =",prior_H1,"\n")
+      cat("Priors: ")
+      cat("P(H1) =",prior_H1, " ")
       cat("P(H2) =",prior_H2,"\n")
       cat("\n")
       

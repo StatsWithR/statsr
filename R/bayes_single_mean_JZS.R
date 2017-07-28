@@ -1,5 +1,5 @@
 bayes_ci_single_mean_JZS = function(y, cred_level = 0.95,
-                                mu_0=0, rscale=sqrt(2)/2,
+                                mu_0=0, rscale=1,
                                 nsim = 10000,
                                 verbose    = TRUE,
                                 show_summ  = verbose, 
@@ -80,18 +80,18 @@ bayes_ci_single_mean_JZS = function(y, cred_level = 0.95,
     print(pos_plot)
   }
 
+  res = list(mu          = post,
+             post_den    = den,
+             cred_level  = cred_level,
+             post_mean   = post_mean,
+             post_sd     = summary(JZS.post)$statistics["mu", "SD"],
+             ci          = ci,
+             samples     = JZS.post,
+             summary     = stats
+  )
+  if (show_plot) res$plot = pos_plot
   # return
-  return( invisible(
-    list(
-      mu = post,
-      post_den = den,
-      cred_level  = cred_level,
-      post_mean   = post_mean,
-      post_sd     = summary(JZS.post)$statistics["mu", "SD"],
-      ci          = ci,
-      samples = JZS.post
-    )
-  ))
+  return( invisible(res ))
 }
 
 
@@ -99,7 +99,7 @@ bayes_ci_single_mean_JZS = function(y, cred_level = 0.95,
 bayes_ht_single_mean_JZS = function(y, null,  hypothesis_prior,
                                 alternative = "twosided",
                                 cred_level = 0.95, 
-                                mu_0 = null, rscale=sqrt(2)/2,
+                                mu_0 = null, rscale=1,
                                 nsim = 10000,
                                 verbose    = TRUE,
                                 show_summ  = verbose, 
@@ -137,7 +137,7 @@ bayes_ht_single_mean_JZS = function(y, null,  hypothesis_prior,
     cat("n = ", n, ", y-bar = ", round(y_bar, 4), ", s = ", round(s, 4), "\n",sep="")
     cat("(Using Zellner-Siow Cauchy prior:  mu ~ C(",
         round(mu_0,4),", ", round(rscale,4), "*sigma)\n", sep="")
-    cat("(Using improper Jeffreys prior: p(sigma^2) = 1/sigma^2\n")
+    cat("(Using Jeffreys prior: p(sigma^2) = 1/sigma^2\n")
     
     cat("\n")
   }
@@ -174,13 +174,12 @@ bayes_ht_single_mean_JZS = function(y, null,  hypothesis_prior,
                         less = "<",
                         twosided = "!=")
       cat("Hypotheses:\n")
-      cat("H1: mu = ", null, "\n",sep="")
-      cat("H2: mu ", alt_sign, " ", null, "\n",sep="")
+      cat("H1: mu =", null, "versus H2: mu", alt_sign, null,
+           sep=" ")
       cat("\n")
 
       cat("Priors:\n")
-      cat("P(H1) =",prior_H1,"\n")
-      cat("P(H2) =",prior_H2,"\n")
+      cat("P(H1) =",prior_H1, ", P(H2) =" ,prior_H2, sep=" ")
       cat("\n")
       
       cat("Results:\n")
@@ -190,7 +189,7 @@ bayes_ht_single_mean_JZS = function(y, null,  hypothesis_prior,
       
       #cat("\n")
       
-      cat("P(H1|data) =", round(res$post_H1,4), "\n")
+      cat("P(H1|data) =", round(res$post_H1,4), " ")
       cat("P(H2|data) =", round(res$post_H2,4), "\n")
   }
   

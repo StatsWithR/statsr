@@ -105,7 +105,7 @@ bayes_inference = function(y, x = NULL, data,
                            hypothesis_prior = c(H1=0.5,H2=0.5),
                            prior_family="JZS",
                            n_0 = 1, mu_0 = null, s_0 = 0, v_0 = -1,
-                           rscale=sqrt(2)/2,
+                           rscale=1,
                            beta_prior  = NULL,
                            beta_prior1 = NULL,
                            beta_prior2 = NULL,
@@ -391,7 +391,7 @@ bayes_inference = function(y, x = NULL, data,
     {
       if(type == "ci")
         return(invisible(
-          bayes_ci_two_mean(y, x, mu_0, rscale, cred_level,
+          bayes_ci_two_mean(y, x, mu_0, rscale, cred_level, nsim,
                             verbose, show_summ, show_res, show_plot)
         ))
       if(type == "ht") {

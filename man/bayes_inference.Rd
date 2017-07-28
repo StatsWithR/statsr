@@ -9,7 +9,7 @@ bayes_inference(y, x = NULL, data, type = c("ci", "ht"),
   "simulation"), success = NULL, null = NULL, cred_level = 0.95,
   alternative = c("twosided", "less", "greater"), hypothesis_prior = c(H1 =
   0.5, H2 = 0.5), prior_family = "JZS", n_0 = 1, mu_0 = null, s_0 = 0,
-  v_0 = -1, rscale = sqrt(2)/2, beta_prior = NULL, beta_prior1 = NULL,
+  v_0 = -1, rscale = 1, beta_prior = NULL, beta_prior1 = NULL,
   beta_prior2 = NULL, nsim = 10000, verbose = TRUE, show_summ = verbose,
   show_res = verbose, show_plot = verbose)
 }

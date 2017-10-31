@@ -1,15 +1,27 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
 [![Build Status](https://travis-ci.org/StatsWithR/statsr.svg?branch=master)](https://travis-ci.org/StatsWithR/statsr)
 
-statsr
-======
+# statsr
 
 Companion package for the Coursera *Statistics with R* specialization
 
-To install the latest version from github, verify that there is passing badge above on the README page. In `R` enter
+To install the latest version from github, verify that there is passing badge above on the README page.  In `R` enter
 
-``` r
+```{r github, echo=TRUE,eval=FALSE}
 library(devtools)
 devtools::install_github("statswithr/statsr")
 ```
+

@@ -4,6 +4,11 @@
 
 credible_interval_app = function()
 {
+  if (!is_rstudio()) {
+    message("Shiny app will only run when built within RStudio.")
+    return()
+  }
+  
   shinyApp(
     ui = pageWithSidebar(
       headerPanel(""),

@@ -4,7 +4,7 @@
 
 bandit_sim = function()
 {
-  if (!is_shiny_runtime())
+  if (!allow_shiny())
     stop("Shiny app will only run when built within RStudio.")
     
   shinyApp(

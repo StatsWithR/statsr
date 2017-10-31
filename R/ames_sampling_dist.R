@@ -4,35 +4,20 @@
 
 ames_samplign_dist = function()
 {
-  if (!is_shiny_runtime())
+  if (!allow_shiny())
     stop("Shiny app will only run when built within RStudio.")
-    
+  
+  ames = statsr::ames
+  
   shinyApp(
     ui <- fluidPage(
-      
       # Sidebar with a slider input for number of bins 
       sidebarLayout(
         sidebarPanel(
-          
-          selectInput("selected_var",
-                      "Variable:",
-                      choices = list("area", "price"),
-                      selected = "area"),         
-          
-          numericInput("n_samp",
-                       "Sample size:",
-                       min = 1,
-                       max = nrow(ames),
-                       value = 30),
-          
-          numericInput("n_sim",
-                       "Number of samples:",
-                       min = 1,
-                       max = 30000,
-                       value = 15000) 
-          
+          selectInput("selected_var", "Variable:",  choices = list("area", "price"), selected = "area"),         
+          numericInput("n_samp", "Sample size:", min = 1, max = nrow(ames), value = 30),
+          numericInput("n_sim", "Number of samples:", min = 1, max = 30000, value = 15000) 
         ),
-        
         # Show a plot of the generated distribution
         mainPanel(
           plotOutput("sampling_plot"),

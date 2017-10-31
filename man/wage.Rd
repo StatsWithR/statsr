@@ -34,4 +34,3 @@ wage
 The data were gathered as part of a random sample of 935 respondents throughout the United States.
 }
 \keyword{datasets}
-

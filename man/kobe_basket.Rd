@@ -30,4 +30,3 @@ Valuable Player and many spectators commented on how he appeared to show
 a hot hand.
 }
 \keyword{datasets}
-

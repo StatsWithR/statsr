@@ -33,4 +33,3 @@ mlb11
 Data from all 30 Major League Baseball teams from the 2011 season.
 }
 \keyword{datasets}
-

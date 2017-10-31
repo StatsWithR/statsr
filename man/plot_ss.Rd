@@ -23,4 +23,3 @@ allow the user to click the plot in two locations to draw a best fit line.
 Residuals are drawn by default; boxes representing the squared residuals are
 optional.
 }
-

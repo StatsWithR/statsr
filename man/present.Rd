@@ -26,4 +26,3 @@ Counts of the total number of male and female births in the United States from
 1940 to 2013.
 }
 \keyword{datasets}
-

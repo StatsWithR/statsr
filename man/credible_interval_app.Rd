@@ -9,4 +9,3 @@ credible_interval_app()
 \description{
 Run the Credible Interval shiny app
 }
-

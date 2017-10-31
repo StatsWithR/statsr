@@ -46,4 +46,3 @@ data for Data Analysis Using Regression and Multilevel/Hierarchical Models
 (Gelman and Hill, 2007).
 }
 \keyword{datasets}
-

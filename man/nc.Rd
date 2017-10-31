@@ -34,4 +34,3 @@ mothers and the birth of their children. We will work with a random sample of
 observations from this data set.
 }
 \keyword{datasets}
-

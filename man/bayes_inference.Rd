@@ -50,4 +50,3 @@ Results of inference task performed
 \description{
 Bayesian hypothesis tests and credible intervals
 }
-

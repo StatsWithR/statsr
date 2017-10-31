@@ -103,4 +103,3 @@ to 2010. See http://www.amstat.org/publications/jse/v19n3/decock/datadocumentati
 for detailed variable descriptions.
 }
 \keyword{datasets}
-

@@ -9,4 +9,3 @@ bandit_sim()
 \description{
 Run the Bandit Simulation shiny app
 }
-

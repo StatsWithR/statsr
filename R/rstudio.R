@@ -2,7 +2,8 @@
 #' 
 
 is_rstudio = function() {
-    x = FALSE
-    try({x = rstudioapi::isAvailable()}, silent=TRUE)
-    x
+  #x = FALSE
+  #try({x = rstudioapi::isAvailable()}, silent=TRUE)
+  #x
+  TRUE
 }

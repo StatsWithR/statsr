@@ -32,14 +32,9 @@ ames_samplign_dist = function()
       
       # create sampling distribution
       sampling_dist <- reactive({
-        ames[[input$selected_var]] %>%
-          sample(size = input$n_samp * input$n_sim, replace = TRUE) %>%
-          matrix(ncol = input$n_samp) %>%
-          rowMeans() %>%
-          data.frame(x_bar = .)
-        #ames %>%
-        #  rep_sample_n(size = input$n_samp, reps = input$n_sim, replace = TRUE) %>%
-        #  summarise_(x_bar = mean(input$selected_var))
+        s = sample(ames[[input$selected_var]], size = input$n_samp * input$n_sim, replace = TRUE)
+        m = matrix(s, ncol = input$n_samp)
+        data.frame(x_bar = rowMeans(m))
       })
       
       # plot sampling distribution
@@ -48,7 +43,7 @@ ames_samplign_dist = function()
         x_max <- quantile(ames[[input$selected_var]], 0.9)
         
         ggplot(sampling_dist(), aes(x = x_bar)) +
-          geom_histogram() +
+          geom_histogram(na.rm=TRUE, bins=50) +
           xlim(x_min, x_max) +
           ylim(0, input$n_sim * 0.35) +
           ggtitle(paste0("Sampling distribution of mean ", 

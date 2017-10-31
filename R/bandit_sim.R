@@ -4,10 +4,8 @@
 
 bandit_sim = function()
 {
-  if (!is_rstudio()) {
-    message("Shiny app will only run when built within RStudio.")
-    return()
-  }
+  if (!is_shiny_runtime())
+    stop("Shiny app will only run when built within RStudio.")
     
   shinyApp(
     ui = fluidPage(

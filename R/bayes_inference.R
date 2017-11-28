@@ -91,6 +91,7 @@
 #'                 type="ht", prior_family="JZS",
 #'                 method="simulation")               
 #' 
+#' @importFrom BayesFactor ttestBF
 #' @export
 
 

@@ -1,3 +1,47 @@
+BF_plot = function(den_H2, res, parameter)
+{
+  d_H2 = data.frame(x = den_H2$x, 
+                    y = den_H2$y * res$post_H2 / max(den_H2$y),
+                    Hypothesis = "H2") 
+
+  li = min(which(d_H2$x >= res$ci_H2[1]))  
+  ui = max(which(d_H2$x <  res$ci_H2[2]))
+
+  d_H2_poly = data.frame(x = c(d_H2$x[c(li,li:ui,ui)]), 
+                         y = c(0, d_H2$y[li:ui], 0),
+                         Hypothesis = "H2")
+
+  d_H1 = data.frame(x = c(res$null, res$null), 
+                    y = c(0, res$post_H1),
+                    Hypothesis = "H1")
+
+  d = rbind(data.frame(x=NA, y=NA, Hypothesis="H1"),
+            d_H2,
+            data.frame(x=NA, y=NA, Hypothesis="Overall"))
+
+  # H2 Features
+  p = ggplot(d, aes_string(x="x", y="y", color="Hypothesis", fill="Hypothesis")) + 
+      geom_line(alpha=0.8) +
+      geom_polygon(data = d_H2_poly, linetype="blank",alpha=0.8) + 
+      ylab("Density") +  
+      xlab(parameter)
+
+  # H2 Features
+  p = p + geom_line(data = d_H1, size=1.5, alpha=0.8)
+      
+
+  # Marginal plot features 
+  y_min = ggplot_build(p)$panel$ranges[[1]]$y.range[1]
+
+  d_Marg = data.frame(x = rep(res$ci_Marg, c(2,2)),
+                      y = c(y_min*1/2, y_min, y_min, y_min*1/2),
+                      Hypothesis = "Overall")
+
+  p = p + geom_line(data = d_Marg, size=0.75, alpha=0.8)
+
+  print(p)
+}
+
 coda_density = function(x, from, to)
 {
     bwf = 1.06 * min(sd(x), IQR(x)/1.34) * length(x)^-0.2

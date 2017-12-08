@@ -6,7 +6,7 @@
 \title{Zinc Concentration in Water}
 \format{A data frame with 10 observations on the following 4 variables.
  \describe{
-   \item{\code{loc}}{sample number}
+   \item{\code{location}}{sample number}
    \item{\code{bottom}}{zinc concentration in bottom water}
    \item{\code{surface}}{zinc concentration in surface water}
    \item{\code{difference}}{difference between zinc concentration at the bottom and surface}

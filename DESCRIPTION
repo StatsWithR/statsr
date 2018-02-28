@@ -1,8 +1,8 @@
 Package: statsr
 Type: Package
 Title: Companion package for the Coursera Statistics with R specialization
-Version: 0.0.1
-Date: 2017-05-11
+Version: 0.1.0
+Date: 2018-02-28
 Authors@R: c(person("Colin", "Rundel", role=c("aut"), email="rundel@gmail.com"),
              person("Mine", "Cetinkaya-Rundel", role=c("aut","cre"), email="mine@stat.duke.edu"),
              person("Merlise", "Clyde", role=c("aut"), email="clyde@stat.duke.edu"),
@@ -14,5 +14,5 @@ Description: R package to support inference for the Coursera Specialization
 LazyData: true
 License: MIT + file LICENSE
 RoxygenNote: 6.0.1
-Depends: R (>= 3.2.0), BayesFactor
+Depends: R (>= 3.4.3), BayesFactor
 Imports: dplyr, rmarkdown, ggplot2, broom, gridExtra, shiny, cubature, knitr, tidyr

@@ -7,7 +7,7 @@ Authors@R: c(person("Colin", "Rundel", role=c("aut"), email="rundel@gmail.com"),
              person("Mine", "Cetinkaya-Rundel", role=c("aut","cre"), email="mine@stat.duke.edu"),
              person("Merlise", "Clyde", role=c("aut"), email="clyde@stat.duke.edu"),
              person("David", "Banks", role=c("aut"), email="banks@stat.duke.edu"))
-Maintainer: Mine Cetinkaya-Rundel <mine@stat.duke.edu>
+Maintainer: Merlise Clyde <clyde@stat.duke.edu>
 Description: R package to support inference for the Coursera Specialization 
             "Statistics with R". Wrapper functions for Bayesian and frequentist analysis and data sets.
             See https://github.com/StatsWithR/statsr for more information.

@@ -66,8 +66,8 @@ plot_bandit_posterior = function(data, prior = c(m1_good=0.5,m2_good=0.5), win_p
   for(i in 1:nrow(data))
     r[i+1,] = bandit_posterior(data[1:i,], prior, win_probs)
 
-  r = dplyr::mutate(r, play=1:n())
-  r = tidyr::gather(r, outcome, prob, -play)
+  r$play = 1:nrow(r)
+  r = with(r, tidyr::gather(r, outcome, prob, -play))
   
   ggplot(r, aes_string(x="play", y="prob", color="outcome")) +
     geom_line(size=1.5) +

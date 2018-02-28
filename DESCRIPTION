@@ -14,5 +14,5 @@ Description: R package to support inference for the Coursera Specialization
 LazyData: true
 License: MIT + file LICENSE
 RoxygenNote: 6.0.1
-Depends: R (>= 3.4.3), BayesFactor
+Depends: R (>= 3.4.0), BayesFactor
 Imports: dplyr, rmarkdown, ggplot2, broom, gridExtra, shiny, cubature, knitr, tidyr

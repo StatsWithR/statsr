@@ -1,18 +1,18 @@
 Package: statsr
 Type: Package
-Title: Companion package for the Coursera Statistics with R specialization
-Version: 0.1.0
-Date: 2018-02-28
+Title: Companion Package for the Coursera Statistics with R Specialization
+Version: 0.1-0
+Date: 2018-03-9
 Authors@R: c(person("Colin", "Rundel", role=c("aut"), email="rundel@gmail.com"),
-             person("Mine", "Cetinkaya-Rundel", role=c("aut","cre"), email="mine@stat.duke.edu"),
-             person("Merlise", "Clyde", role=c("aut"), email="clyde@duke.edu"),
+             person("Mine", "Cetinkaya-Rundel", role=c("aut"), email="mine@stat.duke.edu"),
+             person("Merlise", "Clyde", role=c("aut", "cre"), email="clyde@duke.edu"),
              person("David", "Banks", role=c("aut"), email="banks@stat.duke.edu"))
-Maintainer: Merlise Clyde <clyde@duke.edu>
 Description: R package to support inference for the Coursera Specialization 
             "Statistics with R". Wrapper functions for Bayesian and frequentist analysis and data sets.
-            See https://github.com/StatsWithR/statsr for more information.
+            See <https://github.com/StatsWithR/statsr> for more information.
 LazyData: true
 License: MIT + file LICENSE
 RoxygenNote: 6.0.1
 Depends: R (>= 3.4.0), BayesFactor
 Imports: dplyr, rmarkdown, ggplot2, broom, gridExtra, shiny, cubature, knitr, tidyr
+Suggests: HistData

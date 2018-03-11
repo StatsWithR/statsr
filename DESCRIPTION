@@ -11,7 +11,7 @@ Description: R package to support inference for the Coursera Specialization
             "Statistics with R". Wrapper functions for Bayesian and frequentist analysis and data sets.
             See <https://github.com/StatsWithR/statsr> for more information.
 LazyData: true
-License: MIT + file LICENSE
+License: GPL (>= 3)
 RoxygenNote: 6.0.1
 Depends: R (>= 3.4.0), BayesFactor
 Imports: dplyr, rmarkdown, ggplot2, broom, gridExtra, shiny, cubature, knitr, tidyr

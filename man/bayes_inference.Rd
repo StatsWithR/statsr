@@ -133,3 +133,6 @@ bayes_inference(y=weight, x=feed, data=chickwts,
                 method="simulation")               
 
 }
+\references{
+\url{https://statswithr.github.io/book/}
+}

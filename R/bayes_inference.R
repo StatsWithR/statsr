@@ -91,6 +91,7 @@
 #'                 type="ht", prior_family="JZS",
 #'                 method="simulation")               
 #' 
+#' @references \url{https://statswithr.github.io/book/}
 #' @importFrom BayesFactor ttestBF
 #' @export
 

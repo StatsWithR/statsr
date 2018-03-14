@@ -5,4 +5,4 @@ orig_data
 .Rhistory
 ^README\.Rmd$
 ^README-.*\.png$
-README.md
+README.*md

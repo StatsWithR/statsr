@@ -6,3 +6,5 @@ orig_data
 ^README\.Rmd$
 ^README-.*\.png$
 README.*md
+docs/*
+_pkgdown.yml

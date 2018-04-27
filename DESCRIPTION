@@ -2,17 +2,23 @@ Package: statsr
 Type: Package
 Title: Companion Package for Statistics with R
 Version: 0.1-0
-Date: 2018-03-14
+Date: 2018-04-25
 Authors@R: c(person("Colin", "Rundel", role=c("aut"), email="rundel@gmail.com"),
              person("Mine", "Cetinkaya-Rundel", role=c("aut"), email="mine@stat.duke.edu"),
-             person("Merlise", "Clyde", role=c("aut", "cre"), email="clyde@duke.edu"),
+             person("Merlise", "Clyde", role=c("aut", "cre"), email="clyde@duke.edu",
+	        		       comment=c(ORCID=0000-0002-3595-1872)),
              person("David", "Banks", role=c("aut"), email="banks@stat.duke.edu"))
-Description: R package with functions and datasets to support inference with the open access book
-            "An Introduction to Bayesian Thinking" 
-             <https://statswithr.github.io/book> and the online 
-             "Statistics with R Specialization". See <https://github.com/StatsWithR/statsr> for new releases.
+Description: R package with functions for and datasets to support inference with the open access book
+            "An Introduction to Bayesian Thinking"  which is available online
+             <https://statswithr.github.io/book> and the online videos for the
+             "Statistics with R Specialization" <https://www.coursera.org/specializations/statistics>.  
+             Shiny apps and functions for an introduction to Bayesian inference and decision making, including
+             one and two sample inference for Gaussian data.
+             See <https://github.com/StatsWithR/statsr> for new releases.
 LazyData: true
 License: GPL (>= 3)
+URL: https://www.r-project.org, https://github.com/StatsWithR/statsr
+BugReports: https://github.org/StatsWithR/statsr/issues
 RoxygenNote: 6.0.1
 Depends: R (>= 3.3.0), BayesFactor
 Imports: dplyr, rmarkdown, ggplot2, broom, gridExtra, shiny, cubature, knitr, tidyr

@@ -19,6 +19,7 @@ Generates a plot that shows the bandit posterior values as they are sequentially
 by the provided win / loss data.
 }
 \examples{
+# capture data from the `bandit_sim` app.
 data = data.frame(machine = c(1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 2L), 
                   outcome = c("W", "L", "W", "L", "L", "W", "L", "L", "L", "W"))
 plot_bandit_posterior(data)

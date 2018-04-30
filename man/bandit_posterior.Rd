@@ -2,7 +2,7 @@
 % Please edit documentation in R/bandit_posterior.R
 \name{bandit_posterior}
 \alias{bandit_posterior}
-\title{plot_ss}
+\title{bandit posterior}
 \usage{
 bandit_posterior(data, prior = c(m1_good = 0.5, m2_good = 0.5),
   win_probs = c(good = 1/2, bad = 1/3))

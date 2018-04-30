@@ -1,22 +1,18 @@
 ---
 output: github_document
 ---
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
-
 
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "man/figures/"
+  fig.path = "README-"
 )
 ```
 
-# [statsr: Companion Package for Statistics with R](http://github.org/StatsWithR/statsr)
-
-[![Build Status](http://travis-ci.org/StatsWithR/statsr.svg?branch=master)](http://travis-ci.org/StatsWithR/statsr)
-
+[![Build Status](https://travis-ci.org/StatsWithR/statsr.svg?branch=master)](https://travis-ci.org/StatsWithR/statsr)
 
 
 The `R` package `statsr` provides functions and datasets to support the Coursera [*Statistics with `R` Specialization*](https://www.coursera.org/specializations/statistics)  videos and open access book

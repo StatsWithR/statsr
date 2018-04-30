@@ -2,10 +2,15 @@
 % Please edit documentation in R/credible_interval.R
 \name{credible_interval_app}
 \alias{credible_interval_app}
-\title{Run the Credible Interval shiny app}
+\title{Credible Interval shiny app}
 \usage{
 credible_interval_app()
 }
 \description{
-Run the Credible Interval shiny app
+Run the Shiny credible interval app to generate credible
+intervals under the prior or posterior distibution for 
+Beta, Gamma and Gaussian families.  Sliders are used to
+adjust the hyperparameters in the distribution so that one
+may see how the resulting credible intervals and plotted 
+distributions change.
 }

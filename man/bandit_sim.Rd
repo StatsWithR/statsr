@@ -7,5 +7,8 @@
 bandit_sim()
 }
 \description{
-Run the Bandit Simulation shiny app
+Simulate data from a two armed-bandit (two slot machines) by clicking
+on the images for Machine 1 or Machine 2 and guess/learn which machine 
+has the higher probability of winning as the number of 
+outcomes of wins and losses accumulate.
 }

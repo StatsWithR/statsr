@@ -7,9 +7,9 @@
 plot_ss(x, y, data, showSquares = FALSE, leastSquares = FALSE)
 }
 \arguments{
-\item{x}{the name of numerical vector 1}
+\item{x}{the name of numerical vector 1 on x-axis}
 
-\item{y}{the name of numerical vector 2}
+\item{y}{the name of numerical vector 2 on y-axis}
 
 \item{data}{the dataframe in which x and y can be found}
 

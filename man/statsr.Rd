@@ -4,7 +4,14 @@
 \name{statsr}
 \alias{statsr}
 \alias{statsr-package}
-\title{statsr: A companion package for the Coursera Statistics with R specialization}
+\title{statsr: A companion package for Statistics with R}
 \description{
-See https://github.com/StatsWithR/statsr for more information.
+R package to support the online open access book "An Introduction
+to Bayesian Thinking" available at 
+\url{https://StatsWithR.github.io/book} and videos for the Coursera "Statistics with
+R" Specialization.  The package includes data sets, functions
+and Shiny Applications for learning frequentist and Bayesian
+statistics with R.
+See \url{https://github.com/StatsWithR/statsr} for the development version and 
+additional information.
 }

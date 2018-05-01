@@ -9,7 +9,7 @@
 #' if (interactive()) { 
 #'   ames_sampling_dist()
 #' }
-#' 
+
 #' @export
 
 ames_sampling_dist = function()

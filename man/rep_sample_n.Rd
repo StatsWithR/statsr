@@ -2,7 +2,7 @@
 % Please edit documentation in R/rep_sample_n.R
 \name{rep_sample_n}
 \alias{rep_sample_n}
-\title{Repeating sampling.}
+\title{Repeating Sampling from a Tibble}
 \usage{
 rep_sample_n(tbl, size, replace = FALSE, reps = 1)
 }
@@ -19,7 +19,7 @@ rep_sample_n(tbl, size, replace = FALSE, reps = 1)
 A tbl_df that aggregates all created samples, with the addition of a \code{replicate} column that the tbl_df is also grouped by
 }
 \description{
-Repeating sampling.
+Repeating Sampling from a Tibble
 }
 \examples{
 data(nc)

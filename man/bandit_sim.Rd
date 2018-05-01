@@ -13,11 +13,11 @@ has the higher probability of winning as the number of
 outcomes of wins and losses accumulate.
 }
 \examples{
-\dontrun{
+if (interactive()) {
 # run interactive shiny app to generate wins and losses
 bandit_sim()
-# paste data from app into varible
 }
+# paste data from app into varible
 data = data.frame(
  machine = c(1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L,
    1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 

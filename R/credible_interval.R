@@ -157,6 +157,7 @@ credible_interval_app = function()
           ggplot(d, aes_string(x='x', y='y')) + 
             ylab("Density") +
             geom_line() +
+            geom_area(fill="blue", alpha=0.2) +
             geom_polygon(data = ci_region, aes_string(x='x',y='y'),alpha=0.5) +
             geom_line(data = ci_interval(), size=1.5) +
             geom_point(data = ci_interval(), size=2) +
@@ -195,6 +196,7 @@ credible_interval_app = function()
           ggplot(d, aes_string(x='x', y='y')) + 
             ylab("Density") +
             geom_line() +
+            geom_area(fill="blue", alpha=0.2) +
             ggtitle(paste0("Prior Distribution of ",param))
         })
     },

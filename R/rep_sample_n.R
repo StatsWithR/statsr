@@ -1,4 +1,4 @@
-#' Repeating sampling.
+#' Repeating Sampling from a Tibble
 #' 
 #' @param tbl tbl of data.
 #' @param size The number of rows to select.

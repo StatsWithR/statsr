@@ -13,7 +13,7 @@ has the higher probability of winning as the number of
 outcomes of wins and losses accumulate.
 }
 \examples{
-\dontrun{
+if (interactive()) {
 # run interactive shiny app to generate wins and losses
 bandit_sim()
 # paste data from app into varible

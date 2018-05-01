@@ -15,8 +15,7 @@ may see how the resulting credible intervals and plotted
 distributions change.
 }
 \examples{
-\dontrun{
-# run interactive
-credible_interval_app()
+if (interactive()) {
+   credible_interval_app()
 }
 }

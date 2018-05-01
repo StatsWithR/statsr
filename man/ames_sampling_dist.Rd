@@ -15,8 +15,4 @@ dataset.
 if (interactive()) { 
   ames_sampling_dist()
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 7bb9e0a254cbbd7f3d25aac9a6849c9c5acf73f1
 }

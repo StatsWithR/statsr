@@ -1,7 +1,7 @@
 #' plot_ss
 #'
-#' An interactive function that will generate a scatterplot of two variables, then
-#' allow the user to click the plot in two locations to draw a best fit line.
+#' An interactive shiny app that will generate a scatterplot of two variables, then
+#' allow the user to click the plot in two locations to draw a best fitting line.
 #' Residuals are drawn by default; boxes representing the squared residuals are
 #' optional.
 #'
@@ -10,6 +10,8 @@
 #' @param data the dataframe in which x and y can be found
 #' @param showSquares logical option to show boxes representing the squared residuals
 #' @param leastSquares logical option to bypass point entry and automatically draw the least squares line
+#' @examples 
+#' \dontrun{plot_ss}
 #' @export
 
 plot_ss <- function(x, y, data, showSquares = FALSE, leastSquares = FALSE){

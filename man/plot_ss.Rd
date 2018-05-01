@@ -18,8 +18,11 @@ plot_ss(x, y, data, showSquares = FALSE, leastSquares = FALSE)
 \item{leastSquares}{logical option to bypass point entry and automatically draw the least squares line}
 }
 \description{
-An interactive function that will generate a scatterplot of two variables, then
-allow the user to click the plot in two locations to draw a best fit line.
+An interactive shiny app that will generate a scatterplot of two variables, then
+allow the user to click the plot in two locations to draw a best fitting line.
 Residuals are drawn by default; boxes representing the squared residuals are
 optional.
+}
+\examples{
+\dontrun{plot_ss}
 }

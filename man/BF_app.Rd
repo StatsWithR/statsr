@@ -2,7 +2,7 @@
 % Please edit documentation in R/BF_app.R
 \name{BF_app}
 \alias{BF_app}
-\title{Run the BF shiny app}
+\title{Run the interactive Bayes Factor shiny app}
 \usage{
 BF_app()
 }
@@ -11,4 +11,9 @@ This app illustrates how changing the sample mean and sample size
 affects the Bayes Factor for testing H1 that the mean is zero 
 versus H2 that the mean is not zero for data arising from a normal
 population.
+}
+\examples{
+\dontrun{
+BF.app()
+}
 }

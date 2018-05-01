@@ -241,7 +241,7 @@ leads to mu_0  having a Cauchy(0, rscale^2*sigma^2) prior distribution for prior
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='co'># inference for the mean from a single normal population</span>
+<span class='co'># inference for the mean from a single normal population using</span>
 <span class='co'># Jeffreys Reference prior, p(mu, sigma^2) = 1/sigma^2</span>
 
 <span class='fu'>library</span>(<span class='no'>BayesFactor</span>)
@@ -330,8 +330,9 @@ leads to mu_0  having a Cauchy(0, rscale^2*sigma^2) prior distribution for prior
 #&gt; sigma 18.5889570 21.791739 23.865324 26.27004 32.13835
 #&gt; n_0    0.2187455  2.518125  6.144387 12.62916 36.68739
 #&gt; 
-#&gt; 95% CI for mu: (45.6579, 64.0263)</div><div class='img'><img src='bayes_inference-4.png' alt='' width='700' height='433' /></div><div class='input'>                
-</div><div class='input'><span class='co'># Bayesian t-test for two means </span>
+#&gt; 95% CI for mu: (45.6579, 64.0263)</div><div class='img'><img src='bayes_inference-4.png' alt='' width='700' height='433' /></div><div class='input'>
+
+<span class='co'># Bayesian t-test for two means </span>
 
 <span class='fu'>data</span>(<span class='no'>chickwts</span>)
 <span class='no'>chickwts</span> <span class='kw'>=</span> <span class='no'>chickwts</span>[<span class='no'>chickwts</span>$<span class='no'>feed</span> <span class='kw'>%in%</span> <span class='fu'>c</span>(<span class='st'>"horsebean"</span>,<span class='st'>"linseed"</span>),]
@@ -378,8 +379,7 @@ leads to mu_0  having a Cauchy(0, rscale^2*sigma^2) prior distribution for prior
 #&gt; effect size                 -0.2113328
 #&gt; n_0                         89.1522527
 #&gt; 95% Cred. Int.: (-91.8731 , -11.0476)
-#&gt; </div><div class='img'><img src='bayes_inference-5.png' alt='' width='700' height='433' /></div><div class='input'>
-</div></pre>
+#&gt; </div><div class='img'><img src='bayes_inference-5.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

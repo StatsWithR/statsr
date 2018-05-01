@@ -1,9 +1,13 @@
-#' Run the BF shiny app
+#' Run the interactive Bayes Factor shiny app
 #' 
 #' This app illustrates how changing the sample mean and sample size
 #' affects the Bayes Factor for testing H1 that the mean is zero 
 #' versus H2 that the mean is not zero for data arising from a normal
 #' population.
+#' @examples
+#' \dontrun{
+#' BF.app()
+#' }
 
 BF_app = function()
 {

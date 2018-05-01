@@ -83,7 +83,7 @@ For inference and testing for normal means several default options are avialable
 }
 \examples{
 
-# inference for the mean from a single normal population
+# inference for the mean from a single normal population using
 # Jeffreys Reference prior, p(mu, sigma^2) = 1/sigma^2
 
 library(BayesFactor)
@@ -120,7 +120,7 @@ bayes_inference(tthm, data=tapwater,
                 prior_family="JZS",
                 method="sim")
                 
-}                
+               
 # Bayesian t-test for two means 
 
 data(chickwts)
@@ -131,7 +131,7 @@ bayes_inference(y=weight, x=feed, data=chickwts,
                 statistic="mean", mu_0 = 0, alt="twosided",
                 type="ht", prior_family="JZS",
                 method="simulation")               
-
+}
 }
 \references{
 \url{https://statswithr.github.io/book/}

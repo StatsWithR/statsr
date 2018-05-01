@@ -12,3 +12,34 @@ on the images for Machine 1 or Machine 2 and guess/learn which machine
 has the higher probability of winning as the number of 
 outcomes of wins and losses accumulate.
 }
+\examples{
+\dontrun{
+# run interactive shiny app to generate wins and losses
+bandit_sim()
+# paste data from app into varible
+}
+data = data.frame(
+ machine = c(1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L,
+   1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 
+   2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 1L, 1L, 1L, 1L, 1L,
+   2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 1L, 1L, 1L, 1L, 1L,
+   2L, 2L, 2L, 2L, 2L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 
+   1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 1L, 1L, 1L, 1L, 1L,
+   2L, 2L, 2L, 2L, 2L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 
+   1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 1L, 1L, 1L, 1L, 1L), 
+ outcome = c("W", "W", "W", "L", "W", "W", "W", "L", "W", "L", "W", "L",
+  "L", "L", "W", "L", "W", "L", "L", "L", "W", "W", "W", "L", "L", "L", 
+  "L", "L", "W", "W", "L", "L", "W", "L", "L", "W", "L", "L", "W", "L",
+  "L", "L", "L", "L", "W", "L", "L", "W", "W", "W", "W", "L", "L", "L",
+  "L", "L", "L", "W", "L", "W", "L", "W", "L", "L", "L", "L", "L", "L", "L",
+  "L", "L", "L", "W", "W", "W", "L", "W", "L", "L", "L", "L", "L", "L", "L",
+  "L", "L", "L", "W", "W", "W", "W", "W", "L", "W", "W", "L", "W", "L", "L",
+  "L", "L", "L", "W", "L", "W", "L", "L", "L", "W", "W", "W", "W", "L", "L",
+  "W", "L", "W", "L", "L", "W"))
+  bandit_posterior(data)
+  plot_bandit_posterior(data)
+
+}
+\seealso{
+\code{\link{bandit_posterior}} and \code{\link{plot_bandit_posterior}}
+}

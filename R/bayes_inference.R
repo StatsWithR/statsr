@@ -42,7 +42,7 @@
 #'     
 #' @examples 
 #' 
-#' # inference for the mean from a single normal population
+#' # inference for the mean from a single normal population using
 #' # Jeffreys Reference prior, p(mu, sigma^2) = 1/sigma^2
 #' 
 #' library(BayesFactor)
@@ -79,7 +79,7 @@
 #'                 prior_family="JZS",
 #'                 method="sim")
 #'                 
-#' }                
+#'                
 #' # Bayesian t-test for two means 
 #' 
 #' data(chickwts)
@@ -90,7 +90,7 @@
 #'                 statistic="mean", mu_0 = 0, alt="twosided",
 #'                 type="ht", prior_family="JZS",
 #'                 method="simulation")               
-#' 
+#' }
 #' @references \url{https://statswithr.github.io/book/}
 #' @importFrom BayesFactor ttestBF
 #' @export

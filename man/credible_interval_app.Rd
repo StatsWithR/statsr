@@ -7,10 +7,16 @@
 credible_interval_app()
 }
 \description{
-Run the Shiny credible interval app to generate credible
+Run the `shiny` credible interval app to generate credible
 intervals under the prior or posterior distibution for 
 Beta, Gamma and Gaussian families.  Sliders are used to
 adjust the hyperparameters in the distribution so that one
 may see how the resulting credible intervals and plotted 
 distributions change.
+}
+\examples{
+\dontrun{
+# run interactive
+credible_interval_app()
+}
 }

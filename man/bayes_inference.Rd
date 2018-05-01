@@ -94,7 +94,7 @@ bayes_inference(tthm, data=tapwater,
                 statistic="mean", 
                 type="ci", prior_family="ref",
                 method="theoretical")
-\dontrun{ 
+\donttest{ 
 # Calculate 95\% CI using simulation from Student t using an informative mean and ref
 # prior for sigma^2
 
@@ -120,7 +120,7 @@ bayes_inference(tthm, data=tapwater,
                 prior_family="JZS",
                 method="sim")
                 
-}                 
+}                
 # Bayesian t-test for two means 
 
 data(chickwts)

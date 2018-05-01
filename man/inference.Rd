@@ -62,3 +62,20 @@ Results of inference task performed
 \description{
 Hypothesis tests and confidence intervals
 }
+\examples{
+data(tapwater)
+
+# Calculate 95\% CI using quantiles using a Student t distribution
+inference(tthm, data=tapwater,
+                statistic="mean", 
+                type="ci",
+                method="theoretical")
+                
+inference(tthm, data=tapwater,
+                statistic="mean", 
+                type="ci",
+                boot_method = "perc",
+                method="simulation")
+                
+                
+}

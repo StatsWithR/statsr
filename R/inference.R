@@ -21,6 +21,23 @@
 #' @param show_inf_plot print inference plot, set to verbose by default
 #' @param show_res print results, set to verbose by default
 #' @return Results of inference task performed
+#' @examples 
+#' data(tapwater)
+#' 
+#' # Calculate 95% CI using quantiles using a Student t distribution
+#' inference(tthm, data=tapwater,
+#'                 statistic="mean", 
+#'                 type="ci",
+#'                 method="theoretical")
+#'                 
+#' inference(tthm, data=tapwater,
+#'                 statistic="mean", 
+#'                 type="ci",
+#'                 boot_method = "perc",
+#'                 method="simulation")
+#'                 
+
+#'                 
 #' @export
 
 inference <- function(y, x = NULL, data,

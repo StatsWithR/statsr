@@ -5,6 +5,9 @@
 #' @param replace Sample with or without replacement?
 #' @param reps The number of samples to collect.
 #' @return A tbl_df that aggregates all created samples, with the addition of a \code{replicate} column that the tbl_df is also grouped by
+#' @examples 
+#' data(nc)
+#' rep_sample_n(nc, size=10, replace=FALSE, reps=1)
 #' @export
 
 rep_sample_n <- function(tbl, size, replace = FALSE, reps = 1)

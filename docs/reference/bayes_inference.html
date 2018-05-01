@@ -262,15 +262,24 @@ leads to mu_0  having a Cauchy(0, rscale^2*sigma^2) prior distribution for prior
 #&gt; Marginal Posterior for mu:
 #&gt; Student t with posterior mean = 55.5239, posterior scale = 4.3946 on 27 df
 #&gt; 
-#&gt; 95% CI: (46.507 , 64.5409)</div><div class='img'><img src='bayes_inference-1.png' alt='' width='700' height='433' /></div><span class='co'># NOT RUN {</span>
-<span class='co'># Calculate 95% CI using simulation from Student t using an informative mean and ref</span>
+#&gt; 95% CI: (46.507 , 64.5409)</div><div class='img'><img src='bayes_inference-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Calculate 95% CI using simulation from Student t using an informative mean and ref</span>
 <span class='co'># prior for sigma^2</span>
 
 <span class='fu'>bayes_inference</span>(<span class='no'>tthm</span>, <span class='kw'>data</span><span class='kw'>=</span><span class='no'>tapwater</span>,
                 <span class='kw'>statistic</span><span class='kw'>=</span><span class='st'>"mean"</span>, <span class='kw'>mu_0</span><span class='kw'>=</span><span class='fl'>9.8</span>,
                 <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"ci"</span>,  <span class='kw'>prior_family</span><span class='kw'>=</span><span class='st'>"JUI"</span>,
-                <span class='kw'>method</span><span class='kw'>=</span><span class='st'>"theo"</span>)
-
+                <span class='kw'>method</span><span class='kw'>=</span><span class='st'>"theo"</span>)</div><div class='output co'>#&gt; Single numerical variable
+#&gt; n = 28, y-bar = 55.5239, s = 23.254
+#&gt; (Assuming proper prior:  mu | sigma^2 ~ N(9.8, *sigma^2/1)
+#&gt; (Assuming improper prior: P(1/sigma^2) = (sigma^2)^-1
+#&gt; 
+#&gt; Joint Posterior Distribution for mu and 1/sigma^2:
+#&gt;  N(53.9472, sigma^2/29) G(27/2, 21.2245*27/2)
+#&gt; 
+#&gt; Marginal Posterior for mu:
+#&gt; Student t with posterior mean = 53.9472, posterior scale = 4.607 on 27 df
+#&gt; 
+#&gt; 95% CI: (44.4944 , 63.4)</div><div class='img'><img src='bayes_inference-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Calculate 95% CI using simulation  with the </span>
 <span class='co'># Cauchy prior on mu and reference prior on sigma^2</span>
 
@@ -278,17 +287,51 @@ leads to mu_0  having a Cauchy(0, rscale^2*sigma^2) prior distribution for prior
 <span class='fu'>bayes_inference</span>(<span class='no'>tthm</span>, <span class='kw'>data</span><span class='kw'>=</span><span class='no'>tapwater</span>,
                 <span class='kw'>statistic</span><span class='kw'>=</span><span class='st'>"mean"</span>, <span class='kw'>mu_0</span> <span class='kw'>=</span> <span class='fl'>9.8</span>, <span class='kw'>rscale</span><span class='kw'>=</span><span class='fu'>sqrt</span>(<span class='fl'>2</span>)/<span class='fl'>2</span>,
                 <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"ci"</span>, <span class='kw'>prior_family</span><span class='kw'>=</span><span class='st'>"JZS"</span>,
-                <span class='kw'>method</span><span class='kw'>=</span><span class='st'>"simulation"</span>)
-
+                <span class='kw'>method</span><span class='kw'>=</span><span class='st'>"simulation"</span>)</div><div class='output co'>#&gt; Single numerical variable
+#&gt; n = 28, y-bar = 55.5239, s = 23.254
+#&gt; (Assuming Zellner-Siow Cauchy prior:  mu | sigma^2 ~ C(9.8, 0.7071*sigma)
+#&gt; (Assuming improper Jeffreys prior: p(sigma^2) = 1/sigma^2
+#&gt; 
+#&gt; Posterior Summaries
+#&gt;             2.5%       25%       50%      75%    97.5%
+#&gt; mu    45.6474155 51.834212 54.877835 57.93561 63.79327
+#&gt; sigma 18.6871687 21.900700 23.952390 26.41319 32.26566
+#&gt; n_0    0.2575021  2.864806  6.738517 13.85686 41.44594
+#&gt; 
+#&gt; 95% CI for mu: (45.6474, 63.7933)</div><div class='img'><img src='bayes_inference-3.png' alt='' width='700' height='433' /></div><div class='input'>
 
 <span class='co'># Bayesian t-test mu = 0 with ZJS prior  </span>
 <span class='fu'>bayes_inference</span>(<span class='no'>tthm</span>, <span class='kw'>data</span><span class='kw'>=</span><span class='no'>tapwater</span>,
                 <span class='kw'>statistic</span><span class='kw'>=</span><span class='st'>"mean"</span>,
                 <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"ht"</span>, <span class='kw'>alternative</span><span class='kw'>=</span><span class='st'>"twosided"</span>, <span class='kw'>null</span><span class='kw'>=</span><span class='fl'>80</span>,
                 <span class='kw'>prior_family</span><span class='kw'>=</span><span class='st'>"JZS"</span>,
-                <span class='kw'>method</span><span class='kw'>=</span><span class='st'>"sim"</span>)
-
-<span class='co'># }</span><div class='input'><span class='co'># Bayesian t-test for two means </span>
+                <span class='kw'>method</span><span class='kw'>=</span><span class='st'>"sim"</span>)</div><div class='output co'>#&gt; Single numerical variable
+#&gt; n = 28, y-bar = 55.5239, s = 23.254
+#&gt; (Using Zellner-Siow Cauchy prior:  mu ~ C(80, 1*sigma)
+#&gt; (Using Jeffreys prior: p(sigma^2) = 1/sigma^2
+#&gt; 
+#&gt; Hypotheses:
+#&gt; H1: mu = 80 versus H2: mu != 80
+#&gt; Priors:
+#&gt; P(H1) = 0.5 , P(H2) = 0.5
+#&gt; Results:
+#&gt; BF[H2:H1] = 3258.855
+#&gt; P(H1|data) = 3e-04  P(H2|data) = 0.9997 
+#&gt; 
+#&gt; Posterior summaries for mu under H2:
+#&gt; Single numerical variable
+#&gt; n = 28, y-bar = 55.5239, s = 23.254
+#&gt; (Assuming Zellner-Siow Cauchy prior:  mu | sigma^2 ~ C(80, 1*sigma)
+#&gt; (Assuming improper Jeffreys prior: p(sigma^2) = 1/sigma^2
+#&gt; 
+#&gt; Posterior Summaries
+#&gt;             2.5%       25%       50%      75%    97.5%
+#&gt; mu    45.6578858 51.840349 54.907170 57.94701 64.02633
+#&gt; sigma 18.5889570 21.791739 23.865324 26.27004 32.13835
+#&gt; n_0    0.2187455  2.518125  6.144387 12.62916 36.68739
+#&gt; 
+#&gt; 95% CI for mu: (45.6579, 64.0263)</div><div class='img'><img src='bayes_inference-4.png' alt='' width='700' height='433' /></div><div class='input'>                
+</div><div class='input'><span class='co'># Bayesian t-test for two means </span>
 
 <span class='fu'>data</span>(<span class='no'>chickwts</span>)
 <span class='no'>chickwts</span> <span class='kw'>=</span> <span class='no'>chickwts</span>[<span class='no'>chickwts</span>$<span class='no'>feed</span> <span class='kw'>%in%</span> <span class='fu'>c</span>(<span class='st'>"horsebean"</span>,<span class='st'>"linseed"</span>),]
@@ -322,20 +365,20 @@ leads to mu_0  having a Cauchy(0, rscale^2*sigma^2) prior distribution for prior
 #&gt; 
 #&gt; 
 #&gt; Posterior Summaries
-#&gt;                                   2.5%         25%         50%          75%
-#&gt; overall mean               169.4091896  183.066300  189.908210  196.6429473
-#&gt; mu_horsebean - mu_linseed  -91.5572824  -63.808758  -50.174148  -36.9147478
-#&gt; sigma^2                   1304.7469487 1823.894697 2262.348765 2811.4721936
-#&gt; effect size                 -2.0082062   -1.374267   -1.058956   -0.7510626
-#&gt; n_0                          0.4617713    5.469877   13.867263   29.3036126
+#&gt;                                   2.5%         25%         50%         75%
+#&gt; overall mean               168.8933510  182.885462  189.745741  196.660522
+#&gt; mu_horsebean - mu_linseed  -91.8731181  -64.511203  -50.848104  -37.216722
+#&gt; sigma^2                   1285.7510402 1831.129230 2257.254913 2820.563688
+#&gt; effect size                 -2.0104264   -1.393083   -1.072684   -0.761675
+#&gt; n_0                          0.5310425    5.302766   13.509756   28.575491
 #&gt;                                  97.5%
-#&gt; overall mean               210.3750372
-#&gt; mu_horsebean - mu_linseed  -10.3682834
-#&gt; sigma^2                   4453.4456564
-#&gt; effect size                 -0.2013726
-#&gt; n_0                         92.8373446
-#&gt; 95% Cred. Int.: (-91.5573 , -10.3683)
-#&gt; </div><div class='img'><img src='bayes_inference-2.png' alt='' width='700' height='433' /></div><div class='input'>
+#&gt; overall mean               210.8103350
+#&gt; mu_horsebean - mu_linseed  -11.0475801
+#&gt; sigma^2                   4498.3773126
+#&gt; effect size                 -0.2113328
+#&gt; n_0                         89.1522527
+#&gt; 95% Cred. Int.: (-91.8731 , -11.0476)
+#&gt; </div><div class='img'><img src='bayes_inference-5.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

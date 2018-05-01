@@ -1,6 +1,6 @@
 #' Credible Interval shiny app
 #' 
-#' Run the Shiny credible interval app to generate credible
+#' Run the `shiny` credible interval app to generate credible
 #' intervals under the prior or posterior distibution for 
 #' Beta, Gamma and Gaussian families.  Sliders are used to
 #' adjust the hyperparameters in the distribution so that one
@@ -8,6 +8,11 @@
 #' distributions change.
 #' 
 #' @export
+#' @examples 
+#' \dontrun{
+#' # run interactive
+#' credible_interval_app()
+#' }
 
 credible_interval_app = function()
 {

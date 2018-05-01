@@ -21,3 +21,7 @@ A tbl_df that aggregates all created samples, with the addition of a \code{repli
 \description{
 Repeating sampling.
 }
+\examples{
+data(nc)
+rep_sample_n(nc, size=10, replace=FALSE, reps=1)
+}

@@ -1,7 +1,7 @@
 #' Credible Interval shiny app
 #' 
 #' Run the `shiny` credible interval app to generate credible
-#' intervals under the prior or posterior distibution for 
+#' intervals under the prior or posterior distribution for 
 #' Beta, Gamma and Gaussian families.  Sliders are used to
 #' adjust the hyperparameters in the distribution so that one
 #' may see how the resulting credible intervals and plotted 

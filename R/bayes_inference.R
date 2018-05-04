@@ -29,13 +29,13 @@
 #' @return Results of inference task performed.
 #' 
 #' 
-#' @note For inference and testing for normal means several default options are avialable.
+#' @note For inference and testing for normal means several default options are available.
 #'  "JZS"  corresponds to using the Jeffreys reference prior on sigma^2, p(sigma^2) = 1/sigma^2, 
 #'  and the Zellner-Siow Cauchy prior on the standardized effect size mu/sigma or ( mu_1 - mu_2)/sigma
 #'   with a location of mu_0 and scale  rscale.  The "JUI" option also uses the
 #'   Jeffreys reference prior on sigma^2, but the Unit Information prior on the
-#'  standardized effect, N(mu_0, 1).  The option "ref" uses the improper unifrom prior  on 
-#'  the standardized effect and the Jeffereys reference prior on  sigma^2.  The latter 
+#'  standardized effect, N(mu_0, 1).  The option "ref" uses the improper uniform prior  on 
+#'  the standardized effect and the Jeffreys reference prior on  sigma^2.  The latter 
 #'  cannot be used for hypothesis testing due to the ill-determination of Bayes
 #'  factors.  Finally "NG" corresponds to the conjugate Normal-Gamma prior.
 #'  

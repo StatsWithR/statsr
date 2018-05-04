@@ -5,7 +5,7 @@
 #' which machine is good and the probability of the good and bad machine paying out.
 #'
 #' @param data data frame containing win loss data
-#' @param prior prior vector containing the probabilites of Machine 1 and Machine 2 being good, defaults to 0.5 and 0.5 respectively.
+#' @param prior prior vector containing the probabilities of Machine 1 and Machine 2 being good, defaults to 0.5 and 0.5 respectively.
 #' @param win_probs vector containing the probabilities of winning on the good and bad machine respectively.
 #' @return A vector containing the posterior probability of Machine 1 and Machine 2 being the good machine.
 #' @seealso \code{\link{bandit_sim}} to generate data and
@@ -47,7 +47,7 @@ bandit_posterior = function(data, prior = c(m1_good=0.5,m2_good=0.5), win_probs 
 #' by the provided win / loss data.
 #'
 #' @param data data frame containing win loss data
-#' @param prior prior vector containing the probabilites of Machine 1 and Machine 2 being good, defaults to 50-50.
+#' @param prior prior vector containing the probabilities of Machine 1 and Machine 2 being good, defaults to 50-50.
 #' @param win_probs vector containing the probabilities of winning on the good and bad machine respectively.
 #' @seealso \code{\link{bandit_sim}} to generate data to use below
 #'

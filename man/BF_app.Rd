@@ -13,7 +13,7 @@ versus H2 that the mean is not zero for data arising from a normal
 population.
 }
 \examples{
-\dontrun{
+if (interactive()) { 
 BF.app()
 }
 }

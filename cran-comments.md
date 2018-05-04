@@ -23,5 +23,7 @@ Resubmission of new package - as requested we:
 
 * replaced `\dontrun{}` by `\donttest{}` in Rd-files as suggested. The examples in  `bayes_inference`  with `\donttest` take 13 seconds elapsed time to run now when checking the package with --run-donttest.  Examples for shiny apps now test for an interactive environment.
 
+* checked spelling of DESCRIPTION and Rd files
+
 
 

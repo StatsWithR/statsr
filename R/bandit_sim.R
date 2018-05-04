@@ -8,11 +8,11 @@
 #' @export
 #' @seealso \code{\link{bandit_posterior}} and \code{\link{plot_bandit_posterior}}
 #' @examples
-#' \dontrun{
+#' if (interactive()) {
 #' # run interactive shiny app to generate wins and losses
 #' bandit_sim()
-#' # paste data from app into varible
 #' }
+#' # paste data from the shiny app into varible
 #' data = data.frame(
 #'  machine = c(1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L,
 #'    1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 

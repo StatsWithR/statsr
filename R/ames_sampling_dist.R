@@ -1,9 +1,15 @@
+#' Simulate Sampling Distribution
+#' 
 #' Run the interactive ames sampling distribution shiny app to 
-#' illustrate sampling distributions using variables from the \code{\link{ames
-#' }}
+#' illustrate sampling distributions using variables from the `ames`
+#' dataset.
+#' 
 #'
-#' @examples 
-#' \dontrun{ames_sampling_dist}
+#' @examples
+#' if (interactive()) { 
+#'   ames_sampling_dist()
+#' }
+
 #' @export
 
 ames_sampling_dist = function()

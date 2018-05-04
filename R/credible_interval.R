@@ -9,9 +9,8 @@
 #' 
 #' @export
 #' @examples 
-#' \dontrun{
-#' # run interactive
-#' credible_interval_app()
+#' if (interactive()) {
+#'    credible_interval_app()
 #' }
 
 credible_interval_app = function()

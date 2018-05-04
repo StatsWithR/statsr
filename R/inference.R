@@ -36,7 +36,17 @@
 #'                 boot_method = "perc",
 #'                 method="simulation")
 #'                 
-
+#' # Inference for a proportion
+#' # Calculate 95% confidence intervals for the proportion of atheists
+#' 
+#' data("atheism")
+#' library("dplyr")
+#' us12 <- atheism %>%
+#'         filter(nationality == "United States" , atheism$year == "2012")
+#' inference(y = response, data = us12, statistic = "proportion",
+#'           type = "ci",
+#'           method = "theoretical", 
+#'           success = "atheist")
 #'                 
 #' @export
 

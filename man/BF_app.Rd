@@ -7,10 +7,17 @@
 BF_app()
 }
 \description{
-This app illustrates how changing the sample mean and sample size
+This app illustrates how changing the Z score and prior precision
 affects the Bayes Factor for testing H1 that the mean is zero 
 versus H2 that the mean is not zero for data arising from a normal
-population.
+population.  Lindley's paradox occurs for large sample sizes
+when the Bayes factor favors H1 even though the Z score is large or the
+p-value is small enough to reach statistical significance and the values of 
+the sample mean do not reflex practical significance based on the prior 
+distribution.
+Bartlett's paradox may occur when the prior precision goes to zero, leading 
+to Bayes factors that favor H1 regardless of the data.
+A prior precision of one corresponds to the unit information prior.
 }
 \examples{
 if (interactive()) { 

@@ -7,7 +7,11 @@
 
 ## R CMD check results with --as-cran and --run-donttest
 There were no ERRORs or WARNINGs.
-2 NOTES:  (1) new package submission and (2) example in \donttest that takes more than 5 secs
+2 NOTES:  (1) new package submission;  (2) Possibly mis-spelled words in DESCRIPTION:   Bartlett's, Lindley's   
+  
+Bartlett and Lindley are proper nouns
+
+Examples in \donttest take more than 5 secs
 
 ## Reverse Dependencies
 
@@ -16,6 +20,8 @@ None
 ## Comments
 
 Resubmission of new package - as requested we:
+
+* updated Description to avoid starting with "R package"
 
 * wrote package names and software names in single quotes (e.g. 'shiny') in the Description.
 

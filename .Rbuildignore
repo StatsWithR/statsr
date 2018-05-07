@@ -10,3 +10,4 @@ docs/*
 _pkgdown.yml
 LICENSE
 cran-comments.md
+^CRAN-RELEASE$

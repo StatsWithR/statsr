@@ -30,10 +30,17 @@
 
 <meta property="og:title" content="Run the interactive Bayes Factor shiny app — BF_app" />
 
-<meta property="og:description" content="This app illustrates how changing the sample mean and sample size
+<meta property="og:description" content="This app illustrates how changing the Z score and prior precision
 affects the Bayes Factor for testing H1 that the mean is zero 
 versus H2 that the mean is not zero for data arising from a normal
-population." />
+population.  Lindley's paradox occurs for large sample sizes
+when the Bayes factor favors H1 even though the Z score is large or the
+p-value is small enough to reach statistical significance and the values of 
+the sample mean do not reflex practical significance based on the prior 
+distribution.
+Bartlett's paradox may occur when the prior precision goes to zero, leading 
+to Bayes factors that favor H1 regardless of the data.
+A prior precision of one corresponds to the unit information prior." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -107,10 +114,17 @@ population." />
 
     <div class="ref-description">
     
-    <p>This app illustrates how changing the sample mean and sample size
+    <p>This app illustrates how changing the Z score and prior precision
 affects the Bayes Factor for testing H1 that the mean is zero 
 versus H2 that the mean is not zero for data arising from a normal
-population.</p>
+population.  Lindley's paradox occurs for large sample sizes
+when the Bayes factor favors H1 even though the Z score is large or the
+p-value is small enough to reach statistical significance and the values of 
+the sample mean do not reflex practical significance based on the prior 
+distribution.
+Bartlett's paradox may occur when the prior precision goes to zero, leading 
+to Bayes factors that favor H1 regardless of the data.
+A prior precision of one corresponds to the unit information prior.</p>
     
     </div>
 
@@ -118,9 +132,9 @@ population.</p>
         
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'>interactive</span>()) {
 <span class='fu'>BF.app</span>()
-<span class='co'># }</span></pre>
+}</div><div class='output co'>#&gt; <span class='error'>Error in BF.app(): could not find function "BF.app"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

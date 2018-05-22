@@ -1,0 +1,15 @@
+url:  http://statswithr.github.io/statsr/
+
+authors:
+  Merlise Clyde:
+    href: http://stat.duke.edu/~clyde
+navbar:
+  title: "statsr"
+  left:
+    - text: "Functions"
+      href: reference/index.html
+    - text: "News"
+      href: news/index.html
+  right:
+    - icon: fa-github
+      href: https://github.com/statswithr/statsr

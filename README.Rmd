@@ -12,8 +12,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-[![Build Status](https://travis-ci.org/StatsWithR/statsr.svg?branch=master)](https://travis-ci.org/StatsWithR/statsr)
+[![Build Status](https://travis-ci.org/StatsWithR/statsr.svg?branch=BayesFactor)](https://travis-ci.org/StatsWithR/statsr)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/statsr)](https://cran.r-project.org/package=statsr)
+[![](http://cranlogs.r-pkg.org/badges/statsr)](http://cran.rstudio.com/web/packages/statsr/index.html) [![](http://cranlogs.r-pkg.org/badges/grand-total/statsr)](http://cran.rstudio.com/web/packages/statsr/index.html)
 
+# statsr
 
 The `R` package `statsr` provides functions and datasets to support the Coursera [*Statistics with `R` Specialization*](https://www.coursera.org/specializations/statistics)  videos and open access book
 [*An Introduction to Bayesian Thinking*](https://statswithr.github.io/book) for learning Bayesian and freqentist statistics using `R`. 

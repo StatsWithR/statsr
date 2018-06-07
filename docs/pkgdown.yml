@@ -1,5 +1,8 @@
 pandoc: 2.1.3
-pkgdown: 1.0.0
-pkgdown_sha: d43ca38c74827d1d6babc3a80d48cd3a8e8fad8c
+pkgdown: 1.0.0.9000
+pkgdown_sha: 426b4326bbea61b5ca64868316249bb0b942a308
 articles: []
+urls:
+  reference: http://statswithr.github.io/statsr//reference
+  article: http://statswithr.github.io/statsr//articles
 

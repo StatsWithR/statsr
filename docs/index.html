@@ -11,10 +11,9 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="jquery.sticky-kit.min.js"></script><script src="pkgdown.js"></script><meta property="og:title" content="Companion Package for Statistics with R">
 <meta property="og:description" content="Provides functions and datasets to support inference with the open access book
-            " an introduction to bayesian thinking available online>
-</head>
-<body><p> and  online videos for the
-             "Statistics with R Specialization" <https:>.  
+            &quot;An Introduction to Bayesian Thinking&quot;, available online
+             &lt;https://statswithr.github.io/book&gt; and  online videos for the
+             &quot;Statistics with R Specialization&quot; &lt;https://www.coursera.org/specializations/statistics&gt;.  
              which includes an introduction to Bayesian inference and decision
              making for one and two sample credible intervals and 
              hypothesis testing for Gaussian and Binomial data, in addition to
@@ -22,12 +21,15 @@
              To help with understanding concepts, 'shiny' applications are used to aide 
              visualization of sampling distributions, credible intervals, hypothesis testing, 
              Lindley's and Bartlett's paradoxes. For development versions or to report issues, please visit
-             <https:> on GitHub." /&gt;
+             &lt;https://github.com/StatsWithR/statsr&gt;.">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]--><div class="container template-article">
+<![endif]-->
+</head>
+<body>
+    <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -45,22 +47,16 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="index.html">
-    <span class="fa fa-home fa-lg"></span>
-     
-  </a>
+  <a href="reference/index.html">Functions</a>
 </li>
 <li>
-  <a href="reference/index.html">Reference</a>
-</li>
-<li>
-  <a href="news/index.html">Changelog</a>
+  <a href="news/index.html">News</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/StatsWithR/statsr">
-    <span class="fa fa-github fa-lg"></span>
+  <a href="https://github.com/statswithr/statsr">
+    <span class="fa fa-github"></span>
      
   </a>
 </li>
@@ -80,7 +76,10 @@
     
     
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-<p><a href="https://travis-ci.org/StatsWithR/statsr"><img src="https://travis-ci.org/StatsWithR/statsr.svg?branch=master" alt="Build Status"></a></p>
+
+<div id="statsr" class="section level1">
+<div class="page-header"><h1 class="hasAnchor">
+<a href="#statsr" class="anchor"></a>statsr</h1></div>
 <p>The <code>R</code> package <code>statsr</code> provides functions and datasets to support the Coursera <a href="https://www.coursera.org/specializations/statistics"><em>Statistics with <code>R</code> Specialization</em></a> videos and open access book <a href="https://statswithr.github.io/book"><em>An Introduction to Bayesian Thinking</em></a> for learning Bayesian and freqentist statistics using <code>R</code>.</p>
 <p>To install the latest version from github, verify that there is a passing badge above on the README page. In <code>R</code> enter</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(devtools)</a>
@@ -88,12 +87,15 @@
 <a class="sourceLine" id="cb1-3" data-line-number="3">                         <span class="dt">dependencies=</span><span class="ot">TRUE</span>,</a>
 <a class="sourceLine" id="cb1-4" data-line-number="4">                         <span class="dt">upgrade_dependencies =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>This will install the packages and any packages that are required, as well as updating any installed packages to their latest versions.</p>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
+<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=statsr">https://​cloud.r-project.org/​package=statsr</a>
+</li>
 <li>Browse source code at <br><a href="https://github.com/StatsWithR/statsr">https://​github.com/​StatsWithR/​statsr</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/StatsWithR/statsr/issues">https://​github.com/​StatsWithR/​statsr/​issues</a>
@@ -111,18 +113,28 @@
 <ul class="list-unstyled">
 <li>Colin Rundel <br><small class="roles"> Author </small>  </li>
 <li>Mine Cetinkaya-Rundel <br><small class="roles"> Author </small>  </li>
-<li>Merlise Clyde <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/-5469" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" height="16"></a> </li>
+<li>
+<a href="http://stat.duke.edu/~clyde">Merlise Clyde</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/-5469" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" height="16"></a> </li>
 <li>David Banks <br><small class="roles"> Author </small>  </li>
 </ul>
 </div>
 
-      </div>
+      <div class="dev-status">
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://travis-ci.org/StatsWithR/statsr"><img src="https://travis-ci.org/StatsWithR/statsr.svg?branch=BayesFactor" alt="Build Status"></a></li>
+<li><a href="https://cran.r-project.org/package=statsr"><img src="http://www.r-pkg.org/badges/version/statsr" alt="CRAN_Status_Badge"></a></li>
+<li><a href="http://cran.rstudio.com/web/packages/statsr/index.html"><img src="http://cranlogs.r-pkg.org/badges/statsr"></a></li>
+<li><a href="http://cran.rstudio.com/web/packages/statsr/index.html"><img src="http://cranlogs.r-pkg.org/badges/grand-total/statsr"></a></li>
+</ul>
+</div>
+</div>
 
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Colin Rundel, Mine Cetinkaya-Rundel, Merlise Clyde, David Banks.</p>
+  <p>Developed by Colin Rundel, Mine Cetinkaya-Rundel, <a href="http://stat.duke.edu/~clyde">Merlise Clyde</a>, David Banks.</p>
 </div>
 
 <div class="pkgdown">
@@ -134,6 +146,5 @@
 
   
 
-  
-</https:></https:></p></body>
+  </body>
 </html>

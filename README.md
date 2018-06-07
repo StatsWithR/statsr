@@ -1,10 +1,13 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# [statsr: Companion Package for Statistics with R](http://github.org/StatsWithR/statsr)
-
 [![Build
-Status](http://travis-ci.org/StatsWithR/statsr.svg?branch=master)](http://travis-ci.org/StatsWithR/statsr)
+Status](https://travis-ci.org/StatsWithR/statsr.svg?branch=BayesFactor)](https://travis-ci.org/StatsWithR/statsr)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/statsr)](https://cran.r-project.org/package=statsr)
+[![](http://cranlogs.r-pkg.org/badges/statsr)](http://cran.rstudio.com/web/packages/statsr/index.html)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/statsr)](http://cran.rstudio.com/web/packages/statsr/index.html)
+
+# statsr
 
 The `R` package `statsr` provides functions and datasets to support the
 Coursera [*Statistics with `R`

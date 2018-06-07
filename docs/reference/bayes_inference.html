@@ -34,6 +34,7 @@
 <meta name="twitter:card" content="summary" />
 
 
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -65,23 +66,17 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
-     
-  </a>
+  <a href="../reference/index.html">Functions</a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
-</li>
-<li>
-  <a href="../news/index.html">Changelog</a>
+  <a href="../news/index.html">News</a>
 </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/StatsWithR/statsr">
-    <span class="fa fa-github fa-lg"></span>
+  <a href="https://github.com/statswithr/statsr">
+    <span class="fa fa-github"></span>
      
   </a>
 </li>
@@ -224,13 +219,13 @@ leads to mu_0  having a Cauchy(0, rscale^2*sigma^2) prior distribution for prior
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>For inference and testing for normal means several default options are avialable.
+    <p>For inference and testing for normal means several default options are available.
  "JZS"  corresponds to using the Jeffreys reference prior on sigma^2, p(sigma^2) = 1/sigma^2, 
  and the Zellner-Siow Cauchy prior on the standardized effect size mu/sigma or ( mu_1 - mu_2)/sigma
   with a location of mu_0 and scale  rscale.  The "JUI" option also uses the
   Jeffreys reference prior on sigma^2, but the Unit Information prior on the
- standardized effect, N(mu_0, 1).  The option "ref" uses the improper unifrom prior  on 
- the standardized effect and the Jeffereys reference prior on  sigma^2.  The latter 
+ standardized effect, N(mu_0, 1).  The option "ref" uses the improper uniform prior  on 
+ the standardized effect and the Jeffreys reference prior on  sigma^2.  The latter 
  cannot be used for hypothesis testing due to the ill-determination of Bayes
  factors.  Finally "NG" corresponds to the conjugate Normal-Gamma prior.</p>
     
@@ -400,7 +395,7 @@ leads to mu_0  having a Cauchy(0, rscale^2*sigma^2) prior distribution for prior
 
       <footer>
       <div class="copyright">
-  <p>Developed by Colin Rundel, Mine Cetinkaya-Rundel, Merlise Clyde, David Banks.</p>
+  <p>Developed by Colin Rundel, Mine Cetinkaya-Rundel, <a href='http://stat.duke.edu/~clyde'>Merlise Clyde</a>, David Banks.</p>
 </div>
 
 <div class="pkgdown">

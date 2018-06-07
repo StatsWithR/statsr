@@ -34,6 +34,7 @@
 <meta name="twitter:card" content="summary" />
 
 
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -65,23 +66,17 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
-     
-  </a>
+  <a href="../reference/index.html">Functions</a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
-</li>
-<li>
-  <a href="../news/index.html">Changelog</a>
+  <a href="../news/index.html">News</a>
 </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/StatsWithR/statsr">
-    <span class="fa fa-github fa-lg"></span>
+  <a href="https://github.com/statswithr/statsr">
+    <span class="fa fa-github"></span>
      
   </a>
 </li>
@@ -227,8 +222,26 @@
                 <span class='kw'>boot_method</span> <span class='kw'>=</span> <span class='st'>"perc"</span>,
                 <span class='kw'>method</span><span class='kw'>=</span><span class='st'>"simulation"</span>)</div><div class='output co'>#&gt; Single numerical variable
 #&gt; n = 28, y-bar = 55.5239, s = 23.254
-#&gt; 95% CI: (47.1417 , 64.0951)</div><div class='img'><img src='inference-2.png' alt='' width='700' height='433' /></div><div class='input'>                
-                
+#&gt; 95% CI: (47.1417 , 64.0951)</div><div class='img'><img src='inference-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># Inference for a proportion</span>
+<span class='co'># Calculate 95% confidence intervals for the proportion of atheists</span>
+
+<span class='fu'>data</span>(<span class='st'>"atheism"</span>)
+<span class='fu'>library</span>(<span class='st'>"dplyr"</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘dplyr’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:statsr’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:stats’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'><span class='no'>us12</span> <span class='kw'>&lt;-</span> <span class='no'>atheism</span> <span class='kw'>%&gt;%</span>
+        <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>nationality</span> <span class='kw'>==</span> <span class='st'>"United States"</span> , <span class='no'>atheism</span>$<span class='no'>year</span> <span class='kw'>==</span> <span class='st'>"2012"</span>)
+<span class='fu'>inference</span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>response</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>us12</span>, <span class='kw'>statistic</span> <span class='kw'>=</span> <span class='st'>"proportion"</span>,
+          <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"ci"</span>,
+          <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"theoretical"</span>,
+          <span class='kw'>success</span> <span class='kw'>=</span> <span class='st'>"atheist"</span>)</div><div class='output co'>#&gt; Single categorical variable, success: atheist
+#&gt; n = 1002, p-hat = 0.0499
+#&gt; 95% CI: (0.0364 , 0.0634)</div><div class='img'><img src='inference-3.png' alt='' width='700' height='433' /></div><div class='input'>                
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -246,7 +259,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Colin Rundel, Mine Cetinkaya-Rundel, Merlise Clyde, David Banks.</p>
+  <p>Developed by Colin Rundel, Mine Cetinkaya-Rundel, <a href='http://stat.duke.edu/~clyde'>Merlise Clyde</a>, David Banks.</p>
 </div>
 
 <div class="pkgdown">

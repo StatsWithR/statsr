@@ -2,7 +2,7 @@
 #' 
 #' @export
 
-ames_samplign_dist = function()
+ames_sampling_dist = function()
 {
   if (!allow_shiny())
     stop("Shiny app will only run when built within RStudio.")

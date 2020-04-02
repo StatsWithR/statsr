@@ -4,12 +4,14 @@
 \name{present}
 \alias{present}
 \title{Male and female births in the US}
-\format{A tbl_df with 74 rows and 3 variables:
+\format{
+A tbl_df with 74 rows and 3 variables:
 \describe{
   \item{year}{year, ranging from 1940 to 2013}
   \item{boys}{number of male births}
   \item{girls}{number of female births}
-}}
+}
+}
 \source{
 Data up to 2002 appear in Mathews TJ, and Hamilton BE. 2005. Trend
 analysis of the sex ratio at birth in the United States. National Vital

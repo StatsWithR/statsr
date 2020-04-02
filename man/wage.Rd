@@ -4,7 +4,8 @@
 \name{wage}
 \alias{wage}
 \title{Wage data}
-\format{A tbl_df with with 935 rows and 17 variables:
+\format{
+A tbl_df with with 935 rows and 17 variables:
 \describe{
   \item{wage}{weekly earnings (dollars)}
   \item{hours}{average hours worked per week}
@@ -23,7 +24,8 @@
   \item{meduc}{mother's education (years)}
   \item{feduc}{father's education (years)}
   \item{lwage}{natural log of wage}
-}}
+}
+}
 \source{
 Jeffrey M. Wooldridge (2000). Introductory Econometrics: A Modern Approach. South-Western College Publishing.
 }

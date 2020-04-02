@@ -4,7 +4,8 @@
 \name{evals}
 \alias{evals}
 \title{Teachers evaluations at the University of Texas at Austin}
-\format{A data frame with 463 rows and 21 variables:
+\format{
+A data frame with 463 rows and 21 variables:
 \describe{
   \item{score}{Average professor evaluation score: (1) very unsatisfactory - (5) excellent}
   \item{rank}{Rank of professor: teaching, tenure track, tenure}
@@ -27,7 +28,8 @@
   \item{bty_avg}{Average beauty rating of professor}
   \item{pic_outfit}{Outfit of professor in picture: not formal, formal}
   \item{pic_color}{Color of professor's picture: color, black & white}
-}}
+}
+}
 \source{
 These data appear in Hamermesh DS, and Parker A. 2005. Beauty in the
 classroom: instructors pulchritude and putative pedagogical productivity. Economics of Education Review

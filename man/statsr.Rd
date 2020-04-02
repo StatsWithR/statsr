@@ -3,7 +3,6 @@
 \docType{package}
 \name{statsr}
 \alias{statsr}
-\alias{statsr-package}
 \title{statsr: A companion package for the Coursera Statistics with R specialization}
 \description{
 See https://github.com/StatsWithR/statsr for more information.

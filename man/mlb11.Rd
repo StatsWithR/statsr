@@ -4,7 +4,8 @@
 \name{mlb11}
 \alias{mlb11}
 \title{Major League Baseball team data}
-\format{A data frame with 30 rows and 12 variables:
+\format{
+A data frame with 30 rows and 12 variables:
 \describe{
   \item{team}{Team name.}
   \item{runs}{Number of runs.}
@@ -22,7 +23,8 @@
   \item{new_slug}{Newer variable: slugging percentage, popular measure of the
       power of a hitter calculated as the total bases divided by at bats.}
   \item{new_obs}{Newer variable: on-base plus slugging, calculated as the sum of the on-base and slugging percentages.}
-}}
+}
+}
 \source{
 \href{http://www.mlb.com/}{mlb.com}
 }

@@ -4,12 +4,26 @@
 \alias{bayes_inference}
 \title{Bayesian hypothesis tests and credible intervals}
 \usage{
-bayes_inference(y, x = NULL, data, type = c("ci", "ht"),
-  statistic = c("mean", "proportion"), success = NULL, null = NULL,
-  cred_level = 0.95, alternative = c("twosided", "less", "greater"),
-  hypothesis_prior = c(H1 = 0.5, H2 = 0.5), n_0 = 1, beta_prior = NULL,
-  beta_prior1 = NULL, beta_prior2 = NULL, verbose = TRUE,
-  show_summ = verbose, show_res = verbose, show_plot = verbose)
+bayes_inference(
+  y,
+  x = NULL,
+  data,
+  type = c("ci", "ht"),
+  statistic = c("mean", "proportion"),
+  success = NULL,
+  null = NULL,
+  cred_level = 0.95,
+  alternative = c("twosided", "less", "greater"),
+  hypothesis_prior = c(H1 = 0.5, H2 = 0.5),
+  n_0 = 1,
+  beta_prior = NULL,
+  beta_prior1 = NULL,
+  beta_prior2 = NULL,
+  verbose = TRUE,
+  show_summ = verbose,
+  show_res = verbose,
+  show_plot = verbose
+)
 }
 \arguments{
 \item{y}{Response variable, can be numerical or categorical}

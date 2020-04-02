@@ -1,7 +1,7 @@
 Package: statsr
 Type: Package
 Title: Companion package for the Coursera Statistics with R specialization
-Version: 0.0.1
+Version: 0.1.0
 Date: 2017-05-11
 Authors@R: c(person("Colin", "Rundel", role=c("aut"), email="rundel@gmail.com"),
              person("Mine", "Cetinkaya-Rundel", role=c("aut","cre"), email="mine@stat.duke.edu"),
@@ -13,6 +13,17 @@ Description: R package to support inference for the Coursera Specialization
             See https://github.com/StatsWithR/statsr for more information.
 LazyData: true
 License: MIT + file LICENSE
-RoxygenNote: 6.0.1
+RoxygenNote: 7.1.0
+Encoding: UTF-8
 Depends: R (>= 3.2.0)
-Imports: dplyr, rmarkdown, knitr, ggplot2, broom, gridExtra, shiny, cubature, tidyr
+Imports: 
+    dplyr,
+    rmarkdown,
+    knitr,
+    ggplot2,
+    broom,
+    gridExtra,
+    shiny,
+    cubature,
+    tidyr,
+    tibble

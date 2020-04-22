@@ -8,8 +8,7 @@ https://cran.r-project.org/web/checks/check_results_statsr.html
 ## Test environments
 
 * local OS X install, R 3.6.3
-* ubuntu  (on travis-ci), R current and R-devel
-* win-builder (devel and release)
+* Ubuntu 16.04.6   (on travis-ci), R current and R-devel
 * rhub Fedora, Ubuntu, Windows Server 2008  R current and R devel
 
 

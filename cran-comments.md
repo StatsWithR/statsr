@@ -7,14 +7,14 @@ https://cran.r-project.org/web/checks/check_results_statsr.html
 
 ## Test environments
 
-* local OS X install, R 3.6.3
+* local MAC OSX install, R 3.6.3
 * Ubuntu 16.04.6   (on travis-ci), R current and R-devel
-* rhub Fedora, Ubuntu, Windows Server 2008  R current and R devel
+* rhub Fedora, Ubuntu, Windows Server 2008 with  R current and R devel
 
 
 ## R CMD check results with --as-cran and --run-donttest
 
-Notes: Possibly mis-spelled words in DESCRIPTION:
+Note: Possibly mis-spelled words in DESCRIPTION:
     Coursera (3:34, 12:53)
-(correct spelling)
+(this is the correct spelling)
 

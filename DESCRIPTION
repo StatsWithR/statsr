@@ -13,7 +13,7 @@ Description: Data and functions to support Bayesian and frequentist inference an
             See <https://github.com/StatsWithR/statsr> for more information.
 LazyData: true
 License: MIT + file LICENSE
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Encoding: UTF-8
 Depends: R (>= 3.2.0)
 Imports: 

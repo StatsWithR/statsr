@@ -4,8 +4,11 @@
 \alias{bandit_posterior}
 \title{bandit posterior}
 \usage{
-bandit_posterior(data, prior = c(m1_good = 0.5, m2_good = 0.5),
-  win_probs = c(good = 1/2, bad = 1/3))
+bandit_posterior(
+  data,
+  prior = c(m1_good = 0.5, m2_good = 0.5),
+  win_probs = c(good = 1/2, bad = 1/3)
+)
 }
 \arguments{
 \item{data}{data frame containing win loss data}

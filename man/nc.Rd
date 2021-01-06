@@ -4,7 +4,8 @@
 \name{nc}
 \alias{nc}
 \title{North Carolina births}
-\format{A tbl_df with 1000 rows and 13 variables:
+\format{
+A tbl_df with 1000 rows and 13 variables:
 \describe{
   \item{fage}{father's age in years}
   \item{mage}{mother's age in years}
@@ -19,7 +20,8 @@
   \item{gender}{gender of the baby, `female` or `male`}
   \item{habit}{status of the mother as a `nonsmoker` or a `smoker`}
   \item{whitemom}{whether mom is `white` or `not white`}
-}}
+}
+}
 \source{
 State of North Carolina.
 }

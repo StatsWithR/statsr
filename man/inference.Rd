@@ -4,14 +4,29 @@
 \alias{inference}
 \title{Hypothesis tests and confidence intervals}
 \usage{
-inference(y, x = NULL, data, type = c("ci", "ht"), statistic = c("mean",
-  "median", "proportion"), success = NULL, order = NULL,
-  method = c("theoretical", "simulation"), null = NULL,
-  alternative = c("less", "greater", "twosided"), sig_level = 0.05,
-  conf_level = 0.95, boot_method = c("perc", "se"), nsim = 15000,
-  seed = NULL, verbose = TRUE, show_var_types = verbose,
-  show_summ_stats = verbose, show_eda_plot = verbose,
-  show_inf_plot = verbose, show_res = verbose)
+inference(
+  y,
+  x = NULL,
+  data,
+  type = c("ci", "ht"),
+  statistic = c("mean", "median", "proportion"),
+  success = NULL,
+  order = NULL,
+  method = c("theoretical", "simulation"),
+  null = NULL,
+  alternative = c("less", "greater", "twosided"),
+  sig_level = 0.05,
+  conf_level = 0.95,
+  boot_method = c("perc", "se"),
+  nsim = 15000,
+  seed = NULL,
+  verbose = TRUE,
+  show_var_types = verbose,
+  show_summ_stats = verbose,
+  show_eda_plot = verbose,
+  show_inf_plot = verbose,
+  show_res = verbose
+)
 }
 \arguments{
 \item{y}{Response variable, can be numerical or categorical}

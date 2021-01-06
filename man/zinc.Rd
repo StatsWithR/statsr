@@ -4,13 +4,15 @@
 \name{zinc}
 \alias{zinc}
 \title{Zinc Concentration in Water}
-\format{A data frame with 10 observations on the following 4 variables.
+\format{
+A data frame with 10 observations on the following 4 variables.
  \describe{
    \item{\code{location}}{sample number}
    \item{\code{bottom}}{zinc concentration in bottom water}
    \item{\code{surface}}{zinc concentration in surface water}
    \item{\code{difference}}{difference between zinc concentration at the bottom and surface}
- }}
+ }
+}
 \source{
 \href{https://onlinecourses.science.psu.edu/stat500/sites/onlinecourses.science.psu.edu.stat500/files/data/zinc_conc.txt}{PennState Eberly College of Science Online Courses}
 }

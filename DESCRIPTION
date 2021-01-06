@@ -24,7 +24,7 @@ LazyData: true
 License: GPL (>= 3)
 URL: https://www.r-project.org, https://github.com/StatsWithR/statsr
 BugReports: https://github.com/StatsWithR/statsr/issues
-RoxygenNote: 6.0.1
+RoxygenNote: 7.1.1
 Depends: R (>= 3.3.0), BayesFactor
 Imports: dplyr, rmarkdown, ggplot2, broom, gridExtra, shiny, cubature, knitr, tidyr
 Suggests: HistData

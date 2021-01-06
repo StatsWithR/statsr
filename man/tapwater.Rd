@@ -4,7 +4,8 @@
 \name{tapwater}
 \alias{tapwater}
 \title{Total Trihalomethanes in Tapwater}
-\format{A dataframe with 28 rows and 6 variables:
+\format{
+A dataframe with 28 rows and 6 variables:
 \describe{
   \item{date}{Date of collection}
   \item{tthm}{average total trihalomethanes in ppb }
@@ -12,7 +13,8 @@
   \item{nondetects}{number of samples where tthm not detected (0)}
   \item{min}{min tthm in ppb in samples}
   \item{max}{max tthm in ppb in samples}
-}}
+}
+}
 \source{
 National Drinking Water Database for Durham, NC. \url{http://www.ewg.org/tap-water/whatsinyourwater/NC/CityofDurham/0332010/Total-trihalomethanes-TTHMs/2950/}
 }

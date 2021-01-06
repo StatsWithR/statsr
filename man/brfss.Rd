@@ -4,7 +4,8 @@
 \name{brfss}
 \alias{brfss}
 \title{Behavioral Risk Factor Surveillance System 2013 (Subset)}
-\format{A tbl_df with with 5000 rows and 6 variables:
+\format{
+A tbl_df with with 5000 rows and 6 variables:
 \describe{
   \item{weight}{Weight in pounds.}
   \item{height}{Height in inches.}
@@ -12,7 +13,8 @@
   \item{exercise}{Any exercise in the last 30 days}
   \item{fruit_per_day}{Number of servings of fruit consumed per day.}
   \item{vege_per_day}{Number of servings of dark green vegetables consumed per day.}
-}}
+}
+}
 \source{
 Centers for Disease Control and Prevention (CDC). Behavioral Risk Factor Surveillance System
 Survey Data. Atlanta, Georgia: U.S. Department of Health and Human Services, Centers for

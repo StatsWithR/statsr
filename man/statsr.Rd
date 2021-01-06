@@ -3,7 +3,6 @@
 \docType{package}
 \name{statsr}
 \alias{statsr}
-\alias{statsr-package}
 \title{statsr: A companion package for Statistics with R}
 \description{
 R package to support the online open access book "An Introduction

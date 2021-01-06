@@ -13,7 +13,7 @@ A tbl_df with 88032 rows and 3 variables:
   }
 }
 \source{
-Global Index of Religiosity and Atheism. WIN-Gallup International Press. 2012.
+\href{https://github.com/OpenIntroStat/oilabs/blob/master/data-raw/atheism/Global_INDEX_of_Religiosity_and_Atheism_PR__6.pdf}{WIN-Gallup International Press Release}
 }
 \usage{
 atheism

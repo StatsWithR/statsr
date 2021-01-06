@@ -1,30 +1,36 @@
 Package: statsr
 Type: Package
-Title: Companion Package for Statistics with R
-Version: 0.1-0
-Date: 2018-05-07
+Title: Companion Software for the Coursera Statistics with R Specialization
+Version: 0.2.1
+Date: 2020-05-31
 Authors@R: c(person("Colin", "Rundel", role=c("aut"), email="rundel@gmail.com"),
              person("Mine", "Cetinkaya-Rundel", role=c("aut"), email="mine@stat.duke.edu"),
-             person("Merlise", "Clyde", role=c("aut", "cre"), email="clyde@duke.edu",
-	        		       comment=c(ORCID=0000-0002-3595-1872)),
+             person("Merlise", "Clyde", role=c("aut", "cre"), email="clyde@duke.edu"),
              person("David", "Banks", role=c("aut"), email="banks@stat.duke.edu"))
-Description: Provides functions and datasets to support inference with the open access book
-            "An Introduction to Bayesian Thinking", available online
-             <https://statswithr.github.io/book> and  online videos for the
-             "Statistics with R Specialization" <https://www.coursera.org/specializations/statistics>.  
-             which includes an introduction to Bayesian inference and decision
-             making for one and two sample credible intervals and 
-             hypothesis testing for Gaussian and Binomial data, in addition to
-             frequentist inference using model-based and randomization-based methods.
-             To help with understanding concepts, 'shiny' applications are used to aide 
-             visualization of sampling distributions, credible intervals, hypothesis testing, 
-             Lindley's and Bartlett's paradoxes. For development versions or to report issues, please visit
-             <https://github.com/StatsWithR/statsr>.
+Maintainer: Merlise Clyde <clyde@duke.edu>
+Description: Data and functions to support Bayesian and frequentist inference and decision making 
+            for the Coursera Specialization "Statistics with R".
+            See <https://github.com/StatsWithR/statsr> for more information.
 LazyData: true
-License: GPL (>= 3)
-URL: https://www.r-project.org, https://github.com/StatsWithR/statsr
-BugReports: https://github.com/StatsWithR/statsr/issues
+License: MIT + file LICENSE
 RoxygenNote: 7.1.1
-Depends: R (>= 3.3.0), BayesFactor
-Imports: dplyr, rmarkdown, ggplot2, broom, gridExtra, shiny, cubature, knitr, tidyr
-Suggests: HistData
+Encoding: UTF-8
+Depends: 
+    R (>= 3.3.0),
+    BayesFactor
+Imports: 
+    dplyr,
+    rmarkdown,
+    knitr,
+    ggplot2,
+    broom,
+    gridExtra,
+    shiny,
+    cubature,
+    tidyr,
+    tibble,
+    utils
+Suggests:
+    HistData   
+URL: https://github.com/StatsWithR/statsr    
+BugReports: https://github.com/StatsWithR/statsr/issues

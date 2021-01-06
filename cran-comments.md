@@ -1,35 +1,32 @@
+# statsr 0.2.0 Comments to CRAN
+ 
+
+Submission to address check errors on multiple platforms due to upgrade of dependency tibble package noted at
+https://cran.r-project.org/web/checks/check_results_statsr.html
+
+
+
+## Comments on Note from checking: 
+ 
+Possibly mis-spelled words in DESCRIPTION:
+    Coursera (3:35, 13:21)
+(this is the correct spelling)
 
 ## Test environments
+ 
+- local MAC OSX install, R 4.0.0
+- Ubuntu 16.04.6   (on travis-ci), R-release and R-devel
+- win-builder R-release, R-devel
+- R-hub ubuntu-gcc-release (R-release)
+- R-hub fedora-clang-devel (R-devel)
 
-* local OS X install, R 3.5.0
-* ubuntu 14.04 (on travis-ci), R 3.5.0 and R-devel
-* win-builder (devel and release)
+## R CMD check results
 
-## R CMD check results with --as-cran and --run-donttest
-There were no ERRORs or WARNINGs.
-2 NOTES:  (1) new package submission;  (2) Possibly mis-spelled words in DESCRIPTION:   Bartlett's, Lindley's   
-  
-Bartlett and Lindley are proper nouns
+On windows_x86_64-w64-mingw32 (r-devel), ubuntu-gcc-release (r-release), fedora-clang-devel (r-devel)
+  checking CRAN incoming feasibility ... NOTE
+  Maintainer: 'Merlise Clyde <clyde@duke.edu>'
+ 
+  Possibly mis-spelled words in DESCRIPTION:
+    Coursera (3:35, 13:21)
 
-Examples in \donttest take more than 5 secs
-
-## Reverse Dependencies
-
-None
-
-## Comments
-
-Resubmission of new package - as requested we:
-
-* updated Description to avoid starting with "R package"
-
-* wrote package names and software names in single quotes (e.g. 'shiny') in the Description.
-
-* added more small executable examples in Rd-file for  `inference` and more details in others.
-
-* replaced `\dontrun{}` by `\donttest{}` in Rd-files as suggested. The examples in  `bayes_inference`  with `\donttest` take 13 seconds elapsed time to run now when checking the package with --run-donttest.  Examples for shiny apps now test for an interactive environment.
-
-* checked spelling of DESCRIPTION and Rd files
-
-
-
+0 errors ✓ | 0 warnings ✓ | 1 note x

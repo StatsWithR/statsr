@@ -1,0 +1,1 @@
+utils::globalVariables(c("outcome", "play", "prob", "x_bar"))

@@ -19,25 +19,28 @@
 #' @export
 
 
-bandit_posterior = function(data, prior = c(m1_good=0.5,m2_good=0.5), win_probs = c(good=1/2,bad=1/3))
-{
-  if(length(names(prior)) == 0)
-    names(prior) = c("m1_good","m2_good")
-  if(length(names(win_probs)) == 0)
-    names(prior) = c("good","bad")
+bandit_posterior <- function(data, prior = c(m1_good = 0.5, m2_good = 0.5), win_probs = c(good = 1 / 2, bad = 1 / 3)) {
+  if (length(names(prior)) == 0) {
+    names(prior) <- c("m1_good", "m2_good")
+  }
+  if (length(names(win_probs)) == 0) {
+    names(prior) <- c("good", "bad")
+  }
 
-  m1_good_and_data = prior["m1_good"] * win_probs["good"]^sum(data$machine==1L & data$outcome=="W")  *
-                                     (1-win_probs["good"])^sum(data$machine==1L & data$outcome=="L") *
-                                        win_probs["bad"]^sum(data$machine==2L & data$outcome=="W")   *
-                                     (1-win_probs["bad"])^sum(data$machine==2L & data$outcome=="L")
+  m1_good_and_data <- prior["m1_good"] * win_probs["good"]^sum(data$machine == 1L & data$outcome == "W") *
+    (1 - win_probs["good"])^sum(data$machine == 1L & data$outcome == "L") *
+    win_probs["bad"]^sum(data$machine == 2L & data$outcome == "W") *
+    (1 - win_probs["bad"])^sum(data$machine == 2L & data$outcome == "L")
 
-  m2_good_and_data = prior["m2_good"] * win_probs["bad"]^sum(data$machine==1L & data$outcome=="W")  *
-                                     (1-win_probs["bad"])^sum(data$machine==1L & data$outcome=="L") *
-                                        win_probs["good"]^sum(data$machine==2L & data$outcome=="W")   *
-                                     (1-win_probs["good"])^sum(data$machine==2L & data$outcome=="L")
+  m2_good_and_data <- prior["m2_good"] * win_probs["bad"]^sum(data$machine == 1L & data$outcome == "W") *
+    (1 - win_probs["bad"])^sum(data$machine == 1L & data$outcome == "L") *
+    win_probs["good"]^sum(data$machine == 2L & data$outcome == "W") *
+    (1 - win_probs["good"])^sum(data$machine == 2L & data$outcome == "L")
   return(
-    c(m1_good_and_data / (m1_good_and_data + m2_good_and_data),
-      m2_good_and_data / (m1_good_and_data + m2_good_and_data))
+    c(
+      m1_good_and_data / (m1_good_and_data + m2_good_and_data),
+      m2_good_and_data / (m1_good_and_data + m2_good_and_data)
+    )
   )
 }
 
@@ -60,22 +63,25 @@ bandit_posterior = function(data, prior = c(m1_good=0.5,m2_good=0.5), win_probs 
 #' @export
 
 
-plot_bandit_posterior = function(data, prior = c(m1_good=0.5,m2_good=0.5), win_probs = c(good=1/2,bad=1/3))
-{
-  r = dplyr::data_frame(
-    "P(M1 is good | Data)" = rep(NA, nrow=nrow(data)+1),
-    "P(M2 is good | Data)" = rep(NA, nrow=nrow(data)+1)
-  ) 
-  
-  r[1,] = prior
-  for(i in 1:nrow(data))
-    r[i+1,] = bandit_posterior(data[1:i,], prior, win_probs)
+plot_bandit_posterior <- function(data,
+                                  prior = c(m1_good = 0.5, m2_good = 0.5),
+                                  win_probs = c(good = 1 / 2, bad = 1 / 3)) {
+  r <- tibble::tibble(
+    "P(M1 is good | Data)" = c(prior[["m1_good"]], rep(NA, nrow(data))),
+    "P(M2 is good | Data)" = c(prior[["m2_good"]], rep(NA, nrow(data)))
+  )
 
-  r$play = 1:nrow(r)
-  r = with(r, tidyr::gather(r, outcome, prob, -play))
-  
-  ggplot(r, aes_string(x="play", y="prob", color="outcome")) +
-    geom_line(size=1.5) +
-    labs(x="Play #", y="Posterior Prob.") +
-    scale_color_manual(values=c("#428bca","#5cb85c"))
+  for (i in 1:nrow(data)) {
+    bp <- bandit_posterior(data[1:i, ], prior, win_probs)
+    r[i+1, 1] <- bp[["m1_good"]]
+    r[i+1, 2] <- bp[["m1_good"]]
+  }
+
+  r <- dplyr::mutate(r, play = dplyr::row_number())
+  r <- tidyr::gather(r, outcome, prob, -play)
+
+  ggplot(r, aes_string(x = "play", y = "prob", color = "outcome")) +
+    geom_line(size = 1.5) +
+    labs(x = "Play #", y = "Posterior Prob.") +
+    scale_color_manual(values = c("#428bca", "#5cb85c"))
 }

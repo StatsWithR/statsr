@@ -5,9 +5,8 @@ orig_data
 .Rhistory
 ^README\.Rmd$
 ^README-.*\.png$
-README.*md
-docs/*
-_pkgdown.yml
-LICENSE
 cran-comments.md
 ^CRAN-RELEASE$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

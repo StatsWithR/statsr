@@ -15,7 +15,7 @@
 #'  }
 #'
 #' @source
-#'  \href{https://onlinecourses.science.psu.edu/stat500/sites/onlinecourses.science.psu.edu.stat500/files/data/zinc_conc.txt}{PennState Eberly College of Science Online Courses}
+#'  \href{https://online.stat.psu.edu/stat500/sites/stat500/files/data/zinc_conc.txt}{PennState Eberly College of Science Online Courses}
 #'
 #' @examples
 #'  data(zinc)

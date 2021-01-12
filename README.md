@@ -3,9 +3,9 @@
 
 [![Build
 Status](https://travis-ci.org/StatsWithR/statsr.svg?branch=BayesFactor)](https://travis-ci.org/StatsWithR/statsr)
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/statsr)](https://cran.r-project.org/package=statsr)
-[![](http://cranlogs.r-pkg.org/badges/statsr)](http://cran.rstudio.com/web/packages/statsr/index.html)
-[![](http://cranlogs.r-pkg.org/badges/grand-total/statsr)](http://cran.rstudio.com/web/packages/statsr/index.html)
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/statsr)](https://cran.r-project.org/package=statsr)
+[![](https://cranlogs.r-pkg.org/badges/statsr)](https://CRAN.R-project.org/package=statsr)
+[![](https://cranlogs.r-pkg.org/badges/grand-total/statsr)](https://CRAN.R-project.org/package=statsr)
 
 # statsr
 

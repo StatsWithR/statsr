@@ -1,8 +1,8 @@
 Package: statsr
 Type: Package
 Title: Companion Software for the Coursera Statistics with R Specialization
-Version: 0.2.1
-Date: 2021-01-12
+Version: 0.3.0
+Date: 2021-01-21
 Authors@R: c(person("Colin", "Rundel", role=c("aut"), email="rundel@gmail.com"),
              person("Mine", "Cetinkaya-Rundel", role=c("aut"), email="mine@stat.duke.edu"),
              person("Merlise", "Clyde", role=c("aut", "cre"), email="clyde@duke.edu"),
@@ -31,6 +31,8 @@ Imports:
     tibble,
     utils
 Suggests:
+    spelling,
     HistData   
 URL: https://github.com/StatsWithR/statsr    
 BugReports: https://github.com/StatsWithR/statsr/issues
+Language: en-US

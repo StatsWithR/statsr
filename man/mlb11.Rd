@@ -26,7 +26,7 @@ A data frame with 30 rows and 12 variables:
 }
 }
 \source{
-\href{http://www.mlb.com/}{mlb.com}
+\href{https://www.mlb.com/}{mlb.com}
 }
 \usage{
 mlb11

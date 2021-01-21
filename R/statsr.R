@@ -13,7 +13,7 @@
 #' 
 #' See \url{https://github.com/StatsWithR/statsr} for the development version and 
 #' additional information or for additional background and illustrations of functions
-#' the online book  \url{https://StatsWithR.github.io/book}.
+#' the online book  \url{https://statswithr.github.io/book}.
 #'
 #' @docType package
 #' @name statsr

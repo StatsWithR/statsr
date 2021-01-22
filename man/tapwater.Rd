@@ -16,7 +16,7 @@ A dataframe with 28 rows and 6 variables:
 }
 }
 \source{
-National Drinking Water Database for Durham, NC. \url{https://www.ewg.org}
+National Drinking Water Database for Durham, NC. \url{https://www.ewg.org/}
 }
 \usage{
 tapwater

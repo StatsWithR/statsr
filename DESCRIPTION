@@ -32,7 +32,9 @@ Imports:
     utils
 Suggests:
     spelling,
-    HistData   
+    HistData,
+    testthat (>= 3.0.0)
 URL: https://github.com/StatsWithR/statsr    
 BugReports: https://github.com/StatsWithR/statsr/issues
 Language: en-US
+Config/testthat/edition: 3

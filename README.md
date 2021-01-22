@@ -13,7 +13,7 @@ The `R` package `statsr` provides functions and datasets to support the
 Coursera [*Statistics with `R`
 Specialization*](https://www.coursera.org/specializations/statistics)
 videos and open access book [*An Introduction to Bayesian
-Thinking*](https://statswithr.github.io/book) for learning Bayesian and
+Thinking*](https://statswithr.github.io/book/) for learning Bayesian and
 frequentist statistics using `R`.
 
 To install the latest version from github, verify that there is a

@@ -19,5 +19,5 @@
 #'   \item{min}{min tthm in ppb in samples}
 #'   \item{max}{max tthm in ppb in samples}
 #' }
-#' @source National Drinking Water Database for Durham, NC. \url{https://www.ewg.org/}
+#' @source National Drinking Water Database for Durham, NC. \url{https://www.ewg.org}
 "tapwater"
